@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Form, Button, Image, Row, Col } from "react-bootstrap"
 import { Link } from "react-router-dom"
-import "../StyleSheets/login.css"
+import "./login.css"
 
 class Login extends Component {
     render() {

@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
-import { Spinner, Table } from "react-bootstrap"
-const url = "https://jobista.altervista.org/api.php?cookies=cookie: _ga=GA1.2.1943054744.1600348951; _gid=GA1.2.1807594624.1600348951; cookieconsent_status=dismiss; flarum_remember=VPSjTzhtbIkBVSVYJNvfnup7fSycdWGgZUIEqwVU; wordpress_logged_in_fa686efef513bdb6e3e44099da671de0=ermander%7C1600521762%7CF4ESYRsKbCx1I7QJSYOUoy9JMDu4WHjdiCRlft2pglR%7C5d711be36cde1e3778662a2b0f26c971a9ff1cbf00d71cad8a9d5173149a1909; __cfduid=d62c6ef5f530039c3adb867f90a4ded361600353024"
+import { Table } from "react-bootstrap"
+const url = "https://robinodds.it/relay_api.php?cookies=cookie: __cfduid=d52928491d5b88ccba3955c1963960c561600528918; _ga=GA1.2.19869112.1600528921; _gid=GA1.2.1402304421.1600528921; cookieconsent_status=dismiss; flarum_remember=vkEccjSqof7XaPBTlzepJBQmrZ9dDU5tXQ7mDu5G; wordpress_logged_in_fa686efef513bdb6e3e44099da671de0=ermander%7C1600704132%7Cl3uD6DEYhUNPnFbGRcMrinWlqRGK0nCAWRG7Qrw567D%7C8d5be5bca525193caefeb5817b23f0f83e8c6ddfdc20c0fe6e7ae6b8dc157a89; _gat_gtag_UA_134094661_1=1"
 
 
-// 
-// 
-
-class OddsTable extends Component {
+class OddsmatcherTable extends Component {
     state={
         odds: [],
         isLoading: true
@@ -15,37 +12,29 @@ class OddsTable extends Component {
     // Fetching all available odds
     fetchOdds = async() => {
         try {
-            this.setState({
-                odds: []
-            })
-            const response = await fetch(url)
-            console.log(response)
-            if(response.ok){
-                const parsedResponse = await response.json()
-                console.log(parsedResponse)
-                const parsedResponseSliced = await  parsedResponse.slice(0, 100)
+            const rawOdds = await fetch(url)
+            console.log(rawOdds)
+            if(rawOdds.ok){
+                const odds = await rawOdds.json()
+                console.log(odds)
+                const slicedOdds = await odds.slice(0, 2000)
+                // Calculating odds rating                
+                for(let i=0; i<slicedOdds.length; i++){
+                    const puntata = 100
+                    const commission = 0.05
+                    let lay_stake = (slicedOdds[i].quota * puntata ) / (slicedOdds[i].quota_banca - commission)
+                    let rawRating = (1 - commission) * lay_stake
+                    let rating = rawRating.toFixed(2)
+                    slicedOdds[i].rating = rating
+                    
+                }
+                slicedOdds.sort(function(a, b){
+                    return b.rating -a.rating
+                })
                 this.setState({
-                    odds: parsedResponseSliced,
+                    odds: slicedOdds,
                     isLoading: false
                 })
-                console.log(this.state.odds)
-                console.log("Item i=0", this.state.odds[0])
-                const updatingOddsWithRating = []
-                for(let i=0; i<this.state.odds.length; i++){
-                    // Calcolo rating
-                    let commissioni_percentuale = 0.05
-                    let puntata = 100
-                    console.log("iubiubi", this.state.odds[i].quota)
-                    let stake_bancata = (this.state.odds[i].quota * puntata)/(this.state.odds[i].quota_banca - commissioni_percentuale)
-                    console.log(stake_bancata)
-                    
-                    
-                    let bancata = (this.state.odds[i].quota * puntata) - (((this.state.odds[i].quota-1) * puntata) / 100) / (this.state.odds[i].quota_banca - commissioni_percentuale / 100)
-                    let responsabilità = bancata * (this.state.quota_banca - 1)
-                    let rating = ((puntata * this.state.odds[i].quota - responsabilità) / puntata) * 100
-                    
-                    console.log(this.state.odds[i])
-                }
             }        
         } catch (error) {
             console.log("fetchOdds function error: ", error)            
@@ -114,7 +103,7 @@ class OddsTable extends Component {
                                         <td>{element.quota_banca}</td>
                                         <td>{element.liquidita}€</td>
                                         <td>{element.book2}</td>
-                                        <td>{element.rating}</td>
+                                        <td>{element.rating}%</td>
                                         <td>{element.lastupdate}</td>
                                         </tr>
                                     )
@@ -128,4 +117,4 @@ class OddsTable extends Component {
     }
 }
 
-export default OddsTable;
+export default OddsmatcherTable;

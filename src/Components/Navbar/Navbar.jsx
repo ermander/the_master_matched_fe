@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Nav, NavDropdown, Navbar, Image } from "react-bootstrap"
-import "../StyleSheets/navbar.css"
+import { Link } from "react-router-dom"
+import "./navbar.css"
 
 class NavBar extends Component {
     render() {
@@ -30,11 +31,19 @@ class NavBar extends Component {
                         {/* ODDSMATCHER, DUTCHER, TRIMATCHER E BEST ODDS */}
 
                         <NavDropdown title="STRUMENTI" id="collasible-nav-dropdown" className="mx-3">
-                            <NavDropdown.Item>ODDSMATCHER</NavDropdown.Item>
-                            <NavDropdown.Item>DUTCHER</NavDropdown.Item>
-                            <NavDropdown.Item>TRIMATCHER</NavDropdown.Item>
+                            <Link to="/oddsmatcher" className="dropdown-item">
+                                ODDSMATCHER
+                            </Link>
+                            <Link to="/dutcher" className="dropdown-item">
+                                DUTCHER
+                            </Link>
+                            <Link to="/trimatcher" className="dropdown-item">
+                                TRIMATCHER
+                            </Link>
                             <NavDropdown.Divider />
-                            <NavDropdown.Item>BEST ODDS</NavDropdown.Item>
+                            <Link to="bestodds" className="dropdown-item">
+                                BEST ODDS
+                            </Link>
                         </NavDropdown>
 
                         {/* CALCOLATORI PUNTA-BANCA, PUNTA-PUNTA, PUNTA 1X2, MULTITOOL, CONVERTER, CASINO */}
@@ -52,7 +61,9 @@ class NavBar extends Component {
 
                         <NavDropdown title="ACCOUNT" id="collasible-nav-dropdown" className="mx-3">
                             <NavDropdown.Item>PROFILO PERSONALE</NavDropdown.Item>
-                            <NavDropdown.Item>PROFIT TRACKER</NavDropdown.Item>
+                            <Link to="profit_tracker" className="dropdown-item">
+                                PROFIT TRACKER
+                            </Link>
                             <NavDropdown.Divider/>
                             <NavDropdown.Item>LOG OUT</NavDropdown.Item>
                         </NavDropdown>

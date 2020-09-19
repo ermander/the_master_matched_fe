@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { Row, Col } from "react-bootstrap"
-import BookDisponibiliModal from './BookDisponibiliModal.jsx';
-import MultiplaModal from './MultiplaModal.jsx';
-import NavBar from "./Navbar.jsx"
-import OddsMatcherModal from "./OddsMatcherModal"
-import OddsTable from "./OddsTable"
+import BookDisponibiliModal from './BookDisponibiliModal';
+import NavBar from "../Navbar/Navbar.jsx"
+import DutcherModal from "./DutcherModal"
+import DutcherTable from "./DutcherTable"
 
-class OddsMatcher extends Component {
+class Dutcher extends Component {
 
     render() {
         return (
@@ -18,17 +17,14 @@ class OddsMatcher extends Component {
                 </div>
                 <Row>
                     <Col>
-                        <OddsMatcherModal /> 
+                        <DutcherModal /> 
                     </Col>
                     <Col>
                         <BookDisponibiliModal /> 
                     </Col>
-                    <Col>
-                        <MultiplaModal /> 
-                    </Col>
                 </Row>
                 <Row>
-                    <OddsTable/>
+                    <DutcherTable/>
                 </Row>
                             
             </>
@@ -36,4 +32,4 @@ class OddsMatcher extends Component {
     }
 }
 
-export default OddsMatcher;
+export default Dutcher;
