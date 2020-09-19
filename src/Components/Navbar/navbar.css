@@ -1,8 +1,22 @@
 #responsive-navbar-nav .links{
-    color: white!important;
-    font-weight: bold;
+    color: black;
+    font-size: large;
+    font-weight: 600;
+    background-color: #c3cbdc;
 }
 #collasible-nav-dropdown{
-    color: white!important;
-    font-weight: bold;
+    color: black;
+    font-size: large;
+    background-color: #c3cbdc;
+}
+
+.navbar-backgroundcolor{
+    background-color: transparent!important
+}
+#responsive-navbar-nav > a > div {
+    background-color: #c3cbdc;  
+}
+
+.dropdown-menu.show{
+    background-color: transparent!important
 }

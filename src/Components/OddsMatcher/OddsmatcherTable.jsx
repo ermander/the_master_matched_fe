@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Table } from "react-bootstrap"
+import "./oddsmatcher.css"
 const url = "https://jobista.altervista.org/api.php?cookies=cookie: __cfduid=d52928491d5b88ccba3955c1963960c561600528918; _ga=GA1.2.19869112.1600528921; _gid=GA1.2.1402304421.1600528921; cookieconsent_status=dismiss; _gat_gtag_UA_134094661_1=1; flarum_remember=vkEccjSqof7XaPBTlzepJBQmrZ9dDU5tXQ7mDu5G; wordpress_logged_in_fa686efef513bdb6e3e44099da671de0=ermander%7C1600704132%7Cl3uD6DEYhUNPnFbGRcMrinWlqRGK0nCAWRG7Qrw567D%7C8d5be5bca525193caefeb5817b23f0f83e8c6ddfdc20c0fe6e7ae6b8dc157a89"
 
 
@@ -48,7 +49,7 @@ class OddsmatcherTable extends Component {
     render() {
         return (
             <div>
-                <Table striped bordered hover variant="dark" style={{width: "95vw", margin: "5vh"}}>
+                <Table striped bordered hover className="odds-table" style={{width: "95vw", margin: "5vh"}}>
                     <thead>
                         <tr>
                             <th>Data</th>

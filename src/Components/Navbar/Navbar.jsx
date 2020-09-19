@@ -7,11 +7,11 @@ class NavBar extends Component {
     render() {
         return (
             <div>
-                <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" style={{padding: "0 16px"}}>
+                <Navbar collapseOnSelect expand="lg" bg="dark" className="navbar-backgroundcolor" style={{padding: "0 16px"}}>
                     <Navbar.Brand>
                         <Image 
                         src="https://res.cloudinary.com/dnadfuxk0/image/upload/v1600363858/photo_2020-03-25_21.25.52_2_qsz4ss.png"
-                        style={{minWidth: "50px"}}/>
+                        style={{minWidth: "50px", paddingRight : "5vw", paddingLeft: "1vw"}}/>
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
