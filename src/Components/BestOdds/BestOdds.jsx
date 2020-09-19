@@ -7,7 +7,6 @@ class BestOdds extends Component {
         return (
             <div>
                 <NavBar />
-                
             </div>
         );
     }

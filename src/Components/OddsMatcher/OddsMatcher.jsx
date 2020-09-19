@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { Row, Col } from "react-bootstrap"
 import BookDisponibiliModal from './BookDisponibiliModal.jsx';
 import MultiplaModal from './MultiplaModal.jsx';
-import NavBar from "../Navbar/Navbar.jsx"
 import OddsMatcherModal from "./OddsMatcherModal"
 import OddsmatcherTable from "./OddsmatcherTable"
+import NavBar from "../Navbar/Navbar"
 
 class OddsMatcher extends Component {
 

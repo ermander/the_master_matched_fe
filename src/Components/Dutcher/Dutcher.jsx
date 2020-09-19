@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Row, Col } from "react-bootstrap"
 import BookDisponibiliModal from './BookDisponibiliModal';
-import NavBar from "../Navbar/Navbar.jsx"
 import DutcherModal from "./DutcherModal"
 import DutcherTable from "./DutcherTable"
+import NavBar from "../Navbar/Navbar"
 
 class Dutcher extends Component {
 

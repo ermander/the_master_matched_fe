@@ -1,6 +1,6 @@
-import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Login from './Components/Login/Login';
+import React from 'react'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import Login from './Components/Login/Login'
 import OddsMatcher from "./Components/OddsMatcher/OddsMatcher"
 import Dutcher from "./Components/Dutcher/Dutcher"
 import BestOdds from "./Components/BestOdds/BestOdds"
@@ -34,7 +34,7 @@ function App() {
           </Route>
 
           {/* ACCOUNT ROUTES*/}
-          <Route path="profit_tracker" exact>
+          <Route path="/profit_tracker" exact>
             <ProfitTracker />
           </Route>
 
