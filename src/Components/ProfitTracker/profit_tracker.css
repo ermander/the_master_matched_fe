@@ -7,9 +7,15 @@ body{
     color: black;
     font-size: 40px!important;
     min-width: 40px;
-    margin-top: 5vh;
+    margin-top: 3vh;
     margin-left: 2vw;
+    text-align: center;
+}
 
+.fa-iconss-description{
+    font-size: 15px;
+    margin-bottom: 3vh;
+    text-align: center;
 }
 
 .main-row{

@@ -2,21 +2,25 @@
     color: black;
     font-size: large;
     font-weight: 600;
-    background-color: #c3cbdc;
+    background-color: transparent;
 }
 #collasible-nav-dropdown{
     color: black;
     font-size: large;
-    background-color: #c3cbdc;
+    background-color: transparent;
 }
 
 .navbar-backgroundcolor{
     background-color: transparent!important
 }
 #responsive-navbar-nav > a > div {
-    background-color: #c3cbdc;  
+    background-color: transparent;  
 }
 
 .dropdown-menu.show{
+    background-color: transparent!important
+}
+
+.dropdown-menu.show:hover{
     background-color: transparent!important
 }

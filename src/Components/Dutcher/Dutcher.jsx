@@ -13,7 +13,7 @@ class Dutcher extends Component {
                 <NavBar />
                 <div 
                     style={{color: "#343a40", fontWeight: "bold", textAlign: "center", fontSize: "50px", marginTop: "3vh", marginBottom: "3vh"}}>
-                        ODDSMATCHER
+                        DUTCHER
                 </div>
                 <Row>
                     <Col>
@@ -24,7 +24,9 @@ class Dutcher extends Component {
                     </Col>
                 </Row>
                 <Row>
-                    <DutcherTable/>
+                    <Col>
+                        <DutcherTable/>
+                    </Col>
                 </Row>
                             
             </>

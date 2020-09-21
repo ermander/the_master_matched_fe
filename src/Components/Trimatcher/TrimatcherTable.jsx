@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import "./trimatcher.css"
 import { Table } from "react-bootstrap"
-const url = "https://jobista.altervista.org/api_dutcher.php?length=5000&cookies=cookie: __cfduid=d8e4bb509f0d3879c7e2ca4839e1ffd211600674364; _ga=GA1.2.1123265171.1600674365; _gid=GA1.2.1151311242.1600674365; cookieconsent_status=dismiss; flarum_remember=ePGRjJDPZIbGEQ64fpxWiIsuAQLnRRr556LjwSXE; wordpress_logged_in_fa686efef513bdb6e3e44099da671de0=ermander%7C1600854352%7CP85HhZJgzur6NtPKr4SDppB8DNGtGIig2e6bNdcpNAS%7C3219e39bf633569966fe0ed05ac145c9e53ec04215e68e35808f8132c6b768e7; _gat_gtag_UA_134094661_1=1"
+const url = "https://jobista.altervista.org/api_trimatcher.php?cookies=cookie: __cfduid=d52928491d5b88ccba3955c1963960c561600528918; _ga=GA1.2.19869112.1600528921; _gid=GA1.2.1402304421.1600528921; cookieconsent_status=dismiss; flarum_remember=vkEccjSqof7XaPBTlzepJBQmrZ9dDU5tXQ7mDu5G; wordpress_logged_in_fa686efef513bdb6e3e44099da671de0=ermander%7C1600704132%7Cl3uD6DEYhUNPnFbGRcMrinWlqRGK0nCAWRG7Qrw567D%7C8d5be5bca525193caefeb5817b23f0f83e8c6ddfdc20c0fe6e7ae6b8dc157a89; _gat_gtag_UA_134094661_1=1"
+
 
 class OddsmatcherTable extends Component {
     state={
@@ -15,9 +17,9 @@ class OddsmatcherTable extends Component {
             console.log(rawOdds)
             if(rawOdds.ok){
                 const odds = await rawOdds.json()
-                console.log(odds)
+                console.log(odds.data[1])
                 this.setState({
-                    odds: odds,
+                    odds: odds.data,
                     isLoading: false
                 })
             }        
@@ -25,6 +27,7 @@ class OddsmatcherTable extends Component {
             console.log("fetchOdds function error: ", error)            
         }
     }
+
 
     componentDidMount(){
         this.fetchOdds()
@@ -40,13 +43,13 @@ class OddsmatcherTable extends Component {
                             <th>Ora</th>
                             <th>Torneo</th>
                             <th>Evento</th>
-                            <th>Mercato</th>
+                            <th>1</th>
                             <th>Book</th>
-                            <th>Tipo</th>
-                            <th>Punta</th>
-                            <th>Banca</th>
-                            <th>Exchange</th>
-                            <th>Rating</th>
+                            <th>X</th>
+                            <th>Book</th>
+                            <th>2</th>
+                            <th>Book</th>
+                            <th>ROI</th>
                             <th>Aggior.</th>
                         </tr>
                     </thead>
@@ -66,26 +69,25 @@ class OddsmatcherTable extends Component {
                                     <td>LOADING</td>
                                     <td>LOADING</td>
                                     <td>LOADING</td>
-                                    <td>LOADING%</td>
                                     <td>LOADING</td>
                                 </tr>
                             )
                             :
                             (
-                                this.state.odds.data.map(element => {
+                                this.state.odds.map(element => {
                                     return (
                                         <tr>
                                         <td>{element.data}</td>
                                         <td>{element.ora}</td>
                                         <td>{element.campionato}</td>
                                         <td>{element.home} vs {element.away}</td>
-                                        <td>{element.tipo}</td>
-                                        <td>{element.book}</td>
                                         <td>{element.a}</td>
-                                        <td>{element.yes}</td>
-                                        <td>{element.no}</td>
+                                        <td>{element.book}</td>
+                                        <td>{element.b}</td>
                                         <td>{element.book2}</td>
-                                        <td>{element.rating}%</td>
+                                        <td>{element.c}</td>
+                                        <td>{element.book3}</td>
+                                        <td>{element.rating}%</td>                                        
                                         <td>{element.lastupdate}</td>
                                         </tr>
                                     )
