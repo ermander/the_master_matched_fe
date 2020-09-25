@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Table } from "react-bootstrap"
 import "./oddsmatcher.css"
-const url = "https://jobista.altervista.org/api.php?cookies=cookie: __cfduid=d8e4bb509f0d3879c7e2ca4839e1ffd211600674364; _ga=GA1.2.1123265171.1600674365; _gid=GA1.2.1151311242.1600674365; cookieconsent_status=dismiss; _gat_gtag_UA_134094661_1=1; flarum_remember=ePGRjJDPZIbGEQ64fpxWiIsuAQLnRRr556LjwSXE; wordpress_logged_in_fa686efef513bdb6e3e44099da671de0=ermander%7C1600854352%7CP85HhZJgzur6NtPKr4SDppB8DNGtGIig2e6bNdcpNAS%7C3219e39bf633569966fe0ed05ac145c9e53ec04215e68e35808f8132c6b768e7"
+const url = "https://jobista.altervista.org/api.php?cookies=cookie: "
 
 
 class OddsmatcherTable extends Component {
@@ -13,7 +13,7 @@ class OddsmatcherTable extends Component {
     // Fetching all available odds
     fetchOdds = async() => {
         try {
-            const rawOdds = await fetch(url)
+            const rawOdds = await fetch(url + "__cfduid=df5bb2c8d12ddb0c2e8ed2afbd224ffee1601038438; _ga=GA1.2.2129195312.1601038440; _gid=GA1.2.1857073251.1601038440; cookieconsent_status=dismiss; _gat_gtag_UA_134094661_1=1; flarum_remember=SjtP089CQ8P4LAuGpMqnfrfUpTHpzrflUJMu7fUu; wordpress_logged_in_fa686efef513bdb6e3e44099da671de0=ermander%7C1601227982%7CUewglddMbQL8LfVNmN6mOQ7GItGqvOZ1h36wg0Vl3lQ%7C9644728e33b55705b82cd77f13f8d3487cd58ae2385bc212d20ead7a10fe3a2e")
             console.log(rawOdds)
             if(rawOdds.ok){
                 const odds = await rawOdds.json()
@@ -90,22 +90,22 @@ class OddsmatcherTable extends Component {
                             )
                             :
                             (
-                                this.state.odds.map(element => {
+                                this.state.odds.map((element, i) => {
                                     return (
-                                        <tr>
-                                        <td>{element.data}</td>
-                                        <td>{element.ora}</td>
-                                        <td>{element.campionato}</td>
-                                        <td>{element.home} vs {element.away}</td>
-                                        <td>{element.tipo}</td>
-                                        <td>{element.book}</td>
-                                        <td>{element.a}</td>
-                                        <td>{element.quota}</td>
-                                        <td>{element.quota_banca}</td>
-                                        <td>{element.liquidita}€</td>
-                                        <td>{element.book2}</td> {/* Image dim: 80px horizontally, 20px verticaly */}
-                                        <td>{element.rating}%</td>
-                                        <td>{element.lastupdate}</td>
+                                        <tr key={i}>
+                                            <td>{element.data}</td>
+                                            <td>{element.ora}</td>
+                                            <td>{element.campionato}</td>
+                                            <td>{element.home} vs {element.away}</td>
+                                            <td>{element.tipo}</td>
+                                            <td>{element.book}</td>
+                                            <td>{element.a}</td>
+                                            <td>{element.quota}</td>
+                                            <td>{element.quota_banca}</td>
+                                            <td>{element.liquidita}€</td>
+                                            <td>{element.book2}</td> {/* Image dim: 80px horizontally, 20px verticaly */}
+                                            <td>{element.rating}%</td>
+                                            <td>{element.lastupdate}</td>
                                         </tr>
                                     )
                                 })

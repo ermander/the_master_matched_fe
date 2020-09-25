@@ -61,7 +61,7 @@ class NavBar extends Component {
 
                         <NavDropdown title="ACCOUNT" id="collasible-nav-dropdown" className="mx-3">
                             <NavDropdown.Item>PROFILO PERSONALE</NavDropdown.Item>
-                            <Link to="/profit_tracker" className="dropdown-item">
+                            <Link to="/profit_tracker/in-progress" className="dropdown-item">
                                 PROFIT TRACKER
                             </Link>
                             <NavDropdown.Divider/>

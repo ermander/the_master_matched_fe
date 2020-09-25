@@ -34,7 +34,7 @@ function App() {
           </Route>
 
           {/* ACCOUNT ROUTES*/}
-          <Route path="/profit_tracker" exact>
+          <Route path="/profit_tracker/in-progress" exact>
             <ProfitTracker />
           </Route>
 

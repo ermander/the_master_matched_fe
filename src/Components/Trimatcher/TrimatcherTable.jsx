@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import "./trimatcher.css"
 import { Table } from "react-bootstrap"
-const url = "https://jobista.altervista.org/api_trimatcher.php?cookies=cookie: __cfduid=d52928491d5b88ccba3955c1963960c561600528918; _ga=GA1.2.19869112.1600528921; _gid=GA1.2.1402304421.1600528921; cookieconsent_status=dismiss; flarum_remember=vkEccjSqof7XaPBTlzepJBQmrZ9dDU5tXQ7mDu5G; wordpress_logged_in_fa686efef513bdb6e3e44099da671de0=ermander%7C1600704132%7Cl3uD6DEYhUNPnFbGRcMrinWlqRGK0nCAWRG7Qrw567D%7C8d5be5bca525193caefeb5817b23f0f83e8c6ddfdc20c0fe6e7ae6b8dc157a89; _gat_gtag_UA_134094661_1=1"
+const url = "https://jobista.altervista.org/api_trimatcher.php?cookies=cookie: "
 
 
 class OddsmatcherTable extends Component {
@@ -13,7 +13,7 @@ class OddsmatcherTable extends Component {
     // Fetching all available odds
     fetchOdds = async() => {
         try {
-            const rawOdds = await fetch(url)
+            const rawOdds = await fetch(url + "__cfduid=df5bb2c8d12ddb0c2e8ed2afbd224ffee1601038438; _ga=GA1.2.2129195312.1601038440; _gid=GA1.2.1857073251.1601038440; cookieconsent_status=dismiss; flarum_remember=yOhjwC8W5CAIHYFwsdGp1DzjylU8xGQ06J7874iT; wordpress_logged_in_fa686efef513bdb6e3e44099da671de0=ermander%7C1601211248%7Cod6xaL0hlJB8WjKvSgxxcBou4QcXWygpdRRnlkh1EdK%7Cd75a395fa5f7be987bcfd4acba79e77306b0d85a8cef528e6ee86fb524a3caf1")
             console.log(rawOdds)
             if(rawOdds.ok){
                 const odds = await rawOdds.json()
@@ -74,9 +74,9 @@ class OddsmatcherTable extends Component {
                             )
                             :
                             (
-                                this.state.odds.map(element => {
+                                this.state.odds.map((element, i) => {
                                     return (
-                                        <tr>
+                                        <tr key={i}>
                                         <td>{element.data}</td>
                                         <td>{element.ora}</td>
                                         <td>{element.campionato}</td>

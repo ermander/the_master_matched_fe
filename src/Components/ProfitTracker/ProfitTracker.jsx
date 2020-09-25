@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from "react-router-dom"
 import NavBar from "../Navbar/Navbar"
 import "./profit_tracker.css"
 
@@ -17,6 +18,25 @@ import { faBalanceScale } from '@fortawesome/free-solid-svg-icons'
 import { faMoneyBill } from '@fortawesome/free-solid-svg-icons'
 
 class ProfitTracker extends Component {
+
+    state = {
+        inProgress: []
+    }
+
+    fetchInProgressMatches = async() => {
+        const url = "http://localhost:3002/profit-tracker/in-progress"
+        const response = await fetch(url)
+        const parsedResponse = await response.json()
+        console.log(parsedResponse)
+        this.setState({
+            inProgress: parsedResponse
+        })
+    }
+
+    componentDidMount(){
+        this.fetchInProgressMatches()
+    }
+
     render() {
         return (            
             <>
@@ -84,7 +104,11 @@ class ProfitTracker extends Component {
                         </Col>
                     </Row>
                 </Col>
-                <Col xs="11"></Col>
+                <Col xs="11">
+                    <Row>
+                        <Col></Col>
+                    </Row>
+                </Col>
             </Row>
             </>
         );
