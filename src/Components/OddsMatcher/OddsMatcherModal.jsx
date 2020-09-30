@@ -21,6 +21,21 @@ class OddsMatcherModal extends Component {
 
   handleClose = () => { this.setState({ show: false })}
   handleShow = () => { this.setState({ show: true })}
+  handleReset = () => { 
+    this.setState({
+      show: true,
+        sport: "",
+      mercato: "",
+      data_inizio: "",
+      ora_inizio: "",
+      data_fine: "",
+      ora_fine: "",
+      liquidita: "",
+      quota_min: "",
+      quota_max: "",
+      stake_rimborso: "",
+      stake_bonus_rimborso: ""
+  })}
 
   render() {
     return (
@@ -46,7 +61,7 @@ class OddsMatcherModal extends Component {
                       <FormControl 
                       aria-label="Text input with checkbox" 
                       placeholder="TUTTI" 
-                      value="all"
+                      value="TUTTI"
                       onChange={(e) => {this.setState({ sport: e.currentTarget.value })}}
                       />
                     </InputGroup>
@@ -59,7 +74,7 @@ class OddsMatcherModal extends Component {
                       <FormControl 
                       aria-label="Text input with checkbox" 
                       placeholder="CALCIO" 
-                      value="calcio"
+                      value="CALCIO"
                       onChange={(e) => {this.setState({ sport: e.currentTarget.value })}}
                       />
                     </InputGroup>
@@ -72,7 +87,7 @@ class OddsMatcherModal extends Component {
                       <FormControl 
                       aria-label="Text input with checkbox" 
                       placeholder="TENNIS"
-                      value="tennis"
+                      value="TENNIS"
                       onChange={(e) => {this.setState({ sport: e.currentTarget.value })}}
                       />
                     </InputGroup>
@@ -85,7 +100,7 @@ class OddsMatcherModal extends Component {
                       <FormControl 
                       aria-label="Text input with checkbox" 
                       placeholder="BASKET "
-                      value="basket"
+                      value="BASKET"
                       onChange={(e) => {this.setState({ sport: e.currentTarget.value })}}/>
                     </InputGroup>
 
@@ -106,7 +121,7 @@ class OddsMatcherModal extends Component {
                       <FormControl 
                       aria-label="Text input with checkbox" 
                       placeholder="TUTTI" 
-                      value="all"
+                      value="TUTTI"
                       onChange={(e) => {this.setState({ mercato: e.currentTarget.value })}}
                       />
                     </InputGroup>
@@ -132,7 +147,7 @@ class OddsMatcherModal extends Component {
                       <FormControl 
                       aria-label="Text input with checkbox" 
                       placeholder="U/O"
-                      value="under_over"
+                      value="U/O"
                       onChange={(e) => {this.setState({ mercato: e.currentTarget.value })}}
                       />
                     </InputGroup>
@@ -145,7 +160,7 @@ class OddsMatcherModal extends Component {
                       <FormControl 
                       aria-label="Text input with checkbox" 
                       placeholder="GG/NG"
-                      value="goal_nogoal"
+                      value="GG/NG"
                       onChange={(e) => {this.setState({ mercato: e.currentTarget.value })}}                      
                       />
                     </InputGroup>
@@ -157,7 +172,7 @@ class OddsMatcherModal extends Component {
                       <FormControl 
                       aria-label="Text input with checkbox" 
                       placeholder="TT"
-                      value="tt"
+                      value="TT"
                       onChange={(e) => {this.setState({ mercato: e.currentTarget.value })}}/>
                     </InputGroup>
 
@@ -173,13 +188,16 @@ class OddsMatcherModal extends Component {
                     <p>Data inizio:</p>
                     <InputGroup>
                       <FormControl 
-                      type="date"/>
+                      type="date"
+                      onChange={(e) => {this.setState({ data_inizio: e.currentTarget.value})}}/>
                     </InputGroup>
                   </Col>
                   <Col xs={6}>
                     <p>Ora inizio:</p>
                     <InputGroup>
-                      <FormControl type="time" />
+                      <FormControl 
+                      type="time" 
+                      onChange={(e) => {this.setState({ ora_inizio: e.currentTarget.value})}}/>
                     </InputGroup>
                   </Col>
                 </Row>
@@ -188,13 +206,17 @@ class OddsMatcherModal extends Component {
                   <Col xs={6}>
                     <p>Data fine:</p>
                     <InputGroup>
-                      <FormControl type="date" />
+                      <FormControl 
+                      type="date" 
+                      onChange={(e) => {this.setState({ data_fine: e.currentTarget.value})}}/>
                     </InputGroup>
                   </Col>
                   <Col xs={6}>
                     <p>Ora fine:</p>
                     <InputGroup>
-                      <FormControl type="time" />
+                      <FormControl 
+                      type="time" 
+                      onChange={(e) => {this.setState({ ora_fine: e.currentTarget.value})}}/>
                     </InputGroup>
                   </Col>
                 </Row>
@@ -252,6 +274,7 @@ class OddsMatcherModal extends Component {
                   <h5>Modalità rimborso</h5>
                   <Row className="mt-5">
                     <Col xs={12}>
+                      <p>Puntata:</p>
                       <InputGroup className="mb-3">
                         <FormControl 
                         type="number" 
@@ -263,6 +286,7 @@ class OddsMatcherModal extends Component {
                   </Row>
                   <Row>
                     <Col xs={12}>
+                    <p>Rimborso:</p>
                       <InputGroup className="mb-3">
                         <FormControl 
                         type="number" 
@@ -290,6 +314,9 @@ class OddsMatcherModal extends Component {
               </Button>
               <Button variant="primary" onClick={this.handleClose}>
                 Save Changes
+              </Button>
+              <Button variant="primary" onClick={this.handleReset}>
+                Reset
               </Button>
             </Modal.Footer>
           </Modal>

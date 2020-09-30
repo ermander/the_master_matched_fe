@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import { Table } from "react-bootstrap"
+import { Table, Button } from "react-bootstrap"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCalculator } from '@fortawesome/free-solid-svg-icons'
+import OddsMatcherMatchModal from "./OddsMatcherMatchModal"
 import "./oddsmatcher.css"
 const url = "https://jobista.altervista.org/api.php?cookies=cookie: "
 
@@ -7,13 +10,35 @@ const url = "https://jobista.altervista.org/api.php?cookies=cookie: "
 class OddsmatcherTable extends Component {
     state={
         odds: [],
-        isLoading: true
+        isLoading: true,
+        show: false,
+        data: "",
+        ora: "",
+        torneo: "",
+        casa: "",
+        ospite: "",
+        mercato: "",
+        book: "",
+        punta: "",
+        banca: "",
+        exchange: "",
+        rating: ""
     }
+
+    handleOpenModalMatch = () => {
+        this.
+        this.setState({ show: true })
+    }
+
+    handleCloseModalMatch = () => {
+        this.setState({ show: false })
+    }
+
 
     // Fetching all available odds
     fetchOdds = async() => {
         try {
-            const rawOdds = await fetch(url + "__cfduid=df5bb2c8d12ddb0c2e8ed2afbd224ffee1601038438; _ga=GA1.2.2129195312.1601038440; _gid=GA1.2.1857073251.1601038440; cookieconsent_status=dismiss; _gat_gtag_UA_134094661_1=1; flarum_remember=SjtP089CQ8P4LAuGpMqnfrfUpTHpzrflUJMu7fUu; wordpress_logged_in_fa686efef513bdb6e3e44099da671de0=ermander%7C1601227982%7CUewglddMbQL8LfVNmN6mOQ7GItGqvOZ1h36wg0Vl3lQ%7C9644728e33b55705b82cd77f13f8d3487cd58ae2385bc212d20ead7a10fe3a2e")
+            const rawOdds = await fetch(url + "__cfduid=defe77d8abaedbfec9c603cfea1c9ad041601474329; _ga=GA1.2.1869698237.1601474343; _gid=GA1.2.596859381.1601474343; cookieconsent_status=dismiss; flarum_remember=VUYFDw9crKkkts88AqiIZcj6n4IT7NN5g0wU07sZ; wordpress_logged_in_fa686efef513bdb6e3e44099da671de0=ermander%7C1601647165%7C9cvFPRYnAZELAhn55HcHot0t6uFCIH6Tf0CiBIWOznB%7C3a9ba8d41de25a7cb99a27e4520e85ad5d2b40729874768ca55b6072127e1296; _gat_gtag_UA_134094661_2=1")
             console.log(rawOdds)
             if(rawOdds.ok){
                 const odds = await rawOdds.json()
@@ -48,6 +73,11 @@ class OddsmatcherTable extends Component {
 
     render() {
         return (
+            <>
+            <OddsMatcherMatchModal 
+                show={this.state.show}
+                noShow={this.handleCloseModalMatch}
+             />
             <div>
                 <Table striped bordered hover className="odds-table" style={{width: "95vw", margin: "5vh"}}>
                     <thead>
@@ -65,6 +95,7 @@ class OddsmatcherTable extends Component {
                             <th>Exchange</th>
                             <th>Rating</th>
                             <th>Aggior.</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -106,6 +137,13 @@ class OddsmatcherTable extends Component {
                                             <td>{element.book2}</td> {/* Image dim: 80px horizontally, 20px verticaly */}
                                             <td>{element.rating}%</td>
                                             <td>{element.lastupdate}</td>
+                                            <td>
+                                                <Button
+                                                    onClick={this.handleOpenModalMatch}
+                                                >
+                                                    <FontAwesomeIcon icon={faCalculator}/>
+                                                </Button>
+                                            </td>
                                         </tr>
                                     )
                                 })
@@ -114,6 +152,7 @@ class OddsmatcherTable extends Component {
                     </tbody>
                 </Table>                
             </div>
+            </>
         );
     }
 }
