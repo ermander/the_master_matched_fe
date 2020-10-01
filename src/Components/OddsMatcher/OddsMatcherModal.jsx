@@ -310,12 +310,12 @@ class OddsMatcherModal extends Component {
             </Modal.Body>
             <Modal.Footer>
               <Button variant="secondary" onClick={this.handleClose}>
-                Close
+                Chiudi
               </Button>
               <Button variant="primary" onClick={this.handleClose}>
-                Save Changes
+                Applica Filtri
               </Button>
-              <Button variant="primary" onClick={this.handleReset}>
+              <Button variant="danger" onClick={this.handleReset}>
                 Reset
               </Button>
             </Modal.Footer>

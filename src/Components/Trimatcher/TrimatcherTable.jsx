@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import "./trimatcher.css"
 import { Table } from "react-bootstrap"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCalculator } from '@fortawesome/free-solid-svg-icons'
+import "./trimatcher.css"
 const url = "https://jobista.altervista.org/api_trimatcher.php?cookies=cookie: "
 
 
@@ -51,6 +53,7 @@ class OddsmatcherTable extends Component {
                             <th>Book</th>
                             <th>ROI</th>
                             <th>Aggior.</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -70,6 +73,7 @@ class OddsmatcherTable extends Component {
                                     <td>LOADING</td>
                                     <td>LOADING</td>
                                     <td>LOADING</td>
+                                    <td></td>
                                 </tr>
                             )
                             :
@@ -89,6 +93,9 @@ class OddsmatcherTable extends Component {
                                         <td>{element.book3}</td>
                                         <td>{element.rating}%</td>                                        
                                         <td>{element.lastupdate}</td>
+                                        <td>
+                                            <FontAwesomeIcon icon={faCalculator} />
+                                        </td>
                                         </tr>
                                     )
                                 })

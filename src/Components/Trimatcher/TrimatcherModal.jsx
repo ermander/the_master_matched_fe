@@ -1,5 +1,4 @@
-import { Modal, Button } from "react-bootstrap"
-
+import { Modal, Button, Row, Col, InputGroup, FormControl } from "react-bootstrap"
 import React, { Component } from 'react';
 
 class TrimatcherModal extends Component {
@@ -14,14 +13,50 @@ class TrimatcherModal extends Component {
     return (
         <>
         <Button variant="primary" onClick={this.handleShow}>
-          Launch demo modal
+          Opzioni di Ricerca
         </Button>
   
         <Modal show={this.state.show} onHide={this.handleClose}>
-          <Modal.Header closeButton>
-            <Modal.Title>Modal heading</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+          <Modal.Body>
+            <Row>
+              <Col xs={5} style={{display: "flex"}} className="mr-1 pr-1">
+              <InputGroup >
+                <InputGroup.Prepend>
+                  <InputGroup.Text>Data e Ora Inizio:</InputGroup.Text>
+                </InputGroup.Prepend>
+                <FormControl 
+                  style={{display: "inline-block"}}
+                  type="date"
+                  onChange={(e) => {this.setState({ data_inizio: e.currentTarget.value})}}/>
+                </InputGroup>
+                <InputGroup>
+                  <FormControl 
+                    style={{display: "inline-block",  maxWidth: "175px"}}
+                    type="time" 
+                    onChange={(e) => {this.setState({ ora_inizio: e.currentTarget.value})}}/>
+                </InputGroup>
+              </Col>
+
+              <Col xs={5} style={{display: "flex"}} className="ml-1 pl-1">
+                <InputGroup>
+                  <InputGroup.Prepend>
+                    <InputGroup.Text>Data e Ora Fine:</InputGroup.Text>
+                  </InputGroup.Prepend>
+                  <FormControl 
+                    style={{display: "inline-block"}}
+                    type="date"
+                    onChange={(e) => {this.setState({ data_inizio: e.currentTarget.value})}}/>
+                  </InputGroup>
+                  <InputGroup>
+                    <FormControl 
+                      style={{display: "inline-block", maxWidth: "175px"}}
+                      type="time" 
+                      onChange={(e) => {this.setState({ ora_inizio: e.currentTarget.value})}}/>
+                  </InputGroup>
+              </Col>
+              <Col xs={2}></Col>
+            </Row>
+          </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={this.handleClose}>
               Close

@@ -1,17 +1,34 @@
 import React, { Component } from 'react';
-import { Table } from "react-bootstrap"
+import { Table, Button } from "react-bootstrap"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCalculator } from '@fortawesome/free-solid-svg-icons'
 const url = "https://jobista.altervista.org/api_dutcher.php?length=5000&cookies=cookie: "
 
 class OddsmatcherTable extends Component {
     state={
         odds: [],
-        isLoading: true
+        isLoading: true,
+        data: "",
+        ora: "",
+        torneo: "",
+        casa: "",
+        ospite: "",
+        mercato: "",
+        book: "",
+        punta: "",
+        banca: "",
+        exchange: "",
+        rating: ""
+    }
+
+    handleOpenModalMatch = () => {
+        this.setState({ show: true })
     }
 
     // Fetching all available odds
     fetchOdds = async() => {
         try {
-            const rawOdds = await fetch(url + "__cfduid=defe77d8abaedbfec9c603cfea1c9ad041601474329; _ga=GA1.2.1869698237.1601474343; _gid=GA1.2.596859381.1601474343; cookieconsent_status=dismiss; flarum_remember=VUYFDw9crKkkts88AqiIZcj6n4IT7NN5g0wU07sZ; wordpress_logged_in_fa686efef513bdb6e3e44099da671de0=ermander%7C1601647165%7C9cvFPRYnAZELAhn55HcHot0t6uFCIH6Tf0CiBIWOznB%7C3a9ba8d41de25a7cb99a27e4520e85ad5d2b40729874768ca55b6072127e1296; _gat_gtag_UA_134094661_2=1")
+            const rawOdds = await fetch(url + "__cfduid=da38a847866851e2992ea38d654fe24a21601550565; _ga=GA1.2.932496912.1601550570; _gid=GA1.2.1631250188.1601550570; cookieconsent_status=dismiss; flarum_remember=SjZuPQ1NLe0CVkc2gTpOeT4EDSrvgtjwVejTKoFj; wordpress_logged_in_fa686efef513bdb6e3e44099da671de0=ermander%7C1601723394%7CVvvk6IHsCRAjZyNXq0KRZgI3kX4CHCQBJs0vYDuQ2xN%7Cca976d207360ce0c3ae58eb71f34d9113efac8143e21fc7ef6f59ecb3f8ee87e; _gat_gtag_UA_134094661_1=1")
             console.log(rawOdds)
             if(rawOdds.ok){
                 const odds = await rawOdds.json()
@@ -48,6 +65,7 @@ class OddsmatcherTable extends Component {
                             <th>Exchange</th>
                             <th>Rating</th>
                             <th>Aggior.</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -68,6 +86,7 @@ class OddsmatcherTable extends Component {
                                     <td>LOADING</td>
                                     <td>LOADING%</td>
                                     <td>LOADING</td>
+                                    <td></td>
                                 </tr>
                             )
                             :
@@ -87,6 +106,14 @@ class OddsmatcherTable extends Component {
                                         <td>{element.book2}</td>
                                         <td>{element.rating}%</td>
                                         <td>{element.lastupdate}</td>
+                                        <td>
+                                            <Button
+                                                onClick={this.handleOpenModalMatch}
+                                                matchInfo={element}
+                                            >
+                                                <FontAwesomeIcon icon={faCalculator}/>
+                                            </Button>
+                                        </td>
                                         </tr>
                                     )
                                 })
