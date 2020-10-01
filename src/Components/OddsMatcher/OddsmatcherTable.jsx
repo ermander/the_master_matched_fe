@@ -6,6 +6,48 @@ import OddsMatcherMatchModal from "./OddsMatcherMatchModal"
 import "./oddsmatcher.css"
 const url = "https://jobista.altervista.org/api.php?cookies=cookie: "
 
+const bookLogos = {
+    "888sport": "https://res.cloudinary.com/dnadfuxk0/image/upload/v1600693155/Solo%20Capstone/888Sport_hczenq.png",
+    "AdmiralYES": "https://res.cloudinary.com/dnadfuxk0/image/upload/v1600693153/Solo%20Capstone/Admiral_Yes_srmgvq.png",
+    "Bet365": "https://res.cloudinary.com/dnadfuxk0/image/upload/v1600693153/Solo%20Capstone/Bet365_ez0m2j.png",
+    "Betaland": "https://res.cloudinary.com/dnadfuxk0/image/upload/v1600693153/Solo%20Capstone/Betaland_gwfqbu.jpg",
+    "Betclic": "https://res.cloudinary.com/dnadfuxk0/image/upload/v1600693153/Solo%20Capstone/Betclic_hiw5gy.webp",
+    "betfair": "https://res.cloudinary.com/dnadfuxk0/image/upload/v1600693154/Solo%20Capstone/BetfairSportBook_ft2kbk.png",
+    "betflag": "https://res.cloudinary.com/dnadfuxk0/image/upload/v1600693154/Solo%20Capstone/BetflagSportBook_infneq.png",
+    "BetFlag": "https://res.cloudinary.com/dnadfuxk0/image/upload/v1600693154/Solo%20Capstone/BetflagSportBook_infneq.png",
+    "betman": "https://res.cloudinary.com/dnadfuxk0/image/upload/v1600693154/Solo%20Capstone/Betman_ybpb2v.webp",
+    "better": "https://res.cloudinary.com/dnadfuxk0/image/upload/v1600693154/Solo%20Capstone/Better_dxguec.png",
+    "Betway": "https://res.cloudinary.com/dnadfuxk0/image/upload/v1600693154/Solo%20Capstone/Betway_ntfplf.png",
+    "Betwill": "https://res.cloudinary.com/dnadfuxk0/image/upload/v1600693154/Solo%20Capstone/Betwill_ltieoj.png",
+    "Bwin": "https://res.cloudinary.com/dnadfuxk0/image/upload/v1600693154/Solo%20Capstone/Bwin_iv1jiu.png",
+    "chancebet": "https://res.cloudinary.com/dnadfuxk0/image/upload/v1600693155/Solo%20Capstone/Chencebet_n8ah64.png",
+    "DomusBet": "https://res.cloudinary.com/dnadfuxk0/image/upload/v1600693155/Solo%20Capstone/DomusBet_jqkzfp.jpg",
+    "eurobet": "https://res.cloudinary.com/dnadfuxk0/image/upload/v1600693155/Solo%20Capstone/Eurobet_ye5nxl.png",
+    "Efbet": "https://res.cloudinary.com/dnadfuxk0/image/upload/v1601574457/Solo%20Capstone/Bookmaker%20Logos/efbet_eqllrh.png",
+    "Flashbet": "https://res.cloudinary.com/dnadfuxk0/image/upload/v1600693155/Solo%20Capstone/Flashbet_ynbnst.png",
+    "Gioco Digitale": "https://res.cloudinary.com/dnadfuxk0/image/upload/v1600693155/Solo%20Capstone/gioco_digitale_ds96er.png",
+    "GoldBet": "https://res.cloudinary.com/dnadfuxk0/image/upload/v1600693155/Solo%20Capstone/Goldbet_aef4tk.png",
+    "LeoVegas": "https://res.cloudinary.com/dnadfuxk0/image/upload/v1600693155/Solo%20Capstone/LeoVegas_brlfxq.png",
+    "Marathonbet": "https://res.cloudinary.com/dnadfuxk0/image/upload/v1600693155/Solo%20Capstone/Marathobet_r3xkub.png",
+    "Merkur Win": "https://res.cloudinary.com/dnadfuxk0/image/upload/v1600693156/Solo%20Capstone/MerkurWin_tnpt8u.png",
+    "Newgioco": "https://res.cloudinary.com/dnadfuxk0/image/upload/v1600693156/Solo%20Capstone/NweGioco_tyxa9a.png",
+    "PinterBet": "https://res.cloudinary.com/dnadfuxk0/image/upload/v1600693156/Solo%20Capstone/PinterBet_gxchdh.png",
+    "PlanetWin365": "https://res.cloudinary.com/dnadfuxk0/image/upload/v1600693156/Solo%20Capstone/PlanetWin365_egmsdn.png",
+    "plexbet": "https://res.cloudinary.com/dnadfuxk0/image/upload/v1600693156/Solo%20Capstone/Plexbet_pdjsvt.png",
+    "Scommettendo": "https://res.cloudinary.com/dnadfuxk0/image/upload/v1600693156/Solo%20Capstone/Scommettendo_faor2n.png",
+    "sisal": "https://res.cloudinary.com/dnadfuxk0/image/upload/v1600693156/Solo%20Capstone/Sisal_j8nlfc.png",
+    "Skybet": "https://res.cloudinary.com/dnadfuxk0/image/upload/v1600693156/Solo%20Capstone/Skybet_hyg0vu.png",
+    "snai": "https://res.cloudinary.com/dnadfuxk0/image/upload/v1600693156/Solo%20Capstone/Snai_al0ikv.png",
+    "SportPesa": "https://res.cloudinary.com/dnadfuxk0/image/upload/v1600693157/Solo%20Capstone/Sportpesa_s67dyp.png",
+    "Stanleybet": "https://res.cloudinary.com/dnadfuxk0/image/upload/v1600693156/Solo%20Capstone/Stanleybet_h55wd1.png",
+    "StarVegas": "https://res.cloudinary.com/dnadfuxk0/image/upload/v1600693157/Solo%20Capstone/StarVegas_kcfxig.png",
+    "Terrybet": "https://res.cloudinary.com/dnadfuxk0/image/upload/v1600693157/Solo%20Capstone/Terrybet_bvmy6y.png",
+    "TotoWinBet": "https://res.cloudinary.com/dnadfuxk0/image/upload/v1600693157/Solo%20Capstone/TotoWinBet_mxth01.png",
+    "unibet": "https://res.cloudinary.com/dnadfuxk0/image/upload/v1600693157/Solo%20Capstone/Unibet2_wecikf.png",
+    "William Hill": "https://res.cloudinary.com/dnadfuxk0/image/upload/v1600693245/Solo%20Capstone/Bookmaker%20Logos/William_Hill_g1hzi8.png",
+    "Zona Gioco": "https://res.cloudinary.com/dnadfuxk0/image/upload/v1600693157/Solo%20Capstone/ZonaGioco_zlw3df.png"
+}
+
 
 class OddsmatcherTable extends Component {
     state={
@@ -45,7 +87,7 @@ class OddsmatcherTable extends Component {
             console.log(rawOdds)
             if(rawOdds.ok){
                 const odds = await rawOdds.json()
-                console.log(odds)
+                // console.log(odds)
                 const slicedOdds = await odds.slice(0, 2000)
                 // Calculating odds rating                
                 for(let i=0; i<slicedOdds.length; i++){
@@ -127,17 +169,22 @@ class OddsmatcherTable extends Component {
                                 this.state.odds.map((element, i) => {
                                     return (
                                         <tr key={i}>
+                                            {console.log(element)}
                                             <td>{element.data}</td>
                                             <td>{element.ora}</td>
                                             <td>{element.campionato}</td>
                                             <td>{element.home} vs {element.away}</td>
                                             <td>{element.tipo}</td>
-                                            <td>{element.book}</td>
+                                            <td>
+                                                <img style={{width: "100px", height: "40px"}} src={bookLogos[element.book]} alt={element.book}/>
+                                            </td>
                                             <td>{element.a}</td>
                                             <td>{element.quota}</td>
                                             <td>{element.quota_banca}</td>
                                             <td>{element.liquidita}€</td>
-                                            <td>{element.book2}</td> {/* Image dim: 80px horizontally, 20px verticaly */}
+                                            <td>
+                                                <img style={{width: "90px", height: "40px"}} src={bookLogos[element.book2]} alt={element.book2}/>
+                                            </td> 
                                             <td>{element.rating}%</td>
                                             <td>{element.lastupdate}</td>
                                             <td>
