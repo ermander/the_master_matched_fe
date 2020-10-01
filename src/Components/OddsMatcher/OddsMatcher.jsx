@@ -56,7 +56,9 @@ class OddsMatcher extends Component {
                     </Col>
                 </Row>
                 <Row>
-                    <OddsmatcherTable/>
+                    <Col>
+                        <OddsmatcherTable />
+                    </Col>
                 </Row>
                             
             </>

@@ -22,13 +22,14 @@ class OddsmatcherTable extends Component {
         punta: "",
         banca: "",
         exchange: "",
-        rating: ""
+        rating: "",
+        modalOdd: {}
     }
 
     handleOpenModalMatch = (element) => {
         this.setState({ 
-            show: true,
-            data: element.data
+            modalOdd: element,
+            show: true
         })
     }
 
@@ -53,8 +54,7 @@ class OddsmatcherTable extends Component {
                     let lay_stake = (slicedOdds[i].quota * puntata ) / (slicedOdds[i].quota_banca - commission)
                     let rawRating = (1 - commission) * lay_stake
                     let rating = rawRating.toFixed(2)
-                    slicedOdds[i].rating = rating
-                    
+                    slicedOdds[i].rating = rating     
                 }
                 slicedOdds.sort(function(a, b){
                     return b.rating -a.rating
@@ -69,7 +69,7 @@ class OddsmatcherTable extends Component {
         }
     }
 
-    componentDidMount(){
+    componentDidMount = () =>{
         this.fetchOdds()
     }
 
@@ -79,6 +79,7 @@ class OddsmatcherTable extends Component {
             <OddsMatcherMatchModal 
                 show={this.state.show}
                 noShow={this.handleCloseModalMatch}
+                odd={this.state.modalOdd}
             />
             
             <div>
@@ -97,8 +98,7 @@ class OddsmatcherTable extends Component {
                             <th>Liquidità</th>
                             <th>Exchange</th>
                             <th>Rating</th>
-                            <th>Aggior.</th>
-                            <th></th>
+                            <th colSpan={2}>Aggior.</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -141,9 +141,8 @@ class OddsmatcherTable extends Component {
                                             <td>{element.rating}%</td>
                                             <td>{element.lastupdate}</td>
                                             <td>
-                                            <Button onClick={this.handleOpenModalMatch}>
-                                                <FontAwesomeIcon icon={faCalculator} />
-                                                
+                                            <Button onClick={ () => this.handleOpenModalMatch(element)}>
+                                                <FontAwesomeIcon icon={faCalculator} />                                                
                                             </Button>                                            
                                             </td>
                                         </tr>

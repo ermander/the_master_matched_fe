@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { Modal, Button } from "react-bootstrap"
 
 class OddsMatcherMatchModal extends Component {
-    state = {
-        show: this.props.show
-    }
+    // state = {
+    //     show: this.props.show
+    // }
 
-    handleClose = () => { this.setState({ show: false })}
+    // handleClose = () => { this.setState({ show: false })}
 
     render() {
         return (
@@ -15,7 +15,7 @@ class OddsMatcherMatchModal extends Component {
                 <Modal.Header closeButton>
                 <Modal.Title>Modal heading</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+                <Modal.Body>{JSON.stringify(this.props.odd)}</Modal.Body>
                 <Modal.Footer>
                 <Button variant="secondary" onClick={this.props.noShow}>
                     Close
