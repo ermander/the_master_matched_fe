@@ -3,6 +3,7 @@ import { Table, Button } from "react-bootstrap"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCalculator } from '@fortawesome/free-solid-svg-icons'
 import { bookLogos } from "../BookLogos/bookLogos"
+import DutcherMatchModal from "./DutcherMatchModal"
 const url = "https://jobista.altervista.org/api_dutcher.php?length=5000&cookies=cookie: "
 
 
@@ -10,6 +11,7 @@ class OddsmatcherTable extends Component {
     state={
         odds: [],
         isLoading: true,
+        show: false,
         data: "",
         ora: "",
         torneo: "",
@@ -20,11 +22,20 @@ class OddsmatcherTable extends Component {
         punta: "",
         banca: "",
         exchange: "",
-        rating: ""
+        rating: "",
+        modalOdd: {}
     }
 
-    handleOpenModalMatch = () => {
-        this.setState({ show: true })
+    handleOpenModalMatch = (element) => {
+        this.setState({ 
+            modalOdd: element,
+            show: true
+        })
+        console.log(element)
+    }
+
+    handleCloseModalMatch = () => {
+        this.setState({ show: false })
     }
 
     // Fetching all available odds
@@ -34,7 +45,6 @@ class OddsmatcherTable extends Component {
             // console.log(rawOdds)
             if(rawOdds.ok){
                 const odds = await rawOdds.json()
-                console.log(odds)
                 this.setState({
                     odds: odds,
                     isLoading: false
@@ -51,6 +61,12 @@ class OddsmatcherTable extends Component {
 
     render() {
         return (
+            <>
+            <DutcherMatchModal 
+                show={this.state.show}
+                noShow={this.handleCloseModalMatch}
+                odd={this.state.modalOdd}
+            />
             <div>
                 <Table striped bordered hover className="odds-table" style={{width: "95vw", margin: "5vh"}}>
                     <thead>
@@ -96,7 +112,6 @@ class OddsmatcherTable extends Component {
                                 this.state.odds.data.map((element, i) => {
                                     return (                                       
                                         <tr key={i}>
-                                        {console.log(element)}
                                         <td>{element.data}</td>
                                         <td>{element.ora}</td>
                                         <td>{element.campionato}</td>
@@ -114,9 +129,7 @@ class OddsmatcherTable extends Component {
                                         <td>{element.rating}%</td>
                                         <td>{element.lastupdate}</td>
                                         <td>
-                                            <Button
-                                                onClick={this.handleOpenModalMatch}
-                                            >
+                                            <Button onClick={ () => this.handleOpenModalMatch(element)}>
                                                 <FontAwesomeIcon icon={faCalculator}/>
                                             </Button>
                                         </td>
@@ -128,6 +141,7 @@ class OddsmatcherTable extends Component {
                     </tbody>
                 </Table>                
             </div>
+            </>
         );
     }
 }

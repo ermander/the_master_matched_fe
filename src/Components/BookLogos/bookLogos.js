@@ -1,5 +1,6 @@
 export const bookLogos = {
     "888Sport": "https://res.cloudinary.com/dnadfuxk0/image/upload/v1600693155/Solo%20Capstone/888Sport_hczenq.png",
+    "888sport": "https://res.cloudinary.com/dnadfuxk0/image/upload/v1600693155/Solo%20Capstone/888Sport_hczenq.png",
     "AdmiralYES": "https://res.cloudinary.com/dnadfuxk0/image/upload/v1600693153/Solo%20Capstone/Admiral_Yes_srmgvq.png",
     "Bet365": "https://res.cloudinary.com/dnadfuxk0/image/upload/v1600693153/Solo%20Capstone/Bet365_ez0m2j.png",
     "Betaland": "https://res.cloudinary.com/dnadfuxk0/image/upload/v1600693153/Solo%20Capstone/Betaland_gwfqbu.jpg",

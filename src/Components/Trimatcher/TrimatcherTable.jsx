@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
-import { Table } from "react-bootstrap"
+import { Table, Button } from "react-bootstrap"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCalculator } from '@fortawesome/free-solid-svg-icons'
 import { bookLogos } from "../BookLogos/bookLogos"
+import TrimatcherMatchModal from "./TrimatcherMatchModal"
 import "./trimatcher.css"
 const url = "https://jobista.altervista.org/api_trimatcher.php?cookies=cookie: "
 
 class OddsmatcherTable extends Component {
     state={
         odds: [],
-        isLoading: true
+        isLoading: true,
+        show: false,
+        modalOdd: {}
     }
 
     // Fetching all available odds
@@ -30,6 +33,18 @@ class OddsmatcherTable extends Component {
         }
     }
 
+    handleOpenModalMatch = (element) => {
+        this.setState({ 
+            modalOdd: element,
+            show: true
+        })
+        console.log(element)
+    }
+
+    handleCloseModalMatch = () => {
+        this.setState({ show: false })
+    }
+
 
     componentDidMount(){
         this.fetchOdds()
@@ -37,6 +52,12 @@ class OddsmatcherTable extends Component {
 
     render() {
         return (
+            <>
+            <TrimatcherMatchModal 
+                show={this.state.show}
+                noShow={this.handleCloseModalMatch}
+                odd={this.state.modalOdd}
+            />
             <div>
                 <Table striped bordered hover className="odds-table" style={{width: "95vw", margin: "5vh"}}>
                     <thead>
@@ -86,15 +107,23 @@ class OddsmatcherTable extends Component {
                                         <td>{element.campionato}</td>
                                         <td>{element.home} vs {element.away}</td>
                                         <td>{element.a}</td>
-                                        <td>{element.book}</td>
+                                        <td>
+                                        <img style={{width: "100px", height: "40px"}} src={bookLogos[element.book]} alt={element.book}/>
+                                        </td>
                                         <td>{element.b}</td>
-                                        <td>{element.book2}</td>
+                                        <td>
+                                        <img style={{width: "100px", height: "40px"}} src={bookLogos[element.book2]} alt={element.book}/>
+                                        </td>
                                         <td>{element.c}</td>
-                                        <td>{element.book3}</td>
+                                        <td>
+                                        <img style={{width: "100px", height: "40px"}} src={bookLogos[element.book3]} alt={element.book}/>
+                                        </td>
                                         <td>{element.rating}%</td>                                        
                                         <td>{element.lastupdate}</td>
                                         <td>
-                                            <FontAwesomeIcon icon={faCalculator} />
+                                            <Button onClick={ () => this.handleOpenModalMatch(element)}>
+                                                <FontAwesomeIcon icon={faCalculator} />                                                
+                                            </Button>  
                                         </td>
                                         </tr>
                                     )
@@ -104,6 +133,7 @@ class OddsmatcherTable extends Component {
                     </tbody>
                 </Table>                
             </div>
+            </>
         );
     }
 }
