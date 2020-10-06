@@ -19,7 +19,14 @@ class TrimatcherModal extends Component {
         <Modal show={this.state.show} onHide={this.handleClose}>
           <Modal.Body>
             <Row>
-              <Col xs={5} style={{display: "flex"}} className="mr-1 pr-1">
+              <Col xs={12}>
+                <strong>
+                  <p className="ml-4 mb-3">Filtra per Data e Ora:</p>
+                </strong>
+              </Col>
+            </Row>
+            <Row>
+              <Col xs={4} style={{display: "flex"}} className="mr-1 pr-1">
               <InputGroup >
                 <InputGroup.Prepend>
                   <InputGroup.Text>Data e Ora Inizio:</InputGroup.Text>
@@ -31,13 +38,13 @@ class TrimatcherModal extends Component {
                 </InputGroup>
                 <InputGroup>
                   <FormControl 
-                    style={{display: "inline-block",  maxWidth: "175px"}}
+                    style={{display: "inline-block",  maxWidth: "125px"}}
                     type="time" 
                     onChange={(e) => {this.setState({ ora_inizio: e.currentTarget.value})}}/>
                 </InputGroup>
               </Col>
 
-              <Col xs={5} style={{display: "flex"}} className="ml-1 pl-1">
+              <Col xs={4} style={{display: "flex"}} className="ml-1 pl-1">
                 <InputGroup>
                   <InputGroup.Prepend>
                     <InputGroup.Text>Data e Ora Fine:</InputGroup.Text>
@@ -54,7 +61,22 @@ class TrimatcherModal extends Component {
                       onChange={(e) => {this.setState({ ora_inizio: e.currentTarget.value})}}/>
                   </InputGroup>
               </Col>
-              <Col xs={2}></Col>
+
+              <Col xs={3} style={{display: "flex"}} className="ml-1 pl-1">
+                <InputGroup>
+                  <InputGroup.Prepend>
+                    <InputGroup.Text>Quota:</InputGroup.Text>
+                  </InputGroup.Prepend>
+                  <FormControl 
+                    style={{display: "inline-block"}}
+                    placeholder="Min."
+                    />
+                  <FormControl 
+                    style={{display: "inline-block"}}
+                    placeholder="Max."
+                    />
+                </InputGroup>
+              </Col>
             </Row>
           </Modal.Body>
           <Modal.Footer>

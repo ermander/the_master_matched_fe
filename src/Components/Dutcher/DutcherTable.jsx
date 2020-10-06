@@ -41,7 +41,7 @@ class OddsmatcherTable extends Component {
     // Fetching all available odds
     fetchOdds = async() => {
         try {
-            const rawOdds = await fetch(url + "__cfduid=dc49b847e8bd8c0cd3367238c203fa8011601884189; _ga=GA1.2.622160755.1601884191; _gid=GA1.2.1468601523.1601884191; _gat_gtag_UA_134094661_1=1; flarum_remember=Pb1QW6dMIuspt7FrNssMLuq6C0PpuUqaWxUiuyRR; wordpress_logged_in_fa686efef513bdb6e3e44099da671de0=ermander%7C1602056995%7C90IF5jwcan4nNB1uuGeyORXtUUOgiilIqV6mhlFRorN%7Cca88cf20441f0a85b76a12c9a8ffeecbff961ee26a59d11f81ee2fcca25d38ae")
+            const rawOdds = await fetch(url + "__cfduid=da3837b45d3bb5760a860c72682fbebe01601907281; _ga=GA1.2.1425073749.1601907285; _gid=GA1.2.570572914.1601907285; cookieconsent_status=dismiss; flarum_remember=mS8kqj1dMJKtSNvgHItmQ8QDxhhsx4mp8eVU0j3t; wordpress_logged_in_fa686efef513bdb6e3e44099da671de0=ermander%7C1602159691%7CgSxXIjv1vStH0OBG4LgR4PDM9xkV4C3AcKRpeK8UkOG%7C38d8fc10fdf73237b49f7e2a24127a10a8ab32d3ed47752322c056c5cae71756; _gat_gtag_UA_134094661_1=1")
             // console.log(rawOdds)
             if(rawOdds.ok){
                 const odds = await rawOdds.json()
