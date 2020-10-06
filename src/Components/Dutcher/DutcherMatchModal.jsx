@@ -59,6 +59,7 @@ class DutcherMatchModal extends Component {
         }        
     }
 
+    // Impostare setTimeOut!!!
     componentDidMount = () =>{
         console.log(this.props.odd)
         const odd = this.props.odd
@@ -134,10 +135,10 @@ class DutcherMatchModal extends Component {
                             </span> 
                         
                         </Col>
-                        <Col xs={6}>
+                        <Col xs={6} style={{display: "flex", alignItems: "center"}}>
                             <Row>
                                 <Col xs={6}>
-                                <Card className="text-center">
+                                <Card className="text-center" style={{minHeight: "300px", maxWidth: "250px"}}>
                                     <Card.Header style={{backgroundColor: "#5a92cd"}}>PUNTA</Card.Header>
                                         <Card.Body>
                                             <Card.Title style={{fontSize: "17px"}}>{this.props.odd.home}</Card.Title>
@@ -151,8 +152,8 @@ class DutcherMatchModal extends Component {
                                         </Card.Body>
                                 </Card>
                                 </Col>
-                                <Col xs={6}>
-                                <Card className="text-center">
+                                <Col xs={6} style={{display: "flex", alignItems: "center"}}>
+                                <Card className="text-center" style={{minHeight: "300px", maxWidth: "250px"}}>
                                     <Card.Header style={{backgroundColor: "#5a92cd"}}>PUNTA</Card.Header>
                                         <Card.Body>
                                         <Card.Title style={{fontSize: "17px"}}>{this.props.odd.away}</Card.Title>
@@ -165,13 +166,6 @@ class DutcherMatchModal extends Component {
                                                 />
                                         </Card.Body>
                                 </Card>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col xs={12} style={{textAlign: "center"}}>
-                                    <Button className="mt-3" style={{minWidth: "70%"}}>
-                                        Invia al Profit Tracker
-                                    </Button>
                                 </Col>
                             </Row>
                         </Col>

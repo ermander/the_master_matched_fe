@@ -42,7 +42,7 @@ class OddsmatcherTable extends Component {
     // Fetching all available odds
     fetchOdds = async() => {
         try {
-            const rawOdds = await fetch(url + "__cfduid=d3c290ba864556497e7c461b4468b47ff1601641133; _ga=GA1.2.1630901575.1601641137; _gid=GA1.2.1850339855.1601641137; _gat_gtag_UA_134094661_1=1; cookieconsent_status=dismiss; flarum_remember=PPx08sOYh2XlbtldmNgUBuKlFV2V3FBMpDzx3NHa; wordpress_logged_in_fa686efef513bdb6e3e44099da671de0=ermander%7C1601813942%7Cc6kiEHfO6jKj7Ced1Lk0D3bYdabf62eTR28mIYwL2K4%7C8ba21cebc20d793a0a28be4202b0b258a0f8f8508fb37dd3f36c8b950d0b5214")
+            const rawOdds = await fetch(url + "__cfduid=da3837b45d3bb5760a860c72682fbebe01601907281; _ga=GA1.2.1425073749.1601907285; _gid=GA1.2.570572914.1601907285; cookieconsent_status=dismiss; _gat_gtag_UA_134094661_1=1; flarum_remember=ergAuWeWwxv25zqEc8hFq5n5mI02F3igxk6WhLR6; wordpress_logged_in_fa686efef513bdb6e3e44099da671de0=ermander%7C1602084956%7C4VzESLHzzpcaMueIwdRMClR9CUOVMnJi32g5sJUQJpP%7C91a5b5ec6eec78dae921f03f64cccf6f8da3029130d5acdf511598673fde00e0")
             console.log(rawOdds)
             if(rawOdds.ok){
                 const odds = await rawOdds.json()

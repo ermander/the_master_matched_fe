@@ -8,6 +8,7 @@ import { faInfoCircle } from '@fortawesome/free-solid-svg-icons'
 import { faFutbol } from '@fortawesome/free-solid-svg-icons'
 import { faMoneyCheck } from '@fortawesome/free-solid-svg-icons'
 import { faPercent } from '@fortawesome/free-solid-svg-icons'
+import "./oddsmatcher.css"
 
 import { bookLogos } from "../BookLogos/bookLogos"
 
@@ -102,44 +103,44 @@ class OddsMatcherMatchModal extends Component {
                     <Row className="mt-4">
                         <Col style={{backgroundColor: "#edf1f2"}} xs={3}>
                             {/* INFORMAZIONI SQUADRE, DATA, ORA, RATING ECC... */}
-                            <span style={{display: "flex"}}>
+                            <span className="match-infoes">
                                 <FontAwesomeIcon icon={faCalendarAlt}/>
-                                <p>Data: <strong>{this.props.odd.data}</strong></p>
-                            </span>
-                            <span style={{display: "flex"}}>
+                                <p className="mb-0">Data: <strong>{this.props.odd.data}</strong></p>
+                            </span >
+                            <span className="match-infoes">
                                 <FontAwesomeIcon icon={faClock}/>
-                                <p>Ora: <strong>{this.props.odd.ora}</strong></p>
+                                <p className="mb-0">Ora: <strong>{this.props.odd.ora}</strong></p>
                             </span>
-                            <span style={{display: "flex"}}>
+                            <span className="match-infoes">
                                 <FontAwesomeIcon icon={faFlag}/>
-                                <p>Paese: <strong>{this.props.odd.nazione}</strong></p>
+                                <p className="mb-0">Paese: <strong>{this.props.odd.nazione}</strong></p>
                             </span>
-                            <span style={{display: "flex"}}>
+                            <span className="match-infoes">
                                 <FontAwesomeIcon icon={faInfoCircle}/>
-                                <p>Torneo: <strong>{this.props.odd.campionato}</strong></p>
+                                <p className="mb-0">Torneo: <strong>{this.props.odd.campionato}</strong></p>
                             </span>
-                            <span style={{display: "flex"}}>
+                            <span className="match-infoes">
                                 <FontAwesomeIcon icon={faFutbol}/>
-                                <p>Casa: <strong>{this.props.odd.home}</strong></p>
+                                <p className="mb-0">Casa: <strong>{this.props.odd.home}</strong></p>
                             </span>
-                            <span style={{display: "flex"}}>
+                            <span className="match-infoes">
                                 <FontAwesomeIcon icon={faFutbol}/>
-                                <p>Ospite: <strong>{this.props.odd.away}</strong></p>
+                                <p className="mb-0">Ospite: <strong>{this.props.odd.away}</strong></p>
                             </span>
-                            <span style={{display: "flex"}}>
+                            <span className="match-infoes">
                                 <FontAwesomeIcon icon={faMoneyCheck}/>
-                                <p>Mercato: <strong>{this.props.odd.tipo}</strong></p>
+                                <p className="mb-0">Mercato: <strong>{this.props.odd.tipo}</strong></p>
                             </span>
-                            <span style={{display: "flex"}}>
+                            <span className="match-infoes">
                                 <FontAwesomeIcon icon={faPercent}/>
-                                <p>Rating: <strong>{this.props.odd.rating}%</strong></p>
+                                <p className="mb-0">Rating: <strong>{this.props.odd.rating}%</strong></p>
                             </span> 
                         
                         </Col>
                         <Col xs={6}>
                             <Row>
                                 <Col xs={6}>
-                                <Card className="text-center">
+                                <Card className="text-center" style={{minHeight: "300px", maxWidth: "250px"}}>
                                     <Card.Header style={{backgroundColor: "#a7d7fd"}}>PUNTA</Card.Header>
                                         <Card.Body>
                                             <Card.Title style={{fontSize: "17px"}}>{this.props.odd.home}</Card.Title>
@@ -154,7 +155,7 @@ class OddsMatcherMatchModal extends Component {
                                 </Card>
                                 </Col>
                                 <Col xs={6}>
-                                <Card className="text-center">
+                                <Card className="text-center" style={{minHeight: "300px", maxWidth: "250px"}}>
                                     <Card.Header style={{backgroundColor: "#f8cad0"}}>BANCA</Card.Header>
                                         <Card.Body>
                                         <Card.Title style={{fontSize: "17px"}}>{this.props.odd.away}</Card.Title>

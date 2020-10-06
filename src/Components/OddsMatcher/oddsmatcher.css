@@ -23,3 +23,9 @@
     justify-content: center;
 }
 
+.match-infoes{
+    display: flex;
+    align-items: center;
+    margin-bottom: 5%;
+}
+
