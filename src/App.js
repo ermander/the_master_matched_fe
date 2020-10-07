@@ -6,6 +6,8 @@ import Dutcher from "./Components/Dutcher/Dutcher"
 import BestOdds from "./Components/BestOdds/BestOdds"
 import Trimatcher from "./Components/Trimatcher/Trimatcher"
 import ProfitTracker from "./Components/ProfitTracker/ProfitTracker"
+import InCorso from "./Components/ProfitTracker/InCorso"
+import Archiviate from "./Components/ProfitTracker/Archiviate"
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
 
 function App() {
@@ -36,6 +38,12 @@ function App() {
           {/* ACCOUNT ROUTES*/}
           <Route path="/profit_tracker/in-progress" exact>
             <ProfitTracker />
+          </Route>
+          <Route path="/profit_tracker/in-progress" exact>
+            <InCorso />
+          </Route>
+          <Route patch="/profit_tracker/archived" exact>
+            <Archiviate />
           </Route>
 
         </Switch>

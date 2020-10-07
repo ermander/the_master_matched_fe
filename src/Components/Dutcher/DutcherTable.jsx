@@ -118,13 +118,13 @@ class OddsmatcherTable extends Component {
                                         <td>{element.home} vs {element.away}</td>
                                         <td>{element.tipo}</td>
                                         <td>
-                                            <img style={{width: "100px", height: "40px"}} src={bookLogos[element.book]}/>
+                                            <img style={{width: "100px", height: "40px"}} src={bookLogos[element.book]} alt={bookLogos[element.book]}/>
                                         </td>
                                         <td>{element.a}</td>
                                         <td>{element.yes}</td>
                                         <td>{element.no}</td>
                                         <td>
-                                            <img style={{width: "90px", height: "40px"}} src={bookLogos[element.book2]}/>
+                                            <img style={{width: "90px", height: "40px"}} src={bookLogos[element.book2]} alt={bookLogos[element.book]}/>
                                         </td>
                                         <td>{element.rating}%</td>
                                         <td>{element.lastupdate}</td>

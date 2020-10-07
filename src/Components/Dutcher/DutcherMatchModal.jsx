@@ -148,6 +148,7 @@ class DutcherMatchModal extends Component {
                                                 <img 
                                                     style={{width: "150px", height: "80px"}}
                                                     src={bookLogos[this.props.odd.book]} 
+                                                    alt={bookLogos[this.props.odd.book]} 
                                                 />
                                         </Card.Body>
                                 </Card>
@@ -163,6 +164,7 @@ class DutcherMatchModal extends Component {
                                                 <img 
                                                     style={{width: "150px", height: "80px"}}
                                                     src={bookLogos[this.props.odd.book2]} 
+                                                    alt={bookLogos[this.props.odd.book2]} 
                                                 />
                                         </Card.Body>
                                 </Card>

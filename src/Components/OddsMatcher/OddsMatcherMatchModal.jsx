@@ -8,6 +8,7 @@ import { faInfoCircle } from '@fortawesome/free-solid-svg-icons'
 import { faFutbol } from '@fortawesome/free-solid-svg-icons'
 import { faMoneyCheck } from '@fortawesome/free-solid-svg-icons'
 import { faPercent } from '@fortawesome/free-solid-svg-icons'
+import { faTimesCircle } from '@fortawesome/free-solid-svg-icons'
 import "./oddsmatcher.css"
 
 import { bookLogos } from "../BookLogos/bookLogos"
@@ -20,57 +21,85 @@ class OddsMatcherMatchModal extends Component {
         puntata: "",
         bancata: "",
         rimborso: "",
-        commissione: "",
+        commissione: "0.05",
         selettoreRimborso: "NORMALE",
         quotaPunta: "",
         quotaBanca: "",
+        risk: ""
+    }
+
+    // Calculating risk and lay stake
+    layStake = async (puntata) => {
+
+        this.setState({ 
+            puntata: puntata,
+            quotaPunta: this.state.quotaPunta !== "" ? this.state.quotaPunta : this.props.odd.quota,
+            quotaBanca: this.state.quotaBanca !== "" ? this.state.quotaBanca : this.props.odd.quota_banca
+        })
+        // (back odds * free bet value) / (lay odds – commission)
+        const back_odd = parseFloat(this.state.quotaPunta !== "" ? this.state.quotaPunta : this.props.odd.quota)
+        const lay_odd = parseFloat(this.state.quotaBanca !== "" ? this.state.quotaBanca : this.props.odd.quota_banca)
+        const bet_stake = parseInt(this.state.puntata)
+        const commission = parseFloat(this.state.commissione)
+        const lay_stake = ((back_odd * bet_stake) / (lay_odd - commission)) * 10
+        const risk = (lay_stake * (lay_odd - 1))
+        this.setState({ 
+            bancata: lay_stake.toFixed(2),
+            risk: risk.toFixed(2)
+        })
     }
 
     // POST nuova giocata abbinata
-
     postNewMatch = async () => {
         try {
-            const postNewMatch = await fetch("http://localhost:3002/profit-tracker/in-progress", {
-            method: "POST",
-            headers: {
-                "Content-Type": 'application/json'
-            },
-                body: JSON.stringify({
-                    data: this.props.odd.data,
-                    ora: this.props.odd.ora,
-                    home: this.props.odd.home,
-                    away: this.props.odd.away,
-                    torneo: this.props.odd.campionato,
-                    mercato: this.props.odd.tipo,
-                    tipoPuntata: this.props.odd.a,
-                    book: this.props.odd.book,
-                    puntata: this.state.puntata,
-                    quotaPunta: this.state.quotaPunta,
-                    exchange: this.props.odd.book2,
-                    bancata: this.state.bancata,
-                    quotaBancata: this.state.quotaBanca,
-                    puntataBonus: this.state.puntataBonus,
-                    puntataRimborso: this.state.rimborso,
-                    commissione: this.state.commissione,
+            const propsOdds = this.props.odd
+            const stateOdds = this.state
+            console.log("arone me pare", propsOdds)
+
+            let matchInfo = {
+                    data: propsOdds.data,
+                    ora: propsOdds.ora,
+                    home: propsOdds.home,
+                    away: propsOdds.away,
+                    torneo: propsOdds.campionato,
+                    mercato: propsOdds.tipo,
+                    tipoPuntata: propsOdds.a,
+                    book: propsOdds.book,
+                    puntata: stateOdds.puntata, //
+                    quotaPunta: "", //
+                    exchange: propsOdds.book2,
+                    bancata: stateOdds.bancata, //
+                    quotaBanca: "", //
+                    puntataBonus: stateOdds.puntataBonus, //
+                    puntataRimborso: stateOdds.puntataRimborso, //
+                    rischio: stateOdds.risk,
+                    commissione: stateOdds.commissione, //
+                    // Inserire calcolo rischio da front end
                     inCorso: true
-                })
-            })
-            const response = await postNewMatch.json()
-            console.log(response)
+                }
+
+                let postInfo = {
+                    ...matchInfo,
+                    quotaPunta: stateOdds.quotaPunta !== "" ? stateOdds.quotaPunta : propsOdds.quota,
+                    quotaBanca: stateOdds.quotaBanca !== "" ? stateOdds.quotaBanca : propsOdds.quota_banca
+                }
+
+                console.log("aaa lè lù", postInfo)
+
+                const postNewMatch = await fetch("http://localhost:3002/profit-tracker/save-match", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": 'application/json'
+                    },
+                        body: JSON.stringify(postInfo)
+                    })
+                    const response = await postNewMatch.json()
+                    console.log(response)                
+
+                return
         } catch (error) {
             console.log(error)            
         }        
-    }
-
-    componentDidMount = () =>{
-        console.log(this.props.odd)
-        const odd = this.props.odd
-        
-        this.setState({
-            quotaPunta: odd.quota,
-            quotaBanca: odd.quota_banca
-        })
-        
     }
 
     render() {
@@ -97,7 +126,11 @@ class OddsMatcherMatchModal extends Component {
                                 </Form.Control>
                             </Form.Group>
                         </Col>
-                        <Col xs={4}></Col>
+                        <Col xs={4} className="d-flex flex-row-reverse">
+                            <Button onClick={this.props.noShow} style={{backgroundColor: "#37474f", border: "none"}}>
+                                <FontAwesomeIcon icon={faTimesCircle} style={{fontSize: "25px"}} />
+                            </Button>
+                        </Col>
                     </Row>
                     {/* INFORMAZIONI MATCH */}
                     <Row className="mt-4">
@@ -150,6 +183,7 @@ class OddsMatcherMatchModal extends Component {
                                                 <img 
                                                     style={{width: "150px", height: "80px"}}
                                                     src={bookLogos[this.props.odd.book]} 
+                                                    alt={bookLogos[this.props.odd.book]} 
                                                 />
                                         </Card.Body>
                                 </Card>
@@ -164,7 +198,8 @@ class OddsMatcherMatchModal extends Component {
                                                 </Card.Text>
                                                 <img 
                                                     style={{width: "150px", height: "80px"}}
-                                                    src={bookLogos[this.props.odd.book2]} 
+                                                    src={bookLogos[this.props.odd.book2]}
+                                                    alt={bookLogos[this.props.odd.book2]}
                                                 />
                                         </Card.Body>
                                 </Card>
@@ -172,7 +207,10 @@ class OddsMatcherMatchModal extends Component {
                             </Row>
                             <Row>
                                 <Col xs={12} style={{textAlign: "center"}}>
-                                    <Button className="mt-3" style={{minWidth: "70%"}}>
+                                    <Button 
+                                        className="mt-3" style={{minWidth: "70%"}}
+                                        onClick={this.postNewMatch}
+                                        >
                                         Invia al Profit Tracker
                                     </Button>
                                 </Col>
@@ -189,7 +227,7 @@ class OddsMatcherMatchModal extends Component {
                                         </InputGroup.Prepend>
                                         <FormControl 
                                             type="text"
-                                            onChange={(e) => { this.setState({ puntata: e.currentTarget.value})}}
+                                            onChange={ (e) => {this.layStake(e.currentTarget.value)}}
                                         />
                                         <InputGroup.Prepend>
                                             <InputGroup.Text style={{minWidth: "42px"}}>€</InputGroup.Text>
@@ -266,7 +304,7 @@ class OddsMatcherMatchModal extends Component {
                                             </InputGroup.Prepend>
                                             <FormControl 
                                                 type="text"
-                                                onChange={(e) => { this.setState({ puntata: e.currentTarget.value})}}
+                                                onChange={ (e) => {this.layStake(e.currentTarget.value)}}
                                             />
                                             <InputGroup.Prepend>
                                                 <InputGroup.Text style={{minWidth: "42px"}}>€</InputGroup.Text>
@@ -310,7 +348,7 @@ class OddsMatcherMatchModal extends Component {
                                             <FormControl 
                                                     type="text"
                                                     placeholder={this.props.odd.quota}
-                                                    onChange={(e) => { this.setState({ quotaBancata: e.currentTarget.value})}}
+                                                    onChange={(e) => { this.setState({ quotaBanca: e.currentTarget.value})}}
                                                 />
                                             <InputGroup.Prepend>
                                                 <InputGroup.Text style={{minWidth: "42px"}}>@</InputGroup.Text>
@@ -384,25 +422,17 @@ class OddsMatcherMatchModal extends Component {
                                     RIEPILOGO
                                 </strong>
                             </div>
-                            <p className="mt-3 pl-5">Punta ## a @{this.props.odd.quota} su <strong>{this.props.odd.book}</strong></p>
-                            <p className="mt-3 pl-5">Banca ## a @{this.props.odd.quota_banca} su <strong>{this.props.odd.book2}</strong></p>
+                            <p className="mt-3 pl-5">Punta {this.state.puntata}€ a @{this.props.odd.quota} su <strong>{this.props.odd.book}</strong></p>
+                            <p className="mt-3 pl-5">Banca {this.state.bancata}€ a @{this.props.odd.quota_banca} su <strong>{this.props.odd.book2}</strong></p>
                             <div style={{textAlign: "center"}}>
                                 <p>
-                                    <strong>Responsabilità di ###</strong>
+                                    <strong>Responsabilità di {this.state.risk}€</strong>
                                 </p>
                                 <h4>Il guadagno minimo sarà: ###</h4>
                             </div>
                         </Col>
                     </Row>
                 </Modal.Body>
-                <Modal.Footer className="px-0" style={{backgroundColor: "#edf1f2"}}>
-                <Button variant="secondary" onClick={this.props.noShow}>
-                    Close
-                </Button>
-                <Button variant="primary" onClick={this.props.noShow}>
-                    Save Changes
-                </Button>
-                </Modal.Footer>
             </Modal>
             </>
         );
