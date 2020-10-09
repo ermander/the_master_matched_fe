@@ -102,6 +102,8 @@ class OddsMatcherMatchModal extends Component {
         }        
     }
 
+    
+
     render() {
         return (
             <>
@@ -228,6 +230,7 @@ class OddsMatcherMatchModal extends Component {
                                         <FormControl 
                                             type="text"
                                             onChange={ (e) => {this.layStake(e.currentTarget.value)}}
+                                            
                                         />
                                         <InputGroup.Prepend>
                                             <InputGroup.Text style={{minWidth: "42px"}}>€</InputGroup.Text>
@@ -243,6 +246,7 @@ class OddsMatcherMatchModal extends Component {
                                                 type="text"
                                                 placeholder={this.props.odd.quota}
                                                 onChange={(e) => { this.setState({ quotaPunta: e.currentTarget.value})}}
+                                                
                                             />
                                         <InputGroup.Prepend>
                                             <InputGroup.Text style={{minWidth: "42px"}}>@</InputGroup.Text>

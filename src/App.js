@@ -5,9 +5,13 @@ import OddsMatcher from "./Components/OddsMatcher/OddsMatcher"
 import Dutcher from "./Components/Dutcher/Dutcher"
 import BestOdds from "./Components/BestOdds/BestOdds"
 import Trimatcher from "./Components/Trimatcher/Trimatcher"
-import ProfitTracker from "./Components/ProfitTracker/ProfitTracker"
 import InCorso from "./Components/ProfitTracker/InCorso"
 import Archiviate from "./Components/ProfitTracker/Archiviate"
+import PuntaPunta from "./Components/Calcolatori/PuntaPunta"
+import PuntaBanca from "./Components/Calcolatori/PuntaBanca"
+import MultiTool from "./Components/Calcolatori/MultiTool" 
+import Casino from "./Components/Calcolatori/Casino"
+import Converter from "./Components/Calcolatori/Converter"
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
 
 function App() {
@@ -21,7 +25,7 @@ function App() {
             <Login />
           </Route>
 
-          {/* INSTRUMENTS ROUTES */}
+          {/* ODDS ROUTE */}
           <Route path="/oddsmatcher" exact >
             <OddsMatcher />
           </Route>
@@ -35,10 +39,24 @@ function App() {
             <BestOdds />
           </Route>
 
-          {/* ACCOUNT ROUTES*/}
-          <Route path="/profit_tracker/in-progress" exact>
-            <ProfitTracker />
+          {/* CALCOLATORI ROUTE*/}
+          <Route path="/punta-banca" exact>
+            <PuntaBanca />
           </Route>
+          <Route path="/punta-punta" exact>
+            <PuntaPunta />
+          </Route>
+          <Route path="multi-tool" exact>
+            <MultiTool />
+          </Route>
+          <Route path="/casino" exact>
+            <Casino />
+          </Route>
+          <Route path="/converter" exact>
+            <Converter />
+          </Route>
+
+          {/* ACCOUNT ROUTES*/}
           <Route path="/profit_tracker/in-progress" exact>
             <InCorso />
           </Route>
