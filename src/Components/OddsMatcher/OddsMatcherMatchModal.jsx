@@ -29,24 +29,26 @@ class OddsMatcherMatchModal extends Component {
     }
 
     // Calculating risk and lay stake
-    layStake = async (puntata) => {
-
+    layStake = async () => {
         this.setState({ 
-            puntata: puntata,
             quotaPunta: this.state.quotaPunta !== "" ? this.state.quotaPunta : this.props.odd.quota,
             quotaBanca: this.state.quotaBanca !== "" ? this.state.quotaBanca : this.props.odd.quota_banca
+        }, () => {
+
+            const back_odd = parseFloat(this.state.quotaPunta !== "" ? this.state.quotaPunta : this.props.odd.quota)
+            const lay_odd = parseFloat(this.state.quotaBanca !== "" ? this.state.quotaBanca : this.props.odd.quota_banca)
+            const bet_stake = parseInt(this.state.puntata)
+            const commission = parseFloat(this.state.commissione)
+            const lay_stake = ((back_odd * bet_stake) / (lay_odd - commission)) * 10
+            const risk = (lay_stake * (lay_odd - 1))
+            debugger
+            this.setState({ 
+                bancata: lay_stake.toFixed(2),
+                risk: risk.toFixed(2)
+            })
         })
         // (back odds * free bet value) / (lay odds – commission)
-        const back_odd = parseFloat(this.state.quotaPunta !== "" ? this.state.quotaPunta : this.props.odd.quota)
-        const lay_odd = parseFloat(this.state.quotaBanca !== "" ? this.state.quotaBanca : this.props.odd.quota_banca)
-        const bet_stake = parseInt(this.state.puntata)
-        const commission = parseFloat(this.state.commissione)
-        const lay_stake = ((back_odd * bet_stake) / (lay_odd - commission)) * 10
-        const risk = (lay_stake * (lay_odd - 1))
-        this.setState({ 
-            bancata: lay_stake.toFixed(2),
-            risk: risk.toFixed(2)
-        })
+       
     }
 
     // POST nuova giocata abbinata
@@ -229,7 +231,7 @@ class OddsMatcherMatchModal extends Component {
                                         </InputGroup.Prepend>
                                         <FormControl 
                                             type="text"
-                                            onChange={ (e) => {this.layStake(e.currentTarget.value)}}
+                                            onChange={ (e) => this.setState({puntata: e.currentTarget.value}, () => this.layStake())}
                                             
                                         />
                                         <InputGroup.Prepend>
@@ -245,7 +247,7 @@ class OddsMatcherMatchModal extends Component {
                                         <FormControl 
                                                 type="text"
                                                 placeholder={this.props.odd.quota}
-                                                onChange={(e) => { this.setState({ quotaPunta: e.currentTarget.value})}}
+                                                onChange={(e) => this.setState({ quotaPunta: e.currentTarget.value}, ()=> this.layStake())}
                                                 
                                             />
                                         <InputGroup.Prepend>
@@ -261,7 +263,7 @@ class OddsMatcherMatchModal extends Component {
                                         <FormControl 
                                                 type="text"
                                                 placeholder={this.props.odd.quota_banca}
-                                                onChange={(e) => { this.setState({ quotaBanca: e.currentTarget.value})}}
+                                                onChange={(e) => { this.setState({ quotaBanca: e.currentTarget.value}, ()=> this.layStake())}}
                                             />
                                         <InputGroup.Prepend>
                                             <InputGroup.Text style={{minWidth: "42px"}}>@</InputGroup.Text>
@@ -276,7 +278,7 @@ class OddsMatcherMatchModal extends Component {
                                         <FormControl 
                                                 type="text"
                                                 placeholder="5"
-                                                onChange={(e) => { this.setState({ commissione: e.currentTarget.value})}}
+                                                onChange={(e) => { this.setState({ commissione: e.currentTarget.value}, ()=> this.layStake())}}
                                             />
                                         <InputGroup.Prepend>
                                             <InputGroup.Text style={{minWidth: "42px"}}>%</InputGroup.Text>
@@ -308,7 +310,7 @@ class OddsMatcherMatchModal extends Component {
                                             </InputGroup.Prepend>
                                             <FormControl 
                                                 type="text"
-                                                onChange={ (e) => {this.layStake(e.currentTarget.value)}}
+                                                onChange={ (e) => this.setState({ puntata: e.currentTarget.value }, () => this.layStake())}
                                             />
                                             <InputGroup.Prepend>
                                                 <InputGroup.Text style={{minWidth: "42px"}}>€</InputGroup.Text>
