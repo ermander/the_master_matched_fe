@@ -12,6 +12,8 @@ import PuntaBanca from "./Components/Calcolatori/PuntaBanca"
 import MultiTool from "./Components/Calcolatori/MultiTool" 
 import Casino from "./Components/Calcolatori/Casino"
 import Converter from "./Components/Calcolatori/Converter"
+import BetDetails from "./Components/ProfitTracker/BetDetails"
+import CasinoDetails from "./Components/ProfitTracker/CasinoDetails"
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
 
 function App() {
@@ -57,13 +59,18 @@ function App() {
           </Route>
 
           {/* ACCOUNT ROUTES*/}
+          <Route path="/profit_tracker/bet_details/:id">
+            <BetDetails />
+          </Route>
           <Route path="/profit_tracker/in-progress" exact>
             <InCorso />
           </Route>
           <Route patch="/profit_tracker/archived" exact>
             <Archiviate />
           </Route>
-
+          <Route path="/profit_tracker/casino" exact>
+            <CasinoDetails />
+          </Route>
         </Switch>
       </div>
     </Router>
