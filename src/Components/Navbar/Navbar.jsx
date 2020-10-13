@@ -50,11 +50,21 @@ class NavBar extends Component {
 
 
                         <NavDropdown title="CALCOLATORI" id="collasible-nav-dropdown" className="mx-3">
-                            <NavDropdown.Item>PUNTA-BANCA</NavDropdown.Item>
-                            <NavDropdown.Item>PUNTA-PUNTA</NavDropdown.Item>
-                            <NavDropdown.Item>MULTITOOL</NavDropdown.Item>
-                            <NavDropdown.Item>CONVERTER</NavDropdown.Item>
-                            <NavDropdown.Item>CASINO</NavDropdown.Item>
+                            <Link to="/punta-banca" className="dropdown-item">
+                                PUNTA-BANCA
+                            </Link>
+                            <Link to="/punta-punta" className="dropdown-item">
+                                PUNTA-PUNTA
+                            </Link>
+                            <Link to="/multi-tool" className="dropdown-item">
+                                MULTITOOL
+                            </Link>
+                            <Link to="/converter" className="dropdown-item">
+                                CONVERTER
+                            </Link>
+                            <Link to="/casino" className="dropdown-item">
+                                CASINO
+                            </Link>
                         </NavDropdown>
 
                         {/* OPZIONI ACCOUNT PERSONALE */}

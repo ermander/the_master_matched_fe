@@ -41,7 +41,7 @@ class OddsmatcherTable extends Component {
     // Fetching all available odds
     fetchOdds = async() => {
         try {
-            const rawOdds = await fetch(url + "__cfduid=d3c290ba864556497e7c461b4468b47ff1601641133; _ga=GA1.2.1630901575.1601641137; _gid=GA1.2.1850339855.1601641137; _gat_gtag_UA_134094661_1=1; cookieconsent_status=dismiss; flarum_remember=PPx08sOYh2XlbtldmNgUBuKlFV2V3FBMpDzx3NHa; wordpress_logged_in_fa686efef513bdb6e3e44099da671de0=ermander%7C1601813942%7Cc6kiEHfO6jKj7Ced1Lk0D3bYdabf62eTR28mIYwL2K4%7C8ba21cebc20d793a0a28be4202b0b258a0f8f8508fb37dd3f36c8b950d0b5214")
+            const rawOdds = await fetch(url + "__cfduid=d7f8eec57d5b74a5146d370609eddc8a21602586726; _ga=GA1.2.359510800.1602586728; _gid=GA1.2.1892420503.1602586728; cookieconsent_status=dismiss; flarum_remember=xjRrMASNnbdoAttzkBGCRPjaNGbRhNmAXaMx3qZ1; wordpress_logged_in_fa686efef513bdb6e3e44099da671de0=ermander%7C1602759536%7C7p9ji9gn5yYFLTBxzkDcaVfCVznOc8SXlvBl9W1H7r0%7C0e2d7d252219a00f3a26cdd2cab1c952a2c54d56077aaaea8c2d25892cc1b230; _gat_gtag_UA_134094661_1=1")
             // console.log(rawOdds)
             if(rawOdds.ok){
                 const odds = await rawOdds.json()
@@ -118,13 +118,13 @@ class OddsmatcherTable extends Component {
                                         <td>{element.home} vs {element.away}</td>
                                         <td>{element.tipo}</td>
                                         <td>
-                                            <img style={{width: "100px", height: "40px"}} src={bookLogos[element.book]}/>
+                                            <img style={{width: "100px", height: "40px"}} src={bookLogos[element.book]} alt={bookLogos[element.book]}/>
                                         </td>
                                         <td>{element.a}</td>
                                         <td>{element.yes}</td>
                                         <td>{element.no}</td>
                                         <td>
-                                            <img style={{width: "90px", height: "40px"}} src={bookLogos[element.book2]}/>
+                                            <img style={{width: "90px", height: "40px"}} src={bookLogos[element.book2]} alt={bookLogos[element.book]}/>
                                         </td>
                                         <td>{element.rating}%</td>
                                         <td>{element.lastupdate}</td>

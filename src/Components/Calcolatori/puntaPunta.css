@@ -1,0 +1,11 @@
+.div-title{
+    display: flex;
+    background-color: #d08e46;
+    height: 10vh;
+}
+.title{
+    font-size: 40px;
+    font-weight: bold;
+    margin: auto;
+    color: #efd9c0;
+}

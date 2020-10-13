@@ -147,6 +147,7 @@ class TrimatcherMatchModal extends Component {
                                                 <img 
                                                     style={{width: "150px", height: "70px"}}
                                                     src={bookLogos[this.props.odd.book]} 
+                                                    alt={bookLogos[this.props.odd.book]} 
                                                     className="mt-4"
                                                 />
                                         </Card.Body>
@@ -163,6 +164,7 @@ class TrimatcherMatchModal extends Component {
                                                 <img 
                                                 style={{width: "150px", height: "70px"}}
                                                 src={bookLogos[this.props.odd.book2]} 
+                                                alt={bookLogos[this.props.odd.book2]}
                                                 className="mt-4"
                                                 />
                                         </Card.Body>
@@ -179,6 +181,7 @@ class TrimatcherMatchModal extends Component {
                                                     <img 
                                                         style={{width: "150px", height: "70px"}}
                                                         src={bookLogos[this.props.odd.book3]} 
+                                                        alt={bookLogos[this.props.odd.book3]}
                                                         className="mt-4"
                                                     />
                                             </Card.Body>

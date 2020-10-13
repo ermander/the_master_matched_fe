@@ -23,3 +23,21 @@
     justify-content: center;
 }
 
+.match-infoes{
+    display: flex;
+    align-items: center;
+    margin-bottom: 5%;
+}
+
+table .table-data{
+    text-align: center;
+    vertical-align: middle;
+}
+
+.table-data-image{
+    width: 100px;
+    height: 40px;
+    border-radius: 20px;
+    background-color: black;
+}
+
