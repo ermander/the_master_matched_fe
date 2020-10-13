@@ -14,7 +14,7 @@ const Table = () => {
 
   const getOdds = async () => {
     try {
-      const response = await fetch(url + "__cfduid=da3837b45d3bb5760a860c72682fbebe01601907281; _ga=GA1.2.1425073749.1601907285; _gid=GA1.2.570572914.1601907285; cookieconsent_status=dismiss; flarum_remember=mS8kqj1dMJKtSNvgHItmQ8QDxhhsx4mp8eVU0j3t; wordpress_logged_in_fa686efef513bdb6e3e44099da671de0=ermander%7C1602159691%7CgSxXIjv1vStH0OBG4LgR4PDM9xkV4C3AcKRpeK8UkOG%7C38d8fc10fdf73237b49f7e2a24127a10a8ab32d3ed47752322c056c5cae71756; _gat_gtag_UA_134094661_1=1")
+      const response = await fetch(url + "__cfduid=d7f8eec57d5b74a5146d370609eddc8a21602586726; _ga=GA1.2.359510800.1602586728; _gid=GA1.2.1892420503.1602586728; cookieconsent_status=dismiss; flarum_remember=xjRrMASNnbdoAttzkBGCRPjaNGbRhNmAXaMx3qZ1; wordpress_logged_in_fa686efef513bdb6e3e44099da671de0=ermander%7C1602759536%7C7p9ji9gn5yYFLTBxzkDcaVfCVznOc8SXlvBl9W1H7r0%7C0e2d7d252219a00f3a26cdd2cab1c952a2c54d56077aaaea8c2d25892cc1b230")
       if(response.ok){
         const parsedResponse = await response.json()
         const odds = parsedResponse.slice(0, 200)
