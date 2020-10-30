@@ -1,42 +1,40 @@
 import React, { Component } from 'react';
 
 // Components
-import NavBar from "../Navbar/Navbar"
-import SideBar from './SideBar';
-// React router don
+import NavBar from "../../Navbar/Navbar"
+import SideBar from '../SideBar/SideBar'
+
+// React Router Dom
+import { withRouter } from "react-router-dom"
 import { Link } from "react-router-dom"
 
-// React bootstrap
-import { Col, Button, Row, Table, Spinner } from "react-bootstrap"
+// React Boostrap
+import { Col, Row, Table, Spinner, Button } from "react-bootstrap"
 
-// FontAwesomeIcon
+// React FontAwasome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArchive } from '@fortawesome/free-solid-svg-icons'
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons"
-import { faClone } from "@fortawesome/free-solid-svg-icons"
 
-// CSS
-import "./profit_tracker.css"
-
-class InCorso extends Component {
+class Archiviate extends Component {
 
     state = {
-        inProgress: [],
+        archived: [],
         isLoading: true
     }
 
     fetchInProgressMatches = async() => {
-        const url = "http://localhost:3002/profit-tracker/in-progress"
+        const url = "http://localhost:3002/profit-tracker/archived"
         const response = await fetch(url)
         const parsedResponse = await response.json()
+        
+        parsedResponse.forEach(element => {
+            console.log(element.createdAt.split("T")[0])
+            console.log(element.createdAt.split)          
+        });
         this.setState({
             inProgress: parsedResponse,
             isLoading: false
         })
-    }
-
-    componentDidMount(){
-        this.fetchInProgressMatches()
     }
 
     deleteMatch = async (id) => {
@@ -58,47 +56,10 @@ class InCorso extends Component {
         }
     }
 
-    cloneMatch = async (id) => {
-        try {
-            const response = await fetch("http://localhost:3002/profit-tracker/in-progress/" + id)
-            const parsedResponse = await response.json()
-            delete parsedResponse._id
-            const cloneMatch = await fetch("http://localhost:3002/profit-tracker/save-match",{
-                method: "POST",
-                    headers: {
-                        "Content-Type": 'application/json'
-                    },
-                    body: JSON.stringify(parsedResponse)
-                })
-                if(cloneMatch.ok){
-                    console.log("Match cloned deleted")
-                    window.location.reload()
-                } else {
-                    console.log("An error occured while trying to clone this match")
-                }
-        } catch (error) {
-            console.log(error)
-        }
+    componentDidMount(){
+        this.fetchInProgressMatches()
     }
 
-    archiveMatch = async (id) => {
-        try {
-            const response = await fetch("http://localhost:3002/profit-tracker/modify-match/" + id, {
-                method: "PUT",
-                headers: {
-                    "Content-Type": 'application/json'
-                },
-                body: JSON.stringify({ inCorso: false })
-
-            })
-            if(response.ok){
-                console.log("ok")
-                window.location.reload()
-            }
-        } catch (error) {
-            console.log(error)
-        }
-    }
 
     render() {
         return (
@@ -114,7 +75,7 @@ class InCorso extends Component {
                             <Row> 
                                 <Col xs={12}>
                                     <div style={{display: "flex"}}>
-                                        <p className="inCorso-title">SCOMMESSE IN CORSO</p>
+                                        <p className="inCorso-title">SCOMMESSE ARCHIVIATE</p>
                                     </div>
                                     <div>
                                         <Table striped bordered hover>
@@ -126,10 +87,10 @@ class InCorso extends Component {
                                                     <th>Evento</th>
                                                     <th>Conto</th>
                                                     <th>Notes</th>
-                                                    <th>+</th>
-                                                    <th>+</th>
-                                                    <th>+</th>
-                                                    <th>+</th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -146,42 +107,37 @@ class InCorso extends Component {
                                                             <td>Evento</td>
                                                             <td>Conto</td>
                                                             <td>Notes</td>
-                                                            <td>+</td>
-                                                            <td>+</td>
-                                                            <td>+</td>
-                                                            <td>+</td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
                                                         </tr> 
                                                     )
                                                     :
                                                     (
-                                                        this.state.inProgress.map((element) => {
+                                                        this.state.inProgress.map((element, i) => {
                                                             return(
                                                                 <tr key={element._id} style={{alignItems: "center", fontWeight: "bold"}}>
+                                                                    {console.log(element)}
                                                                     <td>Puntata #{element._id}</td>
-                                                                    <td>{element.createdAt}</td>
+                                                                    <td>{element.createdAt.split("T")[0]} {element.createdAt.split("T")[1].split(".")[0]}</td>
                                                                     <td>{element.data}</td>
                                                                     <td>{element.home} vs {element.away}</td>
                                                                     <td>Conto</td>
                                                                     <td>Notes</td>
                                                                     <td>
-                                                                        <Button>                                                                            
+                                                                        <Button size="sm">                                                                            
                                                                             <Link to={"/profit_tracker/bet_details/" + element._id} style={{color: "white" }}>
                                                                                 Dettagli
                                                                             </Link>
                                                                         </Button>
                                                                     </td>
                                                                     <td>
-                                                                        <Button variant="warning" onClick={ () => this.archiveMatch(element._id)}>
-                                                                            <FontAwesomeIcon icon={faArchive} />
+                                                                        <Button size="sm" variant="success">                                                                            
+                                                                            Ripristina
                                                                         </Button>
                                                                     </td>
                                                                     <td>
-                                                                        <Button variant="success" onClick={ () => this.cloneMatch(element._id)}>
-                                                                            <FontAwesomeIcon icon={faClone} />
-                                                                        </Button>
-                                                                    </td>
-                                                                    <td>
-                                                                        <Button variant="danger" onClick={ () => this.deleteMatch(element._id)}>
+                                                                        <Button size="sm" variant="danger" onClick={ () => this.deleteMatch(element._id)}>
                                                                             <FontAwesomeIcon icon={faTrashAlt} />
                                                                         </Button>
                                                                     </td>
@@ -190,8 +146,7 @@ class InCorso extends Component {
                                                         })
                                                     )                                               
                                                 }
-                                            </tbody>
-                                        
+                                            </tbody>                                        
                                         </Table>                                        
                                     </div>
                                 </Col>
@@ -205,4 +160,4 @@ class InCorso extends Component {
     }
 }
 
-export default InCorso;
+export default withRouter(Archiviate);

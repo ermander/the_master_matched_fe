@@ -39,7 +39,7 @@ class OddsMatcherMatchModal extends Component {
             const lay_odd = parseFloat(this.state.quotaBanca !== "" ? this.state.quotaBanca : this.props.odd.quota_banca)
             const bet_stake = parseInt(this.state.puntata)
             const commission = parseFloat(this.state.commissione)
-            const lay_stake = ((back_odd * bet_stake) / (lay_odd - commission)) * 10
+            const lay_stake = ((back_odd * bet_stake) / (lay_odd - commission))
             const risk = (lay_stake * (lay_odd - 1))
             debugger
             this.setState({ 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col, Button } from "react-bootstrap"
+import { Row, Col } from "react-bootstrap"
 import MultiplaModal from './MultiplaModal.jsx';
 import OddsMatcherModal from "./OddsMatcherModal"
 import OddsmatcherTable from "./OddsmatcherTable"
@@ -48,14 +48,8 @@ class OddsMatcher extends Component {
                         ODDSMATCHER
                 </div>
                 <Row>
-                    <Col>
-                        <Button 
-                            onClick={ () => this.setState({ })}/>
-                    </Col>
-                    <Col>
-                        <OddsMatcherModal /> 
-                    </Col>
-                    <Col>
+                    <Col className="ml-5">
+                        <OddsMatcherModal />
                         <MultiplaModal /> 
                     </Col>
                 </Row>

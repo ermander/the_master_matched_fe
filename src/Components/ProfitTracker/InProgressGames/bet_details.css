@@ -1,0 +1,36 @@
+h2 {
+    text-align: center;
+    margin-top: 3vh;
+    margin-bottom: 3vh;
+}
+
+table {
+    text-align: center;
+    vertical-align: middle;
+}
+
+table .table-head{
+    vertical-align: middle;
+    font-size: 16px;
+}
+
+table .table-row > td{
+    vertical-align: middle;
+    padding: none;
+    font-size: 14px!important;
+    font-weight: bold;
+    padding: 0.25rem!important    
+}
+
+#left-buttons-div{
+    margin-bottom: 2vh;
+}
+
+.bet-buttons{
+    font-weight: bold;
+    margin-right: 1vw;
+}
+
+.right-buttons-div{
+    display: flex;
+}

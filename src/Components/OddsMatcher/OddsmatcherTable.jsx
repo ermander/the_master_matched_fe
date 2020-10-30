@@ -42,12 +42,14 @@ class OddsmatcherTable extends Component {
     // Fetching all available odds
     fetchOdds = async() => {
         try {
-            const rawOdds = await fetch(url + "__cfduid=d7f8eec57d5b74a5146d370609eddc8a21602586726; _ga=GA1.2.359510800.1602586728; _gid=GA1.2.1892420503.1602586728; cookieconsent_status=dismiss; flarum_remember=xjRrMASNnbdoAttzkBGCRPjaNGbRhNmAXaMx3qZ1; wordpress_logged_in_fa686efef513bdb6e3e44099da671de0=ermander%7C1602759536%7C7p9ji9gn5yYFLTBxzkDcaVfCVznOc8SXlvBl9W1H7r0%7C0e2d7d252219a00f3a26cdd2cab1c952a2c54d56077aaaea8c2d25892cc1b230; _gat_gtag_UA_134094661_1=1")
+            const rawOdds = await fetch(url + "__cfduid=d6c63e32b27e7bb0fdcb7877019e78ecc1604046803; _gid=GA1.2.247405292.1604046807; _gat_gtag_UA_134094661_1=1; cookieconsent_status=dismiss; flarum_remember=fboknOB1RCNvVWklNtYbLFPEEAnTYvxISDtClMDZ; wordpress_logged_in_fa686efef513bdb6e3e44099da671de0=ermander%7C1604219612%7C3zgMq17qOc7hFzvtDrHBwdLLzw1kcGgaVo6cmo0nnTG%7Cb1e87907dbdc39d71e96d868400bd637fe80c67fd062f3e8b971294da899bc09; _ga_M6CJV63K6Z=GS1.1.1604046806.1.1.1604046819.47; _ga_SD5RC6H9GW=GS1.1.1604046806.1.1.1604046819.47; _ga=GA1.2.1630923505.1604046807")
             console.log(rawOdds)
             if(rawOdds.ok){
                 const odds = await rawOdds.json()
-                // console.log(odds)
                 const slicedOdds = await odds.slice(0, 2000)
+                console.log(slicedOdds[1])
+                //slicedOdds[1].lastupdate.split(' ')[1]
+                // tornerà un array così ['2020-10-27', '18:11:03']
                 // Calculating odds rating                
                 for(let i=0; i<slicedOdds.length; i++){
                     const puntata = 100

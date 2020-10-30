@@ -1,26 +1,42 @@
 import React, { Component } from 'react';
-import NavBar from "../Navbar/Navbar"
-import SideBar from "./SideBar"
-import { Link } from "react-router-dom"
-import { Col, Row, Table, Spinner, Button } from "react-bootstrap"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrashAlt } from "@fortawesome/free-solid-svg-icons"
 
-class Archiviate extends Component {
+// Components
+import NavBar from "../../Navbar/Navbar"
+import SideBar from '../SideBar/SideBar';
+// React router don
+import { Link } from "react-router-dom"
+
+// React bootstrap
+import { Col, Button, Row, Table, Spinner } from "react-bootstrap"
+
+// FontAwesomeIcon
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArchive } from '@fortawesome/free-solid-svg-icons'
+import { faTrashAlt } from "@fortawesome/free-solid-svg-icons"
+import { faClone } from "@fortawesome/free-solid-svg-icons"
+
+// CSS
+import "../profit_tracker.css"
+
+class InCorso extends Component {
 
     state = {
-        archived: [],
+        inProgress: [],
         isLoading: true
     }
 
     fetchInProgressMatches = async() => {
-        const url = "http://localhost:3002/profit-tracker/archived"
+        const url = "http://localhost:3002/profit-tracker/in-progress"
         const response = await fetch(url)
         const parsedResponse = await response.json()
         this.setState({
             inProgress: parsedResponse,
             isLoading: false
         })
+    }
+
+    componentDidMount(){
+        this.fetchInProgressMatches()
     }
 
     deleteMatch = async (id) => {
@@ -42,10 +58,47 @@ class Archiviate extends Component {
         }
     }
 
-    componentDidMount(){
-        this.fetchInProgressMatches()
+    cloneMatch = async (id) => {
+        try {
+            const response = await fetch("http://localhost:3002/profit-tracker/in-progress/" + id)
+            const parsedResponse = await response.json()
+            delete parsedResponse._id
+            const cloneMatch = await fetch("http://localhost:3002/profit-tracker/save-match",{
+                method: "POST",
+                    headers: {
+                        "Content-Type": 'application/json'
+                    },
+                    body: JSON.stringify(parsedResponse)
+                })
+                if(cloneMatch.ok){
+                    console.log("Match cloned deleted")
+                    window.location.reload()
+                } else {
+                    console.log("An error occured while trying to clone this match")
+                }
+        } catch (error) {
+            console.log(error)
+        }
     }
 
+    archiveMatch = async (id) => {
+        try {
+            const response = await fetch("http://localhost:3002/profit-tracker/modify-match/" + id, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": 'application/json'
+                },
+                body: JSON.stringify({ inCorso: false })
+
+            })
+            if(response.ok){
+                console.log("ok")
+                window.location.reload()
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     render() {
         return (
@@ -73,10 +126,10 @@ class Archiviate extends Component {
                                                     <th>Evento</th>
                                                     <th>Conto</th>
                                                     <th>Notes</th>
-                                                    <th></th>
-                                                    <th></th>
-                                                    <th></th>
-                                                    <th></th>
+                                                    <th>+</th>
+                                                    <th>+</th>
+                                                    <th>+</th>
+                                                    <th>+</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -93,36 +146,42 @@ class Archiviate extends Component {
                                                             <td>Evento</td>
                                                             <td>Conto</td>
                                                             <td>Notes</td>
-                                                            <td></td>
-                                                            <td></td>
-                                                            <td></td>
+                                                            <td>+</td>
+                                                            <td>+</td>
+                                                            <td>+</td>
+                                                            <td>+</td>
                                                         </tr> 
                                                     )
                                                     :
                                                     (
-                                                        this.state.inProgress.map((element, i) => {
+                                                        this.state.inProgress.map((element) => {
                                                             return(
                                                                 <tr key={element._id} style={{alignItems: "center", fontWeight: "bold"}}>
                                                                     <td>Puntata #{element._id}</td>
-                                                                    <td>{element.createdAt}</td>
+                                                                    <td>{element.createdAt.split("T")[0]} {element.createdAt.split("T")[1].split(".")[0]}</td>
                                                                     <td>{element.data}</td>
                                                                     <td>{element.home} vs {element.away}</td>
                                                                     <td>Conto</td>
                                                                     <td>Notes</td>
                                                                     <td>
-                                                                        <Button>                                                                            
+                                                                        <Button size="sm">                                                                            
                                                                             <Link to={"/profit_tracker/bet_details/" + element._id} style={{color: "white" }}>
                                                                                 Dettagli
                                                                             </Link>
                                                                         </Button>
                                                                     </td>
                                                                     <td>
-                                                                        <Button variant="success">                                                                            
-                                                                            Ripristina
+                                                                        <Button size="sm" variant="warning" onClick={ () => this.archiveMatch(element._id)}>
+                                                                            <FontAwesomeIcon icon={faArchive} />
                                                                         </Button>
                                                                     </td>
                                                                     <td>
-                                                                        <Button variant="danger" onClick={ () => this.deleteMatch(element._id)}>
+                                                                        <Button size="sm" variant="success" onClick={ () => this.cloneMatch(element._id)}>
+                                                                            <FontAwesomeIcon icon={faClone} />
+                                                                        </Button>
+                                                                    </td>
+                                                                    <td>
+                                                                        <Button size="sm" variant="danger" onClick={ () => this.deleteMatch(element._id)}>
                                                                             <FontAwesomeIcon icon={faTrashAlt} />
                                                                         </Button>
                                                                     </td>
@@ -131,7 +190,8 @@ class Archiviate extends Component {
                                                         })
                                                     )                                               
                                                 }
-                                            </tbody>                                        
+                                            </tbody>
+                                        
                                         </Table>                                        
                                     </div>
                                 </Col>
@@ -145,4 +205,4 @@ class Archiviate extends Component {
     }
 }
 
-export default Archiviate;
+export default InCorso;

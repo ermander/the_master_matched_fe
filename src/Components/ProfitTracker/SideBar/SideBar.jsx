@@ -20,7 +20,7 @@ import { faList } from '@fortawesome/free-solid-svg-icons'
 import { faMoneyBill } from '@fortawesome/free-solid-svg-icons'
 
 // CSS
-import "./profit_tracker.css"
+import "../profit_tracker.css"
 
 class SideBar extends Component {
     render() {
