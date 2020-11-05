@@ -56,6 +56,25 @@ class BetDetails extends Component {
         }
     }
 
+    archiveMatch = async(id) => {
+        try {
+            const response = await fetch("http://localhost:3002/profit-tracker/modify-match/" + id, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ inCorso: false })
+            })
+            if(response.ok){
+                console.log("ok")
+            }
+        } catch (error) {
+            console.log(error)
+        } 
+        console.log(this.props)
+        this.props.history.push('/profit_tracker/in-progress')
+    }
+
     componentDidMount = () => {
         this.fetchBet()
     }
@@ -90,7 +109,7 @@ class BetDetails extends Component {
                             className="bet-buttons">Nuovo Deposito</Button>
                     </div>
                     <div className="right-buttons-div">
-                        <Button className="right-buttons-div" size="sm">
+                        <Button className="right-buttons-div" size="sm" onClick={ () => this.archiveMatch(this.state.betInfo._id)}>
                             Archivia
                         </Button>
                         <Button variant="danger" size="sm" onClick={ () => this.deleteMatch(this.state.betInfo._id)}>

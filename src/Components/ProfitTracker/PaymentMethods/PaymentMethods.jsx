@@ -11,6 +11,8 @@ import { faBalanceScaleRight } from '@fortawesome/free-solid-svg-icons'
 import NavBar from '../../Navbar/Navbar'
 import SideBar from "../SideBar/SideBar"
 import ModifyPaymentMethod from "./ModifyPaymentMethod"
+import Ricarica_Spesa from "./Ricarica_Spesa"
+import NewPaymentMethod from "./NewPaymentMethod"
 
 //CSS
 import "./paymentMethod.css"
@@ -25,7 +27,10 @@ class PaymentMethods extends Component {
         id: "",
         description: "",
         accountName: "",
-        totalBalance: ""
+        totalBalance: "",
+        showRicaricaSpesa: false,
+        showNewPaymentMethodModal: false,
+        users: []
     }
 
     fetchPaymentMethos = async () => {
@@ -52,23 +57,64 @@ class PaymentMethods extends Component {
 
     }
 
+    deletePaymentMethod = async() => {
+        const response = await fetch("http://localhost:3002/profit-tracker/delete-payment-method/" + this.state.id, {
+            method: "DELETE"
+        })
+
+        if(response.ok){
+            console.log("Deleted successfully")
+            window.location.reload()
+        }else{
+            console.log("An error occurred while trying to delete the payment method!")
+        }
+    }
+
+    fetchUsers = async() => {
+        try {
+            const rawUsers = await fetch("http://localhost:3002/profit-tracker/get-users")            
+            if(rawUsers.ok){
+                const users = await rawUsers.json()
+                this.setState({ users: users })
+                console.log(users, "diocane")
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     handleCloseModal = () => this.setState({ show: false })
+
+    handleCloseRicaricaSpesa = () => this.setState({ showRicaricaSpesa: false })
+
+    handlerCloseNewPaymentMethodModal = () => this.setState({ showNewPaymentMethodModal: false })
 
     componentDidMount = () => {
         this.fetchPaymentMethos()
         this.calculateTotalBalance()
+        this.fetchUsers()
     }
 
     render() {
         return (
             <>
+            <Ricarica_Spesa 
+                show={this.state.showRicaricaSpesa}
+                noShow={this.handleCloseRicaricaSpesa}
+                paymentMethods={this.state.conti}
+                />
             <ModifyPaymentMethod 
                 noShow={this.handleCloseModal}
                 show={this.state.show}
                 accountHolder={this.state.accountHolder}
                 id={this.state.id}
                 name={this.state.accountName}
-            />     
+            />
+            <NewPaymentMethod 
+                show={this.state.showNewPaymentMethodModal}
+                noShow={this.handlerCloseNewPaymentMethodModal}
+                accountHolders={this.state.users}
+                />
             <NavBar />
             <Row>
                 <Col xs={1}>
@@ -83,9 +129,20 @@ class PaymentMethods extends Component {
                             <h4 id="saldo">Saldo Attuale</h4>
                             <p id="saldo-info">Totale saldo scommesse chiuse, casinò e depositi.</p>
                             </div>
-                            <Button size="sm" variant="success" className="mr-1"> Nuovo Metodo Di Pagamento</Button>
+                            <Button 
+                                size="sm" 
+                                variant="success" 
+                                className="mr-1"
+                                onClick={ () => this.setState({ showNewPaymentMethodModal: true })}
+                                > 
+                                    Nuovo Metodo Di Pagamento</Button>
                             <Button size="sm" variant="warning" className="mr-1">Trasferisci Saldo</Button>
-                            <Button size="sm" variant="info">Ricariche/Spese</Button>
+                            <Button 
+                                size="sm" 
+                                variant="info"
+                                onClick={ () => this.setState({ showRicaricaSpesa: true })}
+                                >
+                                    Ricarica/Spesa</Button>
                         </Col>
                     </Row>
                     <Row>
@@ -99,6 +156,7 @@ class PaymentMethods extends Component {
                                         <th>Descrizione</th>
                                         <th>Saldo</th>
                                         <th>Opzioni</th>
+                                        <th>Opzioni</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -107,6 +165,7 @@ class PaymentMethods extends Component {
                                         ?
                                         (
                                             <tr>
+                                                <td>...</td>
                                                 <td>...</td>
                                                 <td>...</td>
                                                 <td>...</td>
@@ -137,6 +196,16 @@ class PaymentMethods extends Component {
                                                                     accountName: element.accountName
                                                                     })} >
                                                                     Modifica
+                                                            </Button>
+                                                        </td>
+                                                        <td>
+                                                            <Button
+                                                                size="sm"
+                                                                variant="danger"
+                                                                onClick={ () => {
+                                                                    this.setState({ id: element._id }, this.deletePaymentMethod)
+                                                                }}>
+                                                                    Elimina
                                                             </Button>
                                                         </td>
                                                     </tr>

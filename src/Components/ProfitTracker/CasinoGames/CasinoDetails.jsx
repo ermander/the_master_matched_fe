@@ -21,7 +21,9 @@ class CasinoDetails extends Component {
     }
 
     handleClose = () => {this.setState({ show: false })}
+
     handleShow = () => {this.setState({ show: true })}
+    
     saveBet = async () => {
         this.setState({
             show: false

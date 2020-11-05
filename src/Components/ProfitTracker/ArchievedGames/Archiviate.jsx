@@ -56,6 +56,24 @@ class Archiviate extends Component {
         }
     }
 
+    restoreMatch = async(id) => {
+        try {
+            const restoreMatch = await fetch("http://localhost:3002/profit-tracker/modify-match/" + id, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ inCorso: true })
+            })
+            if(restoreMatch.ok){
+                console.log("ok")
+                this.props.history.push("/profit_tracker/bet_details/" + id )
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     componentDidMount(){
         this.fetchInProgressMatches()
     }
@@ -132,7 +150,7 @@ class Archiviate extends Component {
                                                                         </Button>
                                                                     </td>
                                                                     <td>
-                                                                        <Button size="sm" variant="success">                                                                            
+                                                                        <Button size="sm" variant="success" onClick={ () => this.restoreMatch(element._id)}>                                                                            
                                                                             Ripristina
                                                                         </Button>
                                                                     </td>

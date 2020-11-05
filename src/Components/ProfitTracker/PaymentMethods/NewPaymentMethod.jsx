@@ -1,18 +1,21 @@
 import React, { Component } from 'react';
-import { FormControl, Modal, Button, InputGroup } from 'react-bootstrap';
+
+// ReactBoostrap
+import { FormControl, Modal, Button, InputGroup, Form } from 'react-bootstrap';
 
 class NewPaymentMethod extends Component {
 
     state = {
         name: "",
         description: "",
-        balance: ""
+        balance: "",
+        accountHolder: "",
     }
 
     saveNewPaymentMethod = async() => {
         try {
             const data = {
-                accountHolder: this.props.accountHolder,
+                accountHolder: this.state.accountHolder !== "" ? this.state.accountHolder : this.props.accountHolders[0],
                 accountName: this.state.name,
                 description: this.state.description,
                 balance: this.state.balance !== "" ? this.state.balance : "0"
@@ -49,10 +52,31 @@ class NewPaymentMethod extends Component {
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <label>
-                        <strong>Intestatario</strong>
-                    </label>
-                    <FormControl type="text" placeholder={this.props.accountHolder} readOnly />  
+                    <Form.Group controlId="exampleForm.ControlSelect1">
+                        <Form.Label>
+                            <strong>Intestatario</strong>
+                        </Form.Label>
+                        <Form.Control as="select" onChange={ (e) => this.setState({ accountHolder: e.currentTarget.value })}>
+                            {
+                            this.props.accountHolders
+                            ?
+                            this.props.accountHolders.map((element, i) => {
+                                return (
+                                    <option key={i}>{element.name}</option>
+                                )
+                            })
+                            : 
+                            (
+                                <>
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                </>
+                            )
+                            }
+                        </Form.Control>
+                    </Form.Group> 
                     <label>
                         <strong>Nome</strong>
                     </label>              
