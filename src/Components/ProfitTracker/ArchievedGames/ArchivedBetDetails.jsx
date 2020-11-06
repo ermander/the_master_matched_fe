@@ -16,10 +16,11 @@ import "./bet_details.css"
 // FontAwesomeIcon
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons"
+import { faArchive } from '@fortawesome/free-solid-svg-icons'
 
 
 
-class BetDetails extends Component {
+class ArchivedBetDetails extends Component {
 
     state = {
         betInfo : [],
@@ -55,25 +56,6 @@ class BetDetails extends Component {
         }
     }
 
-    archiveMatch = async(id) => {
-        try {
-            const response = await fetch("http://localhost:3002/profit-tracker/modify-match/" + id, {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ inCorso: false })
-            })
-            if(response.ok){
-                console.log("ok")
-            }
-        } catch (error) {
-            console.log(error)
-        } 
-        console.log(this.props)
-        this.props.history.push('/profit_tracker/in-progress')
-    }
-
     componentDidMount = () => {
         this.fetchBet()
     }
@@ -86,13 +68,15 @@ class BetDetails extends Component {
                 <Col xs={1}>
                     <SideBar />
                 </Col>
-                <Col xs={11}>
-                    <>
+                <Col xs={11}>                    
                     <div>
                         <h2>
                             DETTAGLI PUNTATA #{this.state.betInfo._id}
                         </h2>
                     </div>
+                    <Row className="mt-3">
+                        <Col xs={12}>
+                    <>
                     <div id="left-buttons-div">
                         <Button 
                             variant="light"
@@ -108,11 +92,23 @@ class BetDetails extends Component {
                             className="bet-buttons">Nuovo Deposito</Button>
                     </div>
                     <div className="right-buttons-div">
-                        <Button className="right-buttons-div" size="sm" onClick={ () => this.archiveMatch(this.state.betInfo._id)}>
-                            Archivia
+                        <Button 
+                            className="mb-1" 
+                            variant="danger" 
+                            size="sm" 
+                            onClick={ () => this.deleteMatch(this.state.betInfo._id)}
+                            >
+                                <FontAwesomeIcon icon={faTrashAlt} />
+                                <p style={{display: "inline-block", marginBottom: "0px", marginLeft: "0.5vw"}}>Cancella</p>
                         </Button>
-                        <Button variant="danger" size="sm" onClick={ () => this.deleteMatch(this.state.betInfo._id)}>
-                            <FontAwesomeIcon icon={faTrashAlt} />
+                        <Button 
+                            className="mb-1 ml-1"
+                            size="sm"
+                            variant="warning"
+                            style={{color: "white"}}
+                            >
+                                <FontAwesomeIcon icon={faArchive} />
+                                <p style={{display: "inline-block", marginBottom: "0px", marginLeft: "0.5vw"}}>Ripristina</p>
                         </Button>
                     </div>
                     <Table striped bordered hover>
@@ -204,6 +200,8 @@ class BetDetails extends Component {
                         </tbody>
                     </Table>
                     </>
+                    </Col>
+                    </Row>
                 </Col>
             </Row>
             </>
@@ -211,4 +209,4 @@ class BetDetails extends Component {
     }
 }
 
-export default withRouter(BetDetails);
+export default withRouter(ArchivedBetDetails);

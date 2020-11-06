@@ -23,6 +23,7 @@ import CasinoDetails from "./Components/ProfitTracker/CasinoGames/CasinoDetails"
 import Utenti from "./Components/ProfitTracker/Users/Utenti"
 import PaymentMethods from "./Components/ProfitTracker/PaymentMethods/PaymentMethods"
 import Bookmakers from "./Components/ProfitTracker/bookmakers/Bookmakers"
+import ArchivedBetDetails from './Components/ProfitTracker/ArchievedGames/ArchivedBetDetails'
 
 function App() {
   return (
@@ -71,13 +72,15 @@ function App() {
           
           <Route path="/profit_tracker/bet_details/:id">
             <BetDetails />
-          </Route>
-          
+          </Route>          
           <Route path="/profit_tracker/in-progress" exact>
             <InCorso />
           </Route>
           <Route path="/profit_tracker/archived" exact>
             <Archiviate />
+          </Route>
+          <Route path="/profit_tracker/archived-bet-details/:id" exact>
+            <ArchivedBetDetails />
           </Route>
           <Route path="/profit_tracker/casino" exact>
             <CasinoDetails />

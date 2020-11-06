@@ -7,13 +7,57 @@ class Ricarica_Spesa extends Component {
 
     state = {
         paymentMethods: [],
+        type: "",
         movement: "",
         description: "",
-        sender: ""
+        ricaricaSpesaHolder: ""
     }
 
     saveTransaction = async() => {
+        try {
+            const data = {
+                type: this.state.type !== "" || this.state.type == "Spesa" ? "Spesa" : "Ricarica",
+                id: this.state.ricaricaSpesaHolder !== "" ? this.props.paymentMethods[parseInt(this.state.ricaricaSpesaHolder)]._id : this.props.paymentMethods[0]._id,
+                holderID: this.state.ricaricaSpesaHolder !== "" ? this.props.paymentMethods[parseInt(this.state.ricaricaSpesaHolder)].holderID : this.props.paymentMethods[0].holderID,
+                accountHolder: this.state.ricaricaSpesaHolder !== "" ? this.props.paymentMethods[parseInt(this.state.ricaricaSpesaHolder)].accountHolder : this.props.paymentMethods[0].accountHolder,
+                accountName: this.state.ricaricaSpesaHolder !== "" ? this.props.paymentMethods[parseInt(this.state.ricaricaSpesaHolder)].accountName : this.props.paymentMethods[0].accountName,
+                description: this.state.description !== "" ? this.state.description : "",
+                movement: parseInt(this.state.movement)
+            }
+    
+            // Saving the new balance
+            const newBalance = await fetch("http://localhost:3002/profit-tracker/ricarica-spesa", {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            })
+    
+            // Saving the new transaction
+            if(newBalance.ok){
+                const newTransaction = await fetch("http://localhost:3002/profit-tracker/save-transaction", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(data)
+                })
+                
+                if(newTransaction.ok){
+                    console.log("OK")
+                    window.location.reload()
+                }else{
+                    console.log("An error occurred while trying to save the new transaction!")
+                } 
 
+            }else{
+                console.log("An error occurred while trying to save the new balance!")
+            }
+         
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     
@@ -31,9 +75,12 @@ class Ricarica_Spesa extends Component {
                         <Form.Label>
                             <strong>Tipologia</strong>
                         </Form.Label>
-                        <Form.Control as="select">
-                            <option>Ricarica</option>
-                            <option>Spesa</option>
+                        <Form.Control 
+                            as="select"
+                            onChange={ (e) => this.setState({type: e.currentTarget.value})}
+                            >
+                                <option>Ricarica</option>
+                                <option>Spesa</option>
                         </Form.Control>
                     </Form.Group>
                     <Form.Group controlId="exampleForm.ControlSelect1">
@@ -42,7 +89,7 @@ class Ricarica_Spesa extends Component {
                         </Form.Label>
                         <Form.Control 
                             as="select"
-                            onChange={e => console.log(e.currentTarget.value.split(')')[0])}
+                            onChange={e => this.setState({ricaricaSpesaHolder: e.currentTarget.value.split(')')[0] - 1})}
                             >
                             {
                                 this.props.paymentMethods 

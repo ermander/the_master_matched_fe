@@ -92,9 +92,11 @@ class NewBookmaker extends Component {
                                 }
                             </Form.Control>
                         </Form.Group>
-                        <Form.Group controlId="exampleForm.ControlSelect2">
-                            <Form.Label>Bookmakers</Form.Label>
-                            <Form.Control as="select" onChange={ (e) => this.setState({ bookmakerName: e.currentTarget.value })} multiple>
+                        <Form.Group controlId="exampleForm.SelectCustomHtmlSize">
+                            <Form.Label>
+                                <strong>Bookmakers</strong>
+                            </Form.Label>
+                            <Form.Control as="select" htmlSize={3} custom onChange={ (e) => this.setState({ bookmakerName: e.currentTarget.value })} multiple>
                             {
                                 !this.state.defaultBoomakers
                                 ?

@@ -15,10 +15,11 @@ class NewPaymentMethod extends Component {
     saveNewPaymentMethod = async() => {
         try {
             const data = {
-                accountHolder: this.state.accountHolder !== "" ? this.state.accountHolder : this.props.accountHolders[0],
+                holderID: this.state.accountHolder !== "" ? this.props.accountHolders[parseInt(this.state.accountHolder)]._id : this.props.accountHolders[0]._id,
+                accountHolder: this.state.accountHolder !== "" ? this.props.accountHolders[parseInt(this.state.accountHolder)].name : this.props.accountHolders[0].name,
                 accountName: this.state.name,
                 description: this.state.description,
-                balance: this.state.balance !== "" ? this.state.balance : "0"
+                balance: this.state.balance !== "" ? parseInt(this.state.balance) : 0
             }
 
             const NewPaymentMethod = await fetch("http://localhost:3002/profit-tracker/new-payment-method", {
@@ -29,10 +30,8 @@ class NewPaymentMethod extends Component {
                 body: JSON.stringify(data)
             })
 
-            const response = await NewPaymentMethod.json()
-
-            if(response){
-                console.log("New payment method created!", response)
+            if(NewPaymentMethod.ok){
+                console.log("New payment method created!")
                 window.location.reload()
             }else{
                 console.log("An error occurred while trying to create a new payment method")
@@ -56,13 +55,13 @@ class NewPaymentMethod extends Component {
                         <Form.Label>
                             <strong>Intestatario</strong>
                         </Form.Label>
-                        <Form.Control as="select" onChange={ (e) => this.setState({ accountHolder: e.currentTarget.value })}>
+                        <Form.Control as="select" onChange={ (e) => this.setState({ accountHolder: e.currentTarget.value.split(")")[0] })}>
                             {
                             this.props.accountHolders
                             ?
                             this.props.accountHolders.map((element, i) => {
                                 return (
-                                    <option key={i}>{element.name}</option>
+                                    <option key={i}>1) {element.name}</option>
                                 )
                             })
                             : 

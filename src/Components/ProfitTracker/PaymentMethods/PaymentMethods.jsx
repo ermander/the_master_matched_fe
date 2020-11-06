@@ -13,6 +13,7 @@ import SideBar from "../SideBar/SideBar"
 import ModifyPaymentMethod from "./ModifyPaymentMethod"
 import Ricarica_Spesa from "./Ricarica_Spesa"
 import NewPaymentMethod from "./NewPaymentMethod"
+import Trasferimento from "./Trasferimento"
 
 //CSS
 import "./paymentMethod.css"
@@ -30,6 +31,7 @@ class PaymentMethods extends Component {
         totalBalance: "",
         showRicaricaSpesa: false,
         showNewPaymentMethodModal: false,
+        trasferimentoModalShow: false,
         users: []
     }
 
@@ -89,6 +91,8 @@ class PaymentMethods extends Component {
 
     handlerCloseNewPaymentMethodModal = () => this.setState({ showNewPaymentMethodModal: false })
 
+    handleCloseTrasferimentoModal = () => this.setState({ trasferimentoModalShow: false })
+
     componentDidMount = () => {
         this.fetchPaymentMethos()
         this.calculateTotalBalance()
@@ -98,10 +102,12 @@ class PaymentMethods extends Component {
     render() {
         return (
             <>
+            {/* MODALS */}
             <Ricarica_Spesa 
                 show={this.state.showRicaricaSpesa}
                 noShow={this.handleCloseRicaricaSpesa}
                 paymentMethods={this.state.conti}
+                users={this.state.users}
                 />
             <ModifyPaymentMethod 
                 noShow={this.handleCloseModal}
@@ -114,6 +120,11 @@ class PaymentMethods extends Component {
                 show={this.state.showNewPaymentMethodModal}
                 noShow={this.handlerCloseNewPaymentMethodModal}
                 accountHolders={this.state.users}
+                />
+            <Trasferimento
+                show={this.state.trasferimentoModalShow}
+                noShow={this.handleCloseTrasferimentoModal}
+                paymentMethods={this.state.conti}
                 />
             <NavBar />
             <Row>
@@ -136,7 +147,13 @@ class PaymentMethods extends Component {
                                 onClick={ () => this.setState({ showNewPaymentMethodModal: true })}
                                 > 
                                     Nuovo Metodo Di Pagamento</Button>
-                            <Button size="sm" variant="warning" className="mr-1">Trasferisci Saldo</Button>
+                            <Button 
+                                size="sm" 
+                                variant="warning" 
+                                className="mr-1"
+                                onClick={ () => this.setState({ trasferimentoModalShow: true })}
+                                >
+                                    Trasferisci Saldo</Button>
                             <Button 
                                 size="sm" 
                                 variant="info"

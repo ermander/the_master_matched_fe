@@ -9,13 +9,15 @@ class NewPaymentMethod extends Component {
         balance: ""
     }
 
-    saveNewPaymentMethod = async() => {
+    saveNewPaymentMethod = async(id) => {
         try {
+            console.log(id)
             const data = {
+                holderID: id,
                 accountHolder: this.props.accountHolder,
                 accountName: this.state.name,
                 description: this.state.description,
-                balance: this.state.balance !== "" ? this.state.balance : "0"
+                balance: this.state.balance !== "" ? parseInt(this.state.balance) : 0
             }
 
             const NewPaymentMethod = await fetch("http://localhost:3002/profit-tracker/new-payment-method", {
@@ -26,10 +28,8 @@ class NewPaymentMethod extends Component {
                 body: JSON.stringify(data)
             })
 
-            const response = await NewPaymentMethod.json()
-
-            if(response){
-                console.log("New payment method created!", response)
+            if(NewPaymentMethod.ok){
+                console.log("New payment method created!")
                 window.location.reload()
             }else{
                 console.log("An error occurred while trying to create a new payment method")
@@ -92,7 +92,7 @@ class NewPaymentMethod extends Component {
                     </Button>
                     <Button 
                         variant="primary"
-                        onClick={this.saveNewPaymentMethod}>
+                        onClick={ () => this.saveNewPaymentMethod(this.props.id)}>
                             Salva
                     </Button>
                 </Modal.Footer>

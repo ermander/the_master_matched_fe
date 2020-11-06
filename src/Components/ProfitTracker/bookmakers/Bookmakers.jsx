@@ -7,7 +7,10 @@ import NewBookmaker from "./NewBookmaker"
 
 // React Bootstrap
 import { Row, Col, Button, Table } from "react-bootstrap"
-import { parse } from '@fortawesome/fontawesome-svg-core';
+
+// FontAwesomeIcon
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrashAlt } from "@fortawesome/free-solid-svg-icons"
 
 class Bookmakers extends Component {
 
@@ -47,6 +50,21 @@ class Bookmakers extends Component {
         }
     }
 
+    deleteBookmaker = async(id) => {
+        try {
+            const deleteBookmaker = await fetch("http://localhost:3002/profit-tracker/delete-bookmaker/" + id, {
+                method: "DELETE"
+            })
+
+            if(deleteBookmaker.ok){
+                console.log("Deleted successfully!")
+                window.location.reload()
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     componentDidMount = () => {
         this.fetchUsers()
         this.fetchBookmakers()
@@ -78,7 +96,7 @@ class Bookmakers extends Component {
                                     </Button>
                             </Col>
                         </Row>
-                        <Row>
+                        <Row className="mt-3">
                             <Col xs={12}>
                                 <Table striped bordered hover className="odds-table" style={{width: "90vw"}}>
                                     <thead className="table-data">
@@ -90,6 +108,7 @@ class Bookmakers extends Component {
                                             <th>Descrizione</th>
                                             <th>Saldo</th>
                                             <th>Stato</th>
+                                            <th>Opzioni</th>
                                             <th>Opzioni</th>
                                             <th>Opzioni</th>
                                         </tr>
@@ -109,6 +128,7 @@ class Bookmakers extends Component {
                                                 <td>...</td>
                                                 <td>...</td>
                                                 <td>...</td>
+                                                <td>...</td>
                                             </tr>
                                         )
                                         :
@@ -117,11 +137,11 @@ class Bookmakers extends Component {
                                                 return (
                                                     <tr key={i}>
                                                         <td>{i + 1}</td>
-                                                        <td>{element.createdAt}</td>
-                                                        <td>{element.bookmakerHolder}</td>
+                                                        <td>{element.createdAt.split("T")[0]} {element.createdAt.split("T")[1].split(".")[0]}</td>
+                                                        <td>{element.holderName}</td>
                                                         <td>{element.bookmakerName}</td>
-                                                        <td>{element.description}</td>
-                                                        <td>{element.balance}</td>
+                                                        <td>{element.description !== "" ? element.description : "..."}</td>
+                                                        <td>{element.balance}€</td>
                                                         <td>{element.isActive ? "Abilitato" : "Non Abilitato"}</td>
                                                         <td>
                                                             <Button
@@ -137,7 +157,16 @@ class Bookmakers extends Component {
                                                                 variant="warning"
                                                                 >
                                                                     Modifica
-                                                                </Button>
+                                                            </Button>
+                                                        </td>
+                                                        <td>
+                                                            <Button
+                                                                size="sm"
+                                                                variant="danger"
+                                                                onClick={ () => this.deleteBookmaker(element._id)}
+                                                                >
+                                                                    <FontAwesomeIcon icon={faTrashAlt} />
+                                                            </Button>
                                                         </td>
                                                     </tr>
                                                 )

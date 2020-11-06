@@ -12,6 +12,10 @@ import NewPaymentMethod from "./NewPaymentMethod"
 //CSS
 import "./utenti.css"
 
+// FontAwesomeIcon
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrashAlt, faWindowRestore } from "@fortawesome/free-solid-svg-icons"
+
 class Utenti extends Component {
 
     state = {
@@ -35,6 +39,22 @@ class Utenti extends Component {
     handleNewPaymentMethod = () => { this.setState({ newPaymentMethodShow: false })}
 
     handleShow = () => { this.setState({ show: true })}
+
+    deleteUser = async(id) => {
+        try {
+            const deleteUser = await fetch("http://localhost:3002/profit-tracker/delete-user/" + id, {
+                method: "DELETE"
+            })
+            if(deleteUser.ok){
+                console.log("ok")
+                window.location.reload()
+            }else{
+                console.log("An error occurred while trying to delete the user!")
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     fetchUsers = async () => {
         try {
@@ -93,6 +113,7 @@ class Utenti extends Component {
                 show={this.state.newPaymentMethodShow}
                 noShow={this.handleNewPaymentMethod}
                 accountHolder={this.state.name}
+                id={this.state.id}
             />
             <Row>
                 <Col xs={1}>
@@ -153,6 +174,7 @@ class Utenti extends Component {
                                         <th>Opzioni</th>
                                         <th>Opzioni</th>
                                         <th>Opzioni</th>
+                                        <th>Opzioni</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -161,6 +183,7 @@ class Utenti extends Component {
                                         ?
                                         (
                                             <tr>
+                                                <td>...</td>
                                                 <td>...</td>
                                                 <td>...</td>
                                                 <td>...</td>
@@ -183,7 +206,8 @@ class Utenti extends Component {
                                                                 size="sm"
                                                                 onClick={ () => this.setState({ 
                                                                     newPaymentMethodShow: true,
-                                                                    name: element.name
+                                                                    name: element.name,
+                                                                    id: element._id
                                                                 })}
                                                             >
                                                                 Nuovo Metodo di Pagamento
@@ -206,6 +230,15 @@ class Utenti extends Component {
                                                                     })}
                                                             >
                                                                 Modifica
+                                                            </Button>
+                                                        </td>
+                                                        <td>
+                                                            <Button
+                                                                size="sm"
+                                                                variant="danger"
+                                                                onClick={ () => this.deleteUser(element._id)}
+                                                                >
+                                                                    <FontAwesomeIcon icon={faTrashAlt} />
                                                             </Button>
                                                         </td>
                                                     </tr>

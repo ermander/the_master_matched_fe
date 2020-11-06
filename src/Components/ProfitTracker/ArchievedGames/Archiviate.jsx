@@ -144,7 +144,7 @@ class Archiviate extends Component {
                                                                     <td>Notes</td>
                                                                     <td>
                                                                         <Button size="sm">                                                                            
-                                                                            <Link to={"/profit_tracker/bet_details/" + element._id} style={{color: "white" }}>
+                                                                            <Link to={"/profit_tracker/archived-bet-details/" + element._id} style={{color: "white" }}>
                                                                                 Dettagli
                                                                             </Link>
                                                                         </Button>
