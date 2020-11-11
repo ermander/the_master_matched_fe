@@ -1,5 +1,12 @@
 import React, { Component } from 'react';
+
+// React Bootstrap
 import { Modal, Button, Row, Col, Form, InputGroup, Card, FormControl } from "react-bootstrap"
+
+// Components
+import UsersModal from "./UsersModal"
+
+// FontAwasome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons'
 import { faClock } from '@fortawesome/free-solid-svg-icons'
@@ -9,6 +16,8 @@ import { faFutbol } from '@fortawesome/free-solid-svg-icons'
 import { faMoneyCheck } from '@fortawesome/free-solid-svg-icons'
 import { faPercent } from '@fortawesome/free-solid-svg-icons'
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons'
+
+// CSS
 import "./oddsmatcher.css"
 
 // Bookmakers logos
@@ -24,7 +33,26 @@ class OddsMatcherMatchModal extends Component {
         selettoreRimborso: "NORMALE",
         quotaPunta: "",
         quotaBanca: "",
-        risk: ""
+        risk: "",
+        users: [],
+        showUserModal: false
+    }
+
+    // Fetching the users for checking if they have the bookmakers active
+    fetchUsers = async () => {
+        const response = await fetch("http://localhost:3002/profit-tracker/get-users")
+        if(response.ok){
+            const users = await response.json()
+            this.setState({users: users})
+        }
+    }
+
+    showUserModal = () => {
+        this.setState({showUserModal: true})
+    }
+
+    noShowUserModal = () => {
+        this.setState({showUserModal: false})
     }
 
     // Calculating risk and lay stake
@@ -107,9 +135,18 @@ class OddsMatcherMatchModal extends Component {
         }        
     }
 
+    componentDidMount = () => {
+        this.fetchUsers()
+    }
+
     render() {
         return (
             <>
+            <UsersModal 
+                show={this.state.showUserModal}
+                noShow={this.noShowUserModal}
+                users={this.state.users}
+            />
             <Modal show={this.props.show} onHide={this.props.noShow}>
                 <Modal.Body className="pt-0">
                     {/* SELEZIONE MODALITà NORMALE, BONUS O RIMBORSO*/}
@@ -214,7 +251,7 @@ class OddsMatcherMatchModal extends Component {
                                 <Col xs={12} style={{textAlign: "center"}}>
                                     <Button 
                                         className="mt-3" style={{minWidth: "70%"}}
-                                        onClick={this.postNewMatch}
+                                        onClick={this.showUserModal}
                                         >
                                         Invia al Profit Tracker
                                     </Button>
