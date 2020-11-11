@@ -11,9 +11,8 @@ import { faPercent } from '@fortawesome/free-solid-svg-icons'
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons'
 import "./oddsmatcher.css"
 
+// Bookmakers logos
 import { bookLogos } from "../BookLogos/bookLogos"
-
-
 
 class OddsMatcherMatchModal extends Component {
 
@@ -34,29 +33,21 @@ class OddsMatcherMatchModal extends Component {
             quotaPunta: this.state.quotaPunta !== "" ? this.state.quotaPunta : this.props.odd.quota,
             quotaBanca: this.state.quotaBanca !== "" ? this.state.quotaBanca : this.props.odd.quota_banca
         }, () => {
-
             const back_odd = parseFloat(this.state.quotaPunta !== "" ? this.state.quotaPunta : this.props.odd.quota)
             const lay_odd = parseFloat(this.state.quotaBanca !== "" ? this.state.quotaBanca : this.props.odd.quota_banca)
             const bet_stake = parseInt(this.state.puntata)
             const commission = parseFloat(this.state.commissione)
             const lay_stake = ((back_odd * bet_stake) / (lay_odd - commission))
             const risk = (lay_stake * (lay_odd - 1))
-            debugger
-            this.setState({ 
-                bancata: lay_stake.toFixed(2),
-                risk: risk.toFixed(2)
-            })
-        })
-        // (back odds * free bet value) / (lay odds – commission)
-       
+            this.setState({bancata: lay_stake.toFixed(2), risk: risk.toFixed(2)})
+        })       
     }
 
-    // POST nuova giocata abbinata
+    // POST a new matched bet
     postNewMatch = async () => {
         try {
             const propsOdds = this.props.odd
             const stateOdds = this.state
-            console.log("arone me pare", propsOdds)
 
             let matchInfo = {
                     data: propsOdds.data,
@@ -86,25 +77,35 @@ class OddsMatcherMatchModal extends Component {
                     quotaBanca: stateOdds.quotaBanca !== "" ? stateOdds.quotaBanca : propsOdds.quota_banca
                 }
 
-                console.log("aaa lè lù", postInfo)
-
-                const postNewMatch = await fetch("http://localhost:3002/profit-tracker/save-match", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": 'application/json'
-                    },
-                        body: JSON.stringify(postInfo)
-                    })
-                    const response = await postNewMatch.json()
-                    console.log(response)                
-
-                return
+                // Check if the user has the 2 bookmakers properly active
+                const response = await fetch("http://localhost:3002/profit-tracker/bookmakers")
+                if(response.ok){
+                    const activeBookmakers = await response.json()
+                    const checkBook = activeBookmakers.bookmakersName.find(propsOdds.book)
+                    const checkExchange = activeBookmakers.bookmakerName.find(propsOdds.book2)
+                    if(!checkBook && !checkExchange){
+                        console.log("You have to activate this book!", propsOdds.book)
+                    }else if(!checkBook && checkExchange){
+                        console.log("You have to activate this book!", propsOdds.book2)
+                    }else if(!checkExchange && checkBook){
+                        console.log("You have to activate both books", propsOdds.book, propsOdds.book2)
+                    }else{
+                    // Posting the new matched bet
+                    const postNewMatch = await fetch("http://localhost:3002/profit-tracker/save-match", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": 'application/json'
+                        },
+                            body: JSON.stringify(postInfo)
+                        })
+                        const response = await postNewMatch.json()
+                        console.log(response)
+                    }
+                }
         } catch (error) {
             console.log(error)            
         }        
     }
-
-    
 
     render() {
         return (

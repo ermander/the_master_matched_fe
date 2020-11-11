@@ -3,37 +3,104 @@ import React, { Component } from 'react';
 // Components
 import NavBar from "../../Navbar/Navbar"
 import SideBar from "../SideBar/SideBar"
+import NuovaGiocata from "./NuovaGiocata"
+import ModificaGiocata from "./ModificaGiocata"
 
-// FontAwasomeIcon
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons'
 
 // React bootstrap 
-import { Row, Col, Button, Modal, Dropdown, DropdownButton, InputGroup, FormControl } from "react-bootstrap"
+import { Row, Col, Button, Table } from "react-bootstrap"
 
 class CasinoDetails extends Component {
 
     state = {
-        show: false,
         giocateCasino: [],
-        accountsLoading: false,
-        conti: [{conto: "Betfair"}, {conto: "Sisal"}, {conto: "Bet365"}]
+        isLoading: false,
+        bookmakers: [],
+        showNuovaGiocata: false,
+        casinoBets: [],
+        balance: "",
+        showModificaGiocata: false,
+        casinoBet: []
     }
 
-    handleClose = () => {this.setState({ show: false })}
-
-    handleShow = () => {this.setState({ show: true })}
+    handleShow = () => {this.setState({ showNuovaGiocata: true })}
+    handleClose = () => {this.setState({ showNuovaGiocata: false })}
+    showModificaGiocata = (casinoBet) => {this.setState({ showModificaGiocata: true, casinoBet: casinoBet })}
+    noShowModificaGiocata = () => {this.setState({ showModificaGiocata: false })}
     
     saveBet = async () => {
         this.setState({
-            show: false
+            showNuovaGiocata: false
         })
+    }
+
+    fetchBookmakers = async () => {
+        const response = await fetch("http://localhost:3002/profit-tracker/bookmakers")
+        if(response.ok){
+            const bookmakers = await response.json()
+            this.setState({
+                bookmakers: bookmakers
+            })
+        }
+    }
+
+    fetchCasinoBets = async () => {
+        try {
+            const response = await fetch("http://localhost:3002/profit-tracker/casino")
+            if(response.ok){
+                const casinoBets = await response.json()
+                let balance = 0
+                for(let i=0; i<casinoBets.length; i++){
+                    let singleBalance = parseInt(casinoBets[i].movement)
+                    balance = singleBalance + balance
+                }
+    
+                this.setState({
+                    casinoBets: casinoBets,
+                    balance: balance
+                })
+                console.log(this.state.balance)
+            }            
+        } catch (error) {
+            console.log(error)
+        }      
+    }
+
+    deleteCasinoBet = async(id) => {
+        try {
+            const response = await fetch("http://localhost:3002/profit-tracker/delete-casino-bet/" + id, {
+                method: "DELETE"
+            })
+            if(response.ok){
+                console.log("ok")
+                window.location.reload()
+            }else{
+                console.log("An error occurred while trying to delete the match")
+            }            
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    componentDidMount = () => {
+        this.fetchBookmakers()
+        this.fetchCasinoBets()
     }
 
     render() {
         return (
             <div>
                 <NavBar />
+                <ModificaGiocata 
+                    show={this.state.showModificaGiocata}
+                    noShow={this.noShowModificaGiocata}
+                    betInfo={this.state.casinoBet}
+                />
+                <NuovaGiocata 
+                    show={this.state.showNuovaGiocata}
+                    noShow={this.handleClose}
+                    bookmakers={this.state.bookmakers}
+                />
                 <Row>
                     <Col xs={1}>
                         <SideBar />
@@ -42,100 +109,92 @@ class CasinoDetails extends Component {
                         <Row>
                             <Col xs={12}>
                                 <h2>Casinò</h2>
+                                <div style={{maxWidth: "350px"}} id="balance-counter">
+                                <h3 id="counter">{this.state.balance}€</h3>
+                                <h4 id="saldo">Saldo Attuale Casino</h4>
+                                <p id="saldo-info">Questo è il saldo attuale di tutte le giocate casinò.</p>
+                                </div>
                             </Col>
                         </Row>
                         <Row>
                             <Col xs={12}>
-                                <Button variant="primary" onClick={this.handleShow}>
-                                    Nuova Giocata
+                                <Button 
+                                    variant="success"
+                                    size="sm"
+                                    onClick={this.handleShow}>
+                                        Nuova Giocata
                                 </Button>
 
-                                <Modal show={this.state.show} onHide={this.handleClose}>
-                                    <Modal.Header closeButton>
-                                    <Modal.Title>Nuova Giocata</Modal.Title>
-                                    </Modal.Header>
-                                    <Modal.Body>
-                                        <label>
-                                            <strong>Conto</strong>
-                                        </label>
-                                        <DropdownButton id="dropdown-basic-button" title="Seleziona conto">
-                                            {
-                                            this.state.accountsLoading 
-                                            ?
-                                            (
-                                                <>
-                                                <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-                                                <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-                                                <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
-                                                </>
-
-                                            )
-                                            :
-                                            (
-                                                this.state.conti.map((element, i) => {
-                                                    return (                                                        
-                                                        <>
-                                                        <Dropdown.Item href="#/action-1" key={i}>{element.conto}</Dropdown.Item>
-                                                        </>
-                                                    )
-                                                })
-                                            )
-                                            }                                            
-                                        </DropdownButton>
-
-                                        <label>
-                                            <strong>Tipologia</strong>
-                                        </label>
-                                        <DropdownButton id="dropdown-basic-button" title="Seleziona conto">
-                                            <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-                                            <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-                                            <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>                                            
-                                        </DropdownButton>
-
-                                        <label>
-                                            <strong>Stake</strong>
-                                        </label>
-                                        <InputGroup size="sm" className="mb-3">
-                                            <FormControl
-                                                as="textarea"
-                                                aria-label="With textarea"
-                                            />
-                                        </InputGroup>
-                                        {/* Inserire input filed per la data */}
-                                        <InputGroup>
-                                        <InputGroup.Prepend>
-                                            <FontAwesomeIcon icon={faCalendarAlt} className="fa-iconss"/>
-                                        </InputGroup.Prepend>
-                                            <FormControl 
-                                                type="date"
-                                            />
-                                        </InputGroup>
-
-                                        <label>
-                                            <strong>Descrizione</strong>
-                                        </label>
-                                        <InputGroup className="new-user-modal-text-area">
-                                        <FormControl 
-                                            as="textarea" 
-                                            aria-label="With textarea"
-                                        />
-                                    </InputGroup>                                    
-                                        
-                                    </Modal.Body>
-                                    <Modal.Footer>
-                                    <Button variant="secondary" onClick={this.handleClose}>
-                                        Close
-                                    </Button>
-                                    <Button variant="primary" onClick={this.saveBet}>
-                                        Save Changes
-                                    </Button>
-                                    </Modal.Footer>
-                                </Modal>
                             </Col>
                         </Row>
                         <Row>
                             <Col xs={12}>                                
-                            {/* Inserire contatore profitti casino */}
+                            <Table striped bordered hover className="odds-table" style={{width: "90vw"}}>
+                                <thead className="table-data">
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Creato il:</th>
+                                        <th>Conto</th>
+                                        <th>Tipo</th>
+                                        <th>Descrizione</th>
+                                        <th>Movimento</th>
+                                        <th>Opzioni</th>
+                                        <th>Opzioni</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {
+                                        this.state.casinoBets
+                                        ?
+                                        this.state.casinoBets.map((element, i) => {
+                                            return(
+                                                <tr>
+                                                    <td>{i+1}</td>
+                                                    <td>{element.createdAt.split("T")[0]} - {element.createdAt.split("T")[1].split(".")[0]}</td>
+                                                    <td>{element.bookmakerName} {element.bookmakerHolder}</td>
+                                                    <td>{element.type}</td>
+                                                    <td>{element.descrizione}</td>
+                                                    <td>{element.movement}€</td>
+                                                    <td>
+                                                        <Button
+                                                            variant="warning"
+                                                            size="sm"
+                                                            onClick={() => this.showModificaGiocata(element)}>Modifica</Button>
+                                                    </td>
+                                                    <td>
+                                                        <Button
+                                                            variant="danger"
+                                                            size="sm"
+                                                            onClick={() => this.deleteCasinoBet(element._id)}>Elimina</Button>
+                                                    </td>
+                                                </tr>
+                                            )
+                                        })
+                                        :
+                                        (
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td>
+                                                    <Button
+                                                        variant="warning"
+                                                        size="sm">Modifica</Button>
+                                                </td>
+                                                <td>
+                                                    <Button
+                                                        variant="danger"
+                                                        size="sm"
+                                                        >Elimina</Button>
+                                                </td>    
+                                            </tr>                                            
+                                        )
+                                    }
+                                </tbody>
+                            </Table>
                             </Col>
                         </Row>
                         

@@ -26,13 +26,20 @@ class NewBookmaker extends Component {
     }
 
     saveNewBookmaker = async() => {
+        console.log(this.props.users) 
+        console.log(this.state)
         try {
             const data = {
-                holderID: this.state.bookmakerHolder !== "" ? this.props.users[0]._id : this.state.bookmakerHolder._id,
+                holderID: this.state.bookmakerHolder !== "" ? this.props.users[parseInt(this.state.bookmakerHolder)]._id : this.props.users[0]._id,
+                holderName: this.state.bookmakerHolder !== "" ? this.props.users[parseInt(this.state.bookmakerHolder)].name : this.props.users[0].name,
                 bookmakerName: this.state.bookmakerName !== "" ? this.state.bookmakerName : this.state.defaultBoomakers[0],
-                balance: "0",
-                isActive: this.state.isActive !== "" || this.state.isActive !== "Non abilitato" ? true : false
+                description: this.state.description,
+                balance: 0,
+                isActive: this.state.isActive === "" || this.state.isActive === "Abilitato" ? true : false
             }
+
+
+            
 
             const response = await fetch("http://localhost:3002/profit-tracker/new-bookmaker", {
                 method: "POST",
@@ -45,11 +52,9 @@ class NewBookmaker extends Component {
             if(response.ok){
                 console.log("New bookmakers successfully created!")
                 window.location.reload()
-            }else{
-                console.log("An error occurred while trying to create a new bookmaker")
             }
         } catch (error) {
-            console.log(error)
+            console.log("An error occurred while trying to create a new bookmaker", error)
         }
     }
 
@@ -71,13 +76,13 @@ class NewBookmaker extends Component {
                             <Form.Label>
                                 <strong>Intestatario</strong>
                             </Form.Label>
-                            <Form.Control as="select" onChange={ (e) => this.setState({ bookmakerHolder: e.currentTarget.value })}>
+                            <Form.Control as="select" onChange={ (e) => this.setState({ bookmakerHolder: e.currentTarget.value.split(")")[0]-1 })}>
                                 {
                                     this.props.users 
                                     ?
                                     this.props.users.map((element, i) => {
                                         return (
-                                            <option key={i}>{element.name}</option>
+                                            <option key={i}>{i + 1}) {element.name}</option>
                                         )
                                     })
                                     :
@@ -152,7 +157,6 @@ class NewBookmaker extends Component {
                                 Salva
                         </Button>
                     </Modal.Footer>
-
                 </Modal>
             </>
         );

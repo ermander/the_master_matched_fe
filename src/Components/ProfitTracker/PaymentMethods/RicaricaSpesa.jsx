@@ -16,7 +16,7 @@ class Ricarica_Spesa extends Component {
     saveTransaction = async() => {
         try {
             const data = {
-                type: this.state.type !== "" || this.state.type == "Spesa" ? "Spesa" : "Ricarica",
+                type: this.state.type !== "" || this.state.type === "Spesa" ? "Spesa" : "Ricarica",
                 id: this.state.ricaricaSpesaHolder !== "" ? this.props.paymentMethods[parseInt(this.state.ricaricaSpesaHolder)]._id : this.props.paymentMethods[0]._id,
                 holderID: this.state.ricaricaSpesaHolder !== "" ? this.props.paymentMethods[parseInt(this.state.ricaricaSpesaHolder)].holderID : this.props.paymentMethods[0].holderID,
                 accountHolder: this.state.ricaricaSpesaHolder !== "" ? this.props.paymentMethods[parseInt(this.state.ricaricaSpesaHolder)].accountHolder : this.props.paymentMethods[0].accountHolder,

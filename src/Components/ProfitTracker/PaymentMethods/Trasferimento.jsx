@@ -15,13 +15,11 @@ class Trasferimento extends Component {
     saveTrasferment = async() => {
         try {
             const data = {
-                movimento: this.state.movimento !== "" ? parseInt(this.state.movimento) : 0,
+                movement: this.state.movimento !== "" ? parseInt(this.state.movimento) : 0,
                 descrizione: this.state.descrizione !== "" ? this.state.descrizione : "",
-                sender: this.state.sender !== "" ? this.props.paymentMethods[parseInt(this.state.sender)._id] : this.props.paymentMethods[0]._id,
+                sender: this.state.sender !== "" ? this.props.paymentMethods[parseInt(this.state.sender)]._id : this.props.paymentMethods[0]._id,
                 receiver: this.state.receiver !== "" ? this.props.paymentMethods[parseInt(this.state.receiver)]._id : this.props.paymentMethods[0]._id
             }
-
-            console.log(data)
     
             const saveNewBalance = await fetch("http://localhost:3002/profit-tracker/trasferment", {
                 method: "PUT",
@@ -31,7 +29,7 @@ class Trasferimento extends Component {
                 body: JSON.stringify(data)
             })
     
-            /*if(saveNewBalance.ok){
+            if(saveNewBalance.ok){
                 const saveNewTransaction = await fetch("http://localhost:3002/profit-tracker/save-transaction", {
                     method: "POST",
                     headers: {
@@ -50,16 +48,10 @@ class Trasferimento extends Component {
             }else{
                 console.log("An error occurred while trying to save the new balance!")
                 window.location.reload()
-            }
-            */
-            
+            }            
         } catch (error) {
             console.log(error)
         }
-    }
-
-    componentDidMount = () => {
-        console.log(this.props)
     }
 
     render() {

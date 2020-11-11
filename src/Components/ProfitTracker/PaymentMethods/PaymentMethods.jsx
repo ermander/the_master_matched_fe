@@ -3,15 +3,11 @@ import React, { Component } from 'react';
 // Bootstrap
 import { Row, Col, Button, Table } from "react-bootstrap"
 
-// FontAwasome
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBalanceScaleRight } from '@fortawesome/free-solid-svg-icons'
-
 //Components
 import NavBar from '../../Navbar/Navbar'
 import SideBar from "../SideBar/SideBar"
 import ModifyPaymentMethod from "./ModifyPaymentMethod"
-import Ricarica_Spesa from "./Ricarica_Spesa"
+import RicaricaSpesa from "./RicaricaSpesa"
 import NewPaymentMethod from "./NewPaymentMethod"
 import Trasferimento from "./Trasferimento"
 
@@ -54,7 +50,6 @@ class PaymentMethods extends Component {
             let singleBalance = parseInt(parsedResponde[i].balance)
             balance = singleBalance + balance
         }
-        console.log(balance)
         this.setState({ totalBalance: balance})
 
     }
@@ -78,7 +73,6 @@ class PaymentMethods extends Component {
             if(rawUsers.ok){
                 const users = await rawUsers.json()
                 this.setState({ users: users })
-                console.log(users, "diocane")
             }
         } catch (error) {
             console.log(error)
@@ -103,7 +97,7 @@ class PaymentMethods extends Component {
         return (
             <>
             {/* MODALS */}
-            <Ricarica_Spesa 
+            <RicaricaSpesa 
                 show={this.state.showRicaricaSpesa}
                 noShow={this.handleCloseRicaricaSpesa}
                 paymentMethods={this.state.conti}

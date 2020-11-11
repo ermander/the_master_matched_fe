@@ -14,7 +14,7 @@ import "./utenti.css"
 
 // FontAwesomeIcon
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrashAlt, faWindowRestore } from "@fortawesome/free-solid-svg-icons"
+import { faTrashAlt } from "@fortawesome/free-solid-svg-icons"
 
 class Utenti extends Component {
 
@@ -29,7 +29,6 @@ class Utenti extends Component {
         description: "",
         users: [],
         loadingUsers: true,
-        name: ""
     }
 
     handleClose = () => { this.setState({ show: false })}

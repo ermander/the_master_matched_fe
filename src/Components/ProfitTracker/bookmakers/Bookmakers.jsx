@@ -4,6 +4,8 @@ import React, { Component } from 'react';
 import NavBar from '../../Navbar/Navbar'
 import SideBar from "../SideBar/SideBar"
 import NewBookmaker from "./NewBookmaker"
+import NewMovement from "./NewMovement"
+import NewDefaultBookmaker from "./NewDefaultBookmaker"
 
 // React Bootstrap
 import { Row, Col, Button, Table } from "react-bootstrap"
@@ -18,9 +20,14 @@ class Bookmakers extends Component {
         show: false,
         users: [],
         bookmakers: [],
-        isLoading: true
+        isLoading: true,
+        bookMakerInfo: [],
+        showNewMovement: false,
+        userPaymentMethods: [],
+        showNewDefaultBookmakerModal: false
     }
 
+    // ALL FUNCTIONS
     handleShow = () => { this.setState({ show: true })}
     handleClose = () => { this.setState({ show: false })}
 
@@ -65,6 +72,38 @@ class Bookmakers extends Component {
         }
     }
 
+    showNewMovement = async (holderID) => {
+        try {
+            const response = await fetch("http://localhost:3002/profit-tracker/payment-methods/" + holderID)
+            if(response.ok){
+                const parsedResponse = await response.json()
+                this.setState({
+                    userPaymentMethods: parsedResponse,
+                    showNewMovement: true
+                })
+            }
+            
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    noShowNewMovement = () => {
+        this.setState({
+            showNewMovement: false,
+            userPaymentMethods: [],
+            bookMakerInfo: []
+        })
+    }
+
+    showNewDefaultBookmakerModal = () => {
+        this.setState({ showNewDefaultBookmakerModal: true })
+    }
+
+    noShowNewDefaultBookmakerModal = () => {
+        this.setState({ showNewDefaultBookmakerModal: false })
+    }
+
     componentDidMount = () => {
         this.fetchUsers()
         this.fetchBookmakers()
@@ -79,6 +118,16 @@ class Bookmakers extends Component {
                     noShow={this.handleClose}
                     users={this.state.users}
                 />
+                <NewMovement 
+                    show={this.state.showNewMovement}
+                    noShow={this.noShowNewMovement}
+                    bookmakerInfo={this.state.bookMakerInfo}
+                    userPaymentMethods={this.state.userPaymentMethods}
+                />
+                <NewDefaultBookmaker
+                    show={this.state.showNewDefaultBookmakerModal}
+                    noShow={this.noShowNewDefaultBookmakerModal} 
+                />
                 <Row>
                     <Col xs={1}>
                         <SideBar />
@@ -90,9 +139,16 @@ class Bookmakers extends Component {
                                 <Button 
                                     size="sm"
                                     variant="success"
-                                    onClick={this.handleShow}
-                                    >
+                                    onClick={this.handleShow}>
                                         Nuovo Bookmaker
+                                    </Button>
+                                <Button
+                                    className="ml-1"
+                                    style={{color: "white"}}
+                                    size="sm"
+                                    variant="dark"
+                                    onClick={this.showNewDefaultBookmakerModal}>
+                                        Nuovo Bookmaker Personale
                                     </Button>
                             </Col>
                         </Row>
@@ -147,6 +203,7 @@ class Bookmakers extends Component {
                                                             <Button
                                                                 size="sm"
                                                                 variant="primary"
+                                                                onClick={ () => this.setState({bookMakerInfo: element}, () => this.showNewMovement(element.holderID))}
                                                                 >
                                                                     Nuovo Movimento
                                                             </Button>

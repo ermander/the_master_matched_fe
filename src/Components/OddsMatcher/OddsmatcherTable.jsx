@@ -23,33 +23,30 @@ class OddsmatcherTable extends Component {
         banca: "",
         exchange: "",
         rating: "",
-        modalOdd: {}
+        modalOdd: {},
+        activeBookmakers: [],
     }
 
-    handleOpenModalMatch = (element) => {
-        this.setState({ 
-            modalOdd: element,
-            show: true
-        })
-        console.log(element)
-    }
+    handleOpenModalMatch = (element) => {this.setState({modalOdd: element,show: true})}
 
-    handleCloseModalMatch = () => {
-        this.setState({ show: false })
+    handleCloseModalMatch = () => {this.setState({ show: false })}
+
+    activeBookmakers = async () => {
+        const response = await fetch("http://localhost:3002/profit-tracker/bookmakers")
+        if(response.ok){
+            const activeBookmakers = await response.json()
+            this.setState({activeBookmakers: activeBookmakers})
+        }
     }
 
 
     // Fetching all available odds
     fetchOdds = async() => {
         try {
-            const rawOdds = await fetch(url + "__cfduid=dcbc8ff2a5a3e071a1680d099956a08c21604535146; _gid=GA1.2.961336769.1604535151; _gat_gtag_UA_134094661_1=1; flarum_remember=vLUsFGtIcOYPcEQL9ClHuHgn2ZtgJAwndo4zIJL6; wordpress_logged_in_fa686efef513bdb6e3e44099da671de0=ermander%7C1604707960%7C9FqCellpMolfKK6QPY3Jbn3hxyrEMVhv9hHd6Kgni5e%7Ce29a6698950d75688f94ee6ae3c4c06273bb37cd481127dddba76b44cd64ed1c; _ga=GA1.1.1440504221.1604535151; _ga_M6CJV63K6Z=GS1.1.1604535148.1.1.1604535186.22; _ga_SD5RC6H9GW=GS1.1.1604535151.1.1.1604535186.25")
-            console.log(rawOdds)
+            const rawOdds = await fetch(url + "__cfduid=d9ea7507dc7fa13869826051b52886b751605038709; _gid=GA1.2.460999539.1605038712; _gat_gtag_UA_134094661_1=1; cookieconsent_status=dismiss; flarum_remember=WSA1tsSyDTaB4pcTYdJlQwp6dGAeHlMWGqufOeky; wordpress_logged_in_fa686efef513bdb6e3e44099da671de0=ermander%7C1605211517%7CEiwA9X0TgYD5LN4Xejqm20FlqoeMoMTgLhOdwBvAldy%7C77e8553472b497fafddd6162ee05993b647f3168b8edb7bacff3cd684fd0ad5e; _gat_gtag_UA_134094661_2=1; _ga_M6CJV63K6Z=GS1.1.1605038710.1.1.1605038728.42; _ga_SD5RC6H9GW=GS1.1.1605038711.1.1.1605038728.43; _ga=GA1.1.1931440034.1605038712")
             if(rawOdds.ok){
                 const odds = await rawOdds.json()
                 const slicedOdds = await odds.slice(0, 2000)
-                console.log(slicedOdds[1])
-                //slicedOdds[1].lastupdate.split(' ')[1]
-                // tornerà un array così ['2020-10-27', '18:11:03']
                 // Calculating odds rating                
                 for(let i=0; i<slicedOdds.length; i++){
                     const puntata = 100
@@ -59,13 +56,8 @@ class OddsmatcherTable extends Component {
                     let rating = rawRating.toFixed(2)
                     slicedOdds[i].rating = rating     
                 }
-                slicedOdds.sort(function(a, b){
-                    return b.rating -a.rating
-                })
-                this.setState({
-                    odds: slicedOdds,
-                    isLoading: false
-                })
+                slicedOdds.sort(function(a, b){return b.rating -a.rating})
+                this.setState({odds: slicedOdds,isLoading: false})
             }        
         } catch (error) {
             console.log("fetchOdds function error: ", error)            
@@ -74,6 +66,7 @@ class OddsmatcherTable extends Component {
 
     componentDidMount = () =>{
         this.fetchOdds()
+        this.activeBookmakers()
     }
 
     render() {
@@ -83,6 +76,7 @@ class OddsmatcherTable extends Component {
                 show={this.state.show}
                 noShow={this.handleCloseModalMatch}
                 odd={this.state.modalOdd}
+                activeBookmakers={this.state.activeBookmakers}
             />
             
             <div>
