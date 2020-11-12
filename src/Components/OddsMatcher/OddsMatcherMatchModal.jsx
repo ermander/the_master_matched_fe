@@ -34,26 +34,12 @@ class OddsMatcherMatchModal extends Component {
         quotaPunta: "",
         quotaBanca: "",
         risk: "",
-        users: [],
-        showUserModal: false
+        showUserModal: false,
     }
 
-    // Fetching the users for checking if they have the bookmakers active
-    fetchUsers = async () => {
-        const response = await fetch("http://localhost:3002/profit-tracker/get-users")
-        if(response.ok){
-            const users = await response.json()
-            this.setState({users: users})
-        }
-    }
+    showUserModal = () => {this.setState({showUserModal: true})}
 
-    showUserModal = () => {
-        this.setState({showUserModal: true})
-    }
-
-    noShowUserModal = () => {
-        this.setState({showUserModal: false})
-    }
+    noShowUserModal = () => {this.setState({showUserModal: false})}
 
     // Calculating risk and lay stake
     layStake = async () => {
@@ -71,82 +57,31 @@ class OddsMatcherMatchModal extends Component {
         })       
     }
 
-    // POST a new matched bet
-    postNewMatch = async () => {
-        try {
-            const propsOdds = this.props.odd
-            const stateOdds = this.state
-
-            let matchInfo = {
-                    data: propsOdds.data,
-                    ora: propsOdds.ora,
-                    home: propsOdds.home,
-                    away: propsOdds.away,
-                    torneo: propsOdds.campionato,
-                    mercato: propsOdds.tipo,
-                    tipoPuntata: propsOdds.a,
-                    book: propsOdds.book,
-                    puntata: stateOdds.puntata, //
-                    quotaPunta: "", //
-                    exchange: propsOdds.book2,
-                    bancata: stateOdds.bancata, //
-                    quotaBanca: "", //
-                    puntataBonus: stateOdds.puntataBonus, //
-                    puntataRimborso: stateOdds.puntataRimborso, //
-                    rischio: stateOdds.risk,
-                    commissione: stateOdds.commissione, //
-                    // Inserire calcolo rischio da front end
-                    inCorso: true
-                }
-
-                let postInfo = {
-                    ...matchInfo,
-                    quotaPunta: stateOdds.quotaPunta !== "" ? stateOdds.quotaPunta : propsOdds.quota,
-                    quotaBanca: stateOdds.quotaBanca !== "" ? stateOdds.quotaBanca : propsOdds.quota_banca
-                }
-
-                // Check if the user has the 2 bookmakers properly active
-                const response = await fetch("http://localhost:3002/profit-tracker/bookmakers")
-                if(response.ok){
-                    const activeBookmakers = await response.json()
-                    const checkBook = activeBookmakers.bookmakersName.find(propsOdds.book)
-                    const checkExchange = activeBookmakers.bookmakerName.find(propsOdds.book2)
-                    if(!checkBook && !checkExchange){
-                        console.log("You have to activate this book!", propsOdds.book)
-                    }else if(!checkBook && checkExchange){
-                        console.log("You have to activate this book!", propsOdds.book2)
-                    }else if(!checkExchange && checkBook){
-                        console.log("You have to activate both books", propsOdds.book, propsOdds.book2)
-                    }else{
-                    // Posting the new matched bet
-                    const postNewMatch = await fetch("http://localhost:3002/profit-tracker/save-match", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": 'application/json'
-                        },
-                            body: JSON.stringify(postInfo)
-                        })
-                        const response = await postNewMatch.json()
-                        console.log(response)
-                    }
-                }
-        } catch (error) {
-            console.log(error)            
-        }        
-    }
-
-    componentDidMount = () => {
-        this.fetchUsers()
-    }
-
     render() {
         return (
             <>
             <UsersModal 
                 show={this.state.showUserModal}
                 noShow={this.noShowUserModal}
-                users={this.state.users}
+                data={this.props.odd.data}
+                ora={this.props.odd.ora}
+                sport={this.props.odd.sport}
+                home={this.props.odd.home}
+                away={this.props.odd.away}
+                torneo={this.props.odd.campionato}
+                mercato={this.props.odd.tipo}
+                tipoPuntata={this.props.odd.a}
+                book={this.props.odd.book}
+                puntata={this.state.puntata}
+                quotaPunta={this.state.quotaPunta !== "" ? this.state.quotaPunta : this.props.odd.quota}
+                exchange={this.props.odd.book2}
+                bancata={this.state.bancata}
+                quotaBanca={this.state.quotaBanca !== "" ? this.state.quotaBanca : this.props.odd.quota_banca}
+                rischio={this.state.risk}
+                commissione={this.state.commissione}
+                inCorso={true}
             />
+
             <Modal show={this.props.show} onHide={this.props.noShow}>
                 <Modal.Body className="pt-0">
                     {/* SELEZIONE MODALITà NORMALE, BONUS O RIMBORSO*/}

@@ -164,8 +164,8 @@ class InCorso extends Component {
                                                                     <td>Conto</td>
                                                                     <td>Notes</td>
                                                                     <td>
-                                                                        <Button size="sm">                                                                            
-                                                                            <Link to={"/profit_tracker/bet_details/" + element._id} style={{color: "white" }}>
+                                                                        <Button size="sm" variant="light">                                                                            
+                                                                            <Link to={"/profit_tracker/bet_details/" + element._id} style={{color: "black" }}>
                                                                                 Dettagli
                                                                             </Link>
                                                                         </Button>

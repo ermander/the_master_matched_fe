@@ -27,23 +27,16 @@ class OddsmatcherTable extends Component {
         activeBookmakers: [],
     }
 
-    handleOpenModalMatch = (element) => {this.setState({modalOdd: element,show: true})}
-
-    handleCloseModalMatch = () => {this.setState({ show: false })}
-
-    activeBookmakers = async () => {
-        const response = await fetch("http://localhost:3002/profit-tracker/bookmakers")
-        if(response.ok){
-            const activeBookmakers = await response.json()
-            this.setState({activeBookmakers: activeBookmakers})
-        }
+    handleOpenModalMatch = (element) => {
+        this.setState({modalOdd: element,show: true})
     }
 
+    handleCloseModalMatch = () => {this.setState({ show: false })}
 
     // Fetching all available odds
     fetchOdds = async() => {
         try {
-            const rawOdds = await fetch(url + "__cfduid=d9ea7507dc7fa13869826051b52886b751605038709; _gid=GA1.2.460999539.1605038712; _gat_gtag_UA_134094661_1=1; cookieconsent_status=dismiss; flarum_remember=WSA1tsSyDTaB4pcTYdJlQwp6dGAeHlMWGqufOeky; wordpress_logged_in_fa686efef513bdb6e3e44099da671de0=ermander%7C1605211517%7CEiwA9X0TgYD5LN4Xejqm20FlqoeMoMTgLhOdwBvAldy%7C77e8553472b497fafddd6162ee05993b647f3168b8edb7bacff3cd684fd0ad5e; _gat_gtag_UA_134094661_2=1; _ga_M6CJV63K6Z=GS1.1.1605038710.1.1.1605038728.42; _ga_SD5RC6H9GW=GS1.1.1605038711.1.1.1605038728.43; _ga=GA1.1.1931440034.1605038712")
+            const rawOdds = await fetch(url + "__cfduid=dbeeb90a4a1779bd47aa4355c0f7af10d1605144026; _gid=GA1.2.671245364.1605144031; cookieconsent_status=dismiss; flarum_remember=XjOLAn1D4lxfosEBKCVS2sh6120zm6cFR9TkDa4Y; wordpress_logged_in_fa686efef513bdb6e3e44099da671de0=ermander%7C1605316838%7CLZzChAXrNHv2ktX8uBjHQn1V2wTOslXGeiZvS9pSbYo%7Cfe73b87f96035023e5a1e873945dd9125312fb1b8982f1e98c945b93363d650d; _ga_M6CJV63K6Z=GS1.1.1605144030.1.1.1605144955.59; _ga_SD5RC6H9GW=GS1.1.1605144030.1.1.1605144955.59; _ga=GA1.2.1294047239.1605144031; _gat_gtag_UA_134094661_1=1")
             if(rawOdds.ok){
                 const odds = await rawOdds.json()
                 const slicedOdds = await odds.slice(0, 2000)
@@ -66,7 +59,6 @@ class OddsmatcherTable extends Component {
 
     componentDidMount = () =>{
         this.fetchOdds()
-        this.activeBookmakers()
     }
 
     render() {

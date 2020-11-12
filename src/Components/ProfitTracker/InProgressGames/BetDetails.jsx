@@ -8,7 +8,7 @@ import SideBar from "../SideBar/SideBar"
 import { withRouter } from "react-router-dom"
 
 // React bootstrap
-import { Col, Row, Table, Button } from "react-bootstrap"
+import { Col, Row, Table, Button, Form } from "react-bootstrap"
 
 // CSS
 import "./bet_details.css"
@@ -23,7 +23,8 @@ class BetDetails extends Component {
 
     state = {
         betInfo : [],
-        isLoading: true
+        isLoading: true,
+        betType: "Nessuno"
     }
 
     fetchBet = async () => {
@@ -115,7 +116,7 @@ class BetDetails extends Component {
                             <FontAwesomeIcon icon={faTrashAlt} />
                         </Button>
                     </div>
-                    <Table striped bordered hover>
+                    <Table striped bordered hover className="mt-3">
                         <thead>
                             <tr className="table-head">
                                 <th style={{width: "130px"}}>Data Evento</th>
@@ -168,34 +169,63 @@ class BetDetails extends Component {
                                             <td>{this.state.betInfo.home} vs {this.state.betInfo.away}</td>
                                             <td>{this.state.betInfo.torneo}</td>
                                             <td>{this.state.betInfo.tipoPuntata}</td>
-                                            <td>inserire tipo puntata</td>
-                                            <td>inseire bonus button</td>
-                                            <td>inserire conto</td>
+                                            <td>{this.state.betInfo.exchange ? "Punta" : "..."}</td>
+                                            <td>
+                                                <Form.Group>
+                                                    <Form.Control as="select" variant="light" size="sm">
+                                                    <option>Nessuno</option>
+                                                    <option>Bonus</option>
+                                                    <option>Rimborso</option>
+                                                    <option>FreeBet</option>
+                                                    </Form.Control>
+                                                </Form.Group>
+                                            </td>
+                                            <td>{this.state.betInfo.book}</td>
                                             <td>{this.state.betInfo.puntata}€</td>
                                             <td>{this.state.betInfo.quotaBanca}</td>
                                             <td>{this.state.betInfo.puntata}€</td>
-                                            <td>inserire puntata bonus</td>
-                                            <td>inserire rimborso</td>
+                                            <td>{this.state.betInfo.puntataBonus ? this.state.betInfo.puntataBonus : "0.00€"}</td>
+                                            <td>{this.state.betInfo.puntataRimborso ? this.state.betInfo.puntataRimborso : "0.00€"}</td>
                                             <td>0%</td>
                                             <td>{this.state.betInfo.puntata}€</td>
-                                            <td>inserire stato evento button</td>
+                                            <td>
+                                                <Form.Group>
+                                                    <Form.Control as="select" variant="light" size="sm">
+                                                        <option>Bozza</option>
+                                                        <option>In Corso</option>
+                                                        <option>Vinto</option>
+                                                        <option>Perso</option>
+                                                        <option>Annullato</option>
+                                                    </Form.Control>
+                                                </Form.Group>
+                                            </td>
                                         </tr>
                                         <tr className="table-row">
                                             <td>{this.state.betInfo.data}</td>
                                             <td>{this.state.betInfo.home} vs {this.state.betInfo.away}</td>
                                             <td>{this.state.betInfo.torneo}</td>
                                             <td>{this.state.betInfo.tipoPuntata}</td>
-                                            <td>inserire tipo puntata</td>
-                                            <td>inseire bonus button</td>
-                                            <td>inserire conto</td>
+                                            <td>{this.state.betInfo.exchange ? "Banca" : "..."}</td>
+                                            <td>/</td>
+                                            <td>{this.state.betInfo.exchange}</td>
                                             <td>{this.state.betInfo.bancata}€</td>
                                             <td>{this.state.betInfo.quotaBanca}</td>
                                             <td>{this.state.betInfo.rischio}€</td>
-                                            <td>inserire bonus banca</td>
-                                            <td>inserire rimborso banca</td>
+                                            <td>/</td>
+                                            <td>/</td>
                                             <td>{this.state.betInfo.commissione}</td>
                                             <td>{this.state.betInfo.rischio}</td>
-                                            <td>inserire stato evento button</td>
+                                            <td>
+                                                <Form.Group>
+                                                    <Form.Control as="select" variant="light" size="sm">
+                                                        <option>Bozza</option>
+                                                        <option>In Corso</option>
+                                                        <option>Vinto</option>
+                                                        <option>Perso</option>
+                                                        <option>Annullato</option>
+                                                    </Form.Control>
+                                                </Form.Group>
+                                            </td>
                                         </tr>
                                         </>
                                     )

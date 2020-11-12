@@ -4,15 +4,52 @@ import { Button, Form, Modal } from 'react-bootstrap';
 class UsersModal extends Component {
     
     state = {
+        users: [],
         user1: "",
         user2: ""
     }
 
+    // Fetching the users
+    fetchUsers = async () => {
+        try {
+            const response = await fetch("http://localhost:3002/profit-tracker/get-users")
+            if(response.ok){
+                const users = await response.json()
+                this.setState({users: users})
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    // Saving the new matched bet
     saveBet = async () => {
         try {
             const data = {
-
+                data: this.props.data,
+                ora: this.props.ora,
+                sport: this.props.sport,
+                home: this.props.home,
+                away: this.props.away,
+                torneo: this.props.torneo,
+                mercato: this.props.mercato,
+                tipoPuntata: this.props.tipoPuntata,
+                book: this.props.book.charAt(0).toUpperCase() + this.props.book.slice(1),
+                puntata: this.props.puntata,
+                quotaPunta: this.props.quotaPunta,
+                exchange: this.props.exchange.charAt(0).toUpperCase() + this.props.exchange.slice(1),
+                bancata: this.props.bancata,
+                quotaBanca: this.props.quotaBanca,
+                // Inserire puntata bonus
+                // Inserire puntata rimborso
+                rischio: this.props.rischio,
+                commissione: this.props.commissione,
+                inCorso: true,
+                userPuntaId: this.state.user1 !== "" ? this.state.user1[parseInt(this.state.users)]._id : this.state.users[0]._id,
+                userBancaId: this.state.user2 !== "" ? this.state.user2[parseInt(this.state.users)]._id : this.state.users[0]._id
             }
+            console.log(data)
+
             const response = await fetch("http://localhost:3002/profit-tracker/save-match", {
                 method: "POST",
                 headers: {
@@ -24,11 +61,19 @@ class UsersModal extends Component {
             if(response.ok){
                 console.log("OK")
                 window.location.reload()
+            }else{
+                const parsed = await response.json()
+                console.log(parsed)
             }
         } catch (error) {
             console.log(error)
         }
     }
+
+    componentDidMount = () => {
+        this.fetchUsers()
+    }
+
     render() {
         return (
             <>
@@ -42,9 +87,9 @@ class UsersModal extends Component {
                             <Form.Label htmlFor="inlineFormInputGroupUsername">
                                 Intestatario Punta
                             </Form.Label>
-                            <Form.Control as="select" onChange={(e) => this.setState({user1: e.currentTarget.value})}>
+                            <Form.Control as="select" onChange={(e) => this.setState({user1: e.currentTarget.value.split(")")[0]})}>
                                 {
-                                    !this.props.users 
+                                    !this.state.users 
                                     ?
                                     (
                                         <>
@@ -55,9 +100,9 @@ class UsersModal extends Component {
                                     )
                                     :
                                     (
-                                        this.props.users.map((element, i) => {
+                                        this.state.users.map((element, i) => {
                                             return(
-                                                <option key={i}>{element.name}</option>
+                                                <option key={i}>{i+1}){element.name}</option>
                                             )
                                         })
                                     )
@@ -69,9 +114,9 @@ class UsersModal extends Component {
                             <Form.Label>
                                 Intestatario Punta
                             </Form.Label>
-                            <Form.Control as="select" onChange={(e) => this.setState({user2: e.currentTarget.value})}>
+                            <Form.Control as="select" onChange={(e) => this.setState({user2: e.currentTarget.value.split(")")[0]})}>
                                 {
-                                    !this.props.users 
+                                    !this.state.users 
                                     ?
                                     (
                                         <>
@@ -82,9 +127,9 @@ class UsersModal extends Component {
                                     )
                                     :
                                     (
-                                        this.props.users.map((element, i) => {
+                                        this.state.users.map((element, i) => {
                                             return(
-                                                <option key={i}>{element.name}</option>
+                                                <option key={i}>{i+1}){element.name}</option>
                                             )
                                         })
                                     )
