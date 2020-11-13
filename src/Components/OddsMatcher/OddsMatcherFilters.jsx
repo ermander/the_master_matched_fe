@@ -315,7 +315,7 @@ class OddsMatcherModal extends Component {
                 Chiudi
               </Button>
               <Button variant="primary" onClick={()=>{
-                this.props.setFilters({...this.state})
+                this.props.setFiltersToFather({...this.state})
                 this.handleClose()}
                 }>
                 Applica Filtri
