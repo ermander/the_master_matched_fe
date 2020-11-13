@@ -8,38 +8,40 @@ class OddsMatcherModal extends Component {
     show: false,
     sport: "",
     mercato: "",
-    data_inizio: "",
-    ora_inizio: "",
-    data_fine: "",
-    ora_fine: "",
+    dataInizio: "",
+    oraInizio: "",
+    dataFine: "",
+    oraFine: "",
     liquidita: "",
-    quota_min: "",
-    quota_max: "",
-    stake_rimborso: "",
-    stake_bonus_rimborso: ""
+    quotaMin: "",
+    quotaMax: "",
+    stakeRimborso: "",
+    stakeBonusRimborso: ""
   }
 
   handleClose = () => { this.setState({ show: false })}
+
   handleShow = () => { this.setState({ show: true })}
+
   handleReset = () => { 
     this.setState({
       show: true,
-        sport: "",
+      sport: "",
       mercato: "",
-      data_inizio: "",
-      ora_inizio: "",
-      data_fine: "",
-      ora_fine: "",
+      dataInizio: "",
+      oraInizio: "",
+      dataFine: "",
+      oraFine: "",
       liquidita: "",
-      quota_min: "",
-      quota_max: "",
-      stake_rimborso: "",
-      stake_bonus_rimborso: ""
+      quotaMin: "",
+      quotaMax: "",
+      stakeRimborso: "",
+      stakeBonusRimborso: ""
   })}
 
   render() {
     return (
-         <>
+         <div style={{display: "inline-block", marginRight:"1rem", marginLeft: "0", paddingLeft: "0"}}>
           <Button variant="primary" onClick={this.handleShow}>
             Opzioni di Ricerca
           </Button>
@@ -189,7 +191,7 @@ class OddsMatcherModal extends Component {
                     <InputGroup>
                       <FormControl 
                       type="date"
-                      onChange={(e) => {this.setState({ data_inizio: e.currentTarget.value})}}/>
+                      onChange={(e) => {this.setState({ dataInizio: e.currentTarget.value})}}/>
                     </InputGroup>
                   </Col>
                   <Col xs={6}>
@@ -197,7 +199,7 @@ class OddsMatcherModal extends Component {
                     <InputGroup>
                       <FormControl 
                       type="time" 
-                      onChange={(e) => {this.setState({ ora_inizio: e.currentTarget.value})}}/>
+                      onChange={(e) => {this.setState({ oraInizio: e.currentTarget.value})}}/>
                     </InputGroup>
                   </Col>
                 </Row>
@@ -208,7 +210,7 @@ class OddsMatcherModal extends Component {
                     <InputGroup>
                       <FormControl 
                       type="date" 
-                      onChange={(e) => {this.setState({ data_fine: e.currentTarget.value})}}/>
+                      onChange={(e) => {this.setState({ dataFine: e.currentTarget.value})}}/>
                     </InputGroup>
                   </Col>
                   <Col xs={6}>
@@ -216,7 +218,7 @@ class OddsMatcherModal extends Component {
                     <InputGroup>
                       <FormControl 
                       type="time" 
-                      onChange={(e) => {this.setState({ ora_fine: e.currentTarget.value})}}/>
+                      onChange={(e) => {this.setState({ oraFine: e.currentTarget.value})}}/>
                     </InputGroup>
                   </Col>
                 </Row>
@@ -234,9 +236,9 @@ class OddsMatcherModal extends Component {
                     <Col xs={12}>
                       <InputGroup>
                         <FormControl 
-                        type="number"
+                        type="text"
                         placeholder="Minima €"
-                        onChange={(e) => { this.setState({ liquidita: e.currentTarget.value})}}
+                        onChange={(e) => { this.setState({ liquidita: parseFloat(e.currentTarget.value)})}}
                         />
                       </InputGroup>
                     </Col>
@@ -250,18 +252,18 @@ class OddsMatcherModal extends Component {
                     <Col xs={6}>
                       <InputGroup>
                         <FormControl 
-                        type="number" 
+                        type="text" 
                         placeholder="Min" 
-                        onChange={(e) => {this.setState({ quota_min: e.currentTarget.value })}}
+                        onChange={(e) => {this.setState({quotaMin: parseFloat(e.currentTarget.value)})}}
                         />
                       </InputGroup>
                     </Col>
                     <Col xs={6}>
                       <InputGroup>
                         <FormControl 
-                        type="number" 
+                        type="text" 
                         placeholder="Max" 
-                        onChange={(e) => {this.setState({ quota_max: e.currentTarget.value })}}
+                        onChange={(e) => {this.setState({quotaMax: parseFloat(e.currentTarget.value)})}}
                         />
                       </InputGroup>
                     </Col>
@@ -279,7 +281,7 @@ class OddsMatcherModal extends Component {
                         <FormControl 
                         type="number" 
                         placeholder="Puntata €" 
-                        onChange={(e) => {this.setState({ stake_rimborso: e.currentTarget.value })}}
+                        onChange={(e) => {this.setState({ stakeRimborso: e.currentTarget.value })}}
                         />
                       </InputGroup>
                     </Col>
@@ -291,7 +293,7 @@ class OddsMatcherModal extends Component {
                         <FormControl 
                         type="number" 
                         placeholder="Rimborso €"
-                        onChange={(e) => {this.setState({ stake_bonus_rimborso: e.currentTarget.value })}}
+                        onChange={(e) => {this.setState({ stakeBonusRimborso: e.currentTarget.value })}}
                         />
                       </InputGroup>
                     </Col>
@@ -312,7 +314,10 @@ class OddsMatcherModal extends Component {
               <Button variant="secondary" onClick={this.handleClose}>
                 Chiudi
               </Button>
-              <Button variant="primary" onClick={this.handleClose}>
+              <Button variant="primary" onClick={()=>{
+                this.props.setFilters({...this.state})
+                this.handleClose()}
+                }>
                 Applica Filtri
               </Button>
               <Button variant="danger" onClick={this.handleReset}>
@@ -320,7 +325,7 @@ class OddsMatcherModal extends Component {
               </Button>
             </Modal.Footer>
           </Modal>
-        </>
+        </div>
     );
   }
 }

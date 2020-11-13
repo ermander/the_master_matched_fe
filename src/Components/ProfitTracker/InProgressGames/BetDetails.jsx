@@ -24,7 +24,9 @@ class BetDetails extends Component {
     state = {
         betInfo : [],
         isLoading: true,
-        betType: "Nessuno"
+        betType: "Nessuno",
+        bgColor1: "",
+        bgColor2: ""
     }
 
     fetchBet = async () => {
@@ -112,7 +114,7 @@ class BetDetails extends Component {
                         <Button className="right-buttons-div" size="sm" onClick={ () => this.archiveMatch(this.state.betInfo._id)}>
                             Archivia
                         </Button>
-                        <Button variant="danger" size="sm" onClick={ () => this.deleteMatch(this.state.betInfo._id)}>
+                        <Button variant="danger" size="sm" className="ml-1" onClick={ () => this.deleteMatch(this.state.betInfo._id)}>
                             <FontAwesomeIcon icon={faTrashAlt} />
                         </Button>
                     </div>
@@ -190,12 +192,17 @@ class BetDetails extends Component {
                                             <td>{this.state.betInfo.puntata}€</td>
                                             <td>
                                                 <Form.Group>
-                                                    <Form.Control as="select" variant="light" size="sm">
+                                                    <Form.Control 
+                                                        as="select"
+                                                        style={{backgroundColor: this.state.bgColor1}}
+                                                        size="sm"
+                                                        onChange={(e)=>this.setState({bgColor1: e.currentTarget.value})}
+                                                        >
                                                         <option>Bozza</option>
-                                                        <option>In Corso</option>
-                                                        <option>Vinto</option>
-                                                        <option>Perso</option>
-                                                        <option>Annullato</option>
+                                                        <option value="#FFA500">In Corso</option>
+                                                        <option value="#98FB98">Vinto</option>
+                                                        <option value="#FF0000">Perso</option>
+                                                        <option value="#FFA500">Annullato</option>
                                                     </Form.Control>
                                                 </Form.Group>
                                             </td>
@@ -217,12 +224,17 @@ class BetDetails extends Component {
                                             <td>{this.state.betInfo.rischio}</td>
                                             <td>
                                                 <Form.Group>
-                                                    <Form.Control as="select" variant="light" size="sm">
+                                                    <Form.Control 
+                                                    as="select"
+                                                    style={{backgroundColor: this.state.bgColor2}}
+                                                    size="sm"
+                                                    onChange={(e)=>this.setState({bgColor2: e.currentTarget.value})}
+                                                    >
                                                         <option>Bozza</option>
-                                                        <option>In Corso</option>
-                                                        <option>Vinto</option>
-                                                        <option>Perso</option>
-                                                        <option>Annullato</option>
+                                                        <option value="#FFA500">In Corso</option>
+                                                        <option value="#98FB98">Vinto</option>
+                                                        <option value="#FF0000">Perso</option>
+                                                        <option value="#FFA500">Annullato</option>
                                                     </Form.Control>
                                                 </Form.Group>
                                             </td>

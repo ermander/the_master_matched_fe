@@ -5,61 +5,18 @@ import { faCalculator } from '@fortawesome/free-solid-svg-icons'
 import OddsMatcherMatchModal from "./OddsMatcherMatchModal"
 import "./oddsmatcher.css"
 import { bookLogos } from "../BookLogos/bookLogos"
-const url = "https://jobista.altervista.org/api.php?cookies=cookie: "
 
 class OddsmatcherTable extends Component {
     state={
-        odds: [],
         isLoading: true,
         show: false,
-        data: "",
-        ora: "",
-        torneo: "",
-        casa: "",
-        ospite: "",
-        mercato: "",
-        book: "",
-        punta: "",
-        banca: "",
-        exchange: "",
-        rating: "",
         modalOdd: {},
         activeBookmakers: [],
     }
 
-    handleOpenModalMatch = (element) => {
-        this.setState({modalOdd: element,show: true})
-    }
+    handleOpenModalMatch = (element) => {this.setState({modalOdd: element,show: true})}
 
     handleCloseModalMatch = () => {this.setState({ show: false })}
-
-    // Fetching all available odds
-    fetchOdds = async() => {
-        try {
-            const rawOdds = await fetch(url + "__cfduid=dbeeb90a4a1779bd47aa4355c0f7af10d1605144026; _gid=GA1.2.671245364.1605144031; cookieconsent_status=dismiss; flarum_remember=XjOLAn1D4lxfosEBKCVS2sh6120zm6cFR9TkDa4Y; wordpress_logged_in_fa686efef513bdb6e3e44099da671de0=ermander%7C1605316838%7CLZzChAXrNHv2ktX8uBjHQn1V2wTOslXGeiZvS9pSbYo%7Cfe73b87f96035023e5a1e873945dd9125312fb1b8982f1e98c945b93363d650d; _ga_M6CJV63K6Z=GS1.1.1605144030.1.1.1605144955.59; _ga_SD5RC6H9GW=GS1.1.1605144030.1.1.1605144955.59; _ga=GA1.2.1294047239.1605144031; _gat_gtag_UA_134094661_1=1")
-            if(rawOdds.ok){
-                const odds = await rawOdds.json()
-                const slicedOdds = await odds.slice(0, 2000)
-                // Calculating odds rating                
-                for(let i=0; i<slicedOdds.length; i++){
-                    const puntata = 100
-                    const commission = 0.05
-                    let lay_stake = (slicedOdds[i].quota * puntata ) / (slicedOdds[i].quota_banca - commission)
-                    let rawRating = (1 - commission) * lay_stake
-                    let rating = rawRating.toFixed(2)
-                    slicedOdds[i].rating = rating     
-                }
-                slicedOdds.sort(function(a, b){return b.rating -a.rating})
-                this.setState({odds: slicedOdds,isLoading: false})
-            }        
-        } catch (error) {
-            console.log("fetchOdds function error: ", error)            
-        }
-    }
-
-    componentDidMount = () =>{
-        this.fetchOdds()
-    }
 
     render() {
         return (
@@ -92,7 +49,7 @@ class OddsmatcherTable extends Component {
                     </thead>
                     <tbody>
                         {
-                            this.state.isLoading 
+                            this.props.isLoading 
                             ?
                             (
                                 <tr>
@@ -113,7 +70,7 @@ class OddsmatcherTable extends Component {
                             )
                             :
                             (
-                                this.state.odds.map((element, i) => {
+                                this.props.odds.map((element, i) => {
                                     return (
                                         <tr key={i}>
                                             <td className="table-data">{element.data}</td>
