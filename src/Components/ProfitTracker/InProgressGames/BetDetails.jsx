@@ -136,7 +136,6 @@ class BetDetails extends Component {
                                 <th style={{minWidth: "85px"}}>Tasse %</th> 
                                 <th>Movimento</th> 
                                 <th style={{width: "130px"}}>Stato Evento</th>
-                                <th></th>
                             </tr>
                         </thead>
                         <tbody>

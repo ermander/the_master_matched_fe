@@ -25,6 +25,7 @@ import PaymentMethods from "./Components/ProfitTracker/PaymentMethods/PaymentMet
 import Bookmakers from "./Components/ProfitTracker/Bookmakers/Bookmakers"
 import ArchivedBetDetails from './Components/ProfitTracker/ArchievedGames/ArchivedBetDetails'
 import Transactions from './Components/ProfitTracker/Transactions/Transactions'
+import Registration from './Components/Login/Registration'
 
 function App() {
   return (
@@ -32,9 +33,12 @@ function App() {
       <div className="App">
         <Switch className="p-0">
           
-          {/* LOGIN ROUTE */}
+          {/* LOGIN/REGISTRATION ROUTES */}
           <Route path="/" exact >
             <Login />
+          </Route>
+          <Route path="/registration" exact>
+            <Registration />
           </Route>
        
 

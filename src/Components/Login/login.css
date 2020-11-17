@@ -1,3 +1,8 @@
 .inputs{
     min-width: 27vw;
 }
+
+#register-link{
+    display: inline;
+    margin-left: 2rem;
+}

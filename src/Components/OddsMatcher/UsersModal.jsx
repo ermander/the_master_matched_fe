@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
 
+// React Router Dom
+import { withRouter } from "react-router-dom"
+
 class UsersModal extends Component {
     
     state = {
@@ -48,7 +51,6 @@ class UsersModal extends Component {
                 userPuntaId: this.state.user1 !== "" ? this.state.user1[parseInt(this.state.users)]._id : this.state.users[0]._id,
                 userBancaId: this.state.user2 !== "" ? this.state.user2[parseInt(this.state.users)]._id : this.state.users[0]._id
             }
-            console.log(data)
 
             const response = await fetch("http://localhost:3002/profit-tracker/save-match", {
                 method: "POST",
@@ -60,8 +62,11 @@ class UsersModal extends Component {
 
             if(response.ok){
                 console.log("OK")
-                window.location.reload()
+                const parsedResponse = await response.json()
+                console.log(parsedResponse)
+                this.props.history.push('/profit_tracker/bet_details' + "/" + parsedResponse._id)
             }else{
+                console.log(this.props)
                 const parsed = await response.json()
                 console.log(parsed)
             }
@@ -156,4 +161,4 @@ class UsersModal extends Component {
     }
 }
 
-export default UsersModal;
+export default withRouter(UsersModal);

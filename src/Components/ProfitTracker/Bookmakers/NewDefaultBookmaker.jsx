@@ -12,7 +12,19 @@ class NewDefaultBookmaker extends Component {
 
     saveNewDefaultBookmaker = async () => {
         try {
-            const response = await fetch("http://localhost:3002/profit-tracker/new-default-bookmaker")
+
+            const data = {
+                bookmakerName: this.state.name
+            }
+
+            const response = await fetch("http://localhost:3002/profit-tracker/new-default-bookmaker", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            })
+
             if(response.ok){
                 console.log("OK")
                 window.location.reload()
