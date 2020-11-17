@@ -6,6 +6,7 @@ export const bookLogos = {
     "Betaland": "https://res.cloudinary.com/dnadfuxk0/image/upload/v1600693153/Solo%20Capstone/Betaland_gwfqbu.jpg",
     "Betclic": "https://res.cloudinary.com/dnadfuxk0/image/upload/v1600693153/Solo%20Capstone/Betclic_hiw5gy.webp",
     "betfair": "https://res.cloudinary.com/dnadfuxk0/image/upload/v1600693154/Solo%20Capstone/BetfairSportBook_ft2kbk.png",
+    "betfairTest": "https://res.cloudinary.com/dnadfuxk0/image/upload/v1600693154/Solo%20Capstone/BetfairSportBook_ft2kbk.png",
     "BetFlag": "https://res.cloudinary.com/dnadfuxk0/image/upload/v1600693154/Solo%20Capstone/BetflagSportBook_infneq.png",
     "betflag": "https://res.cloudinary.com/dnadfuxk0/image/upload/v1600693154/Solo%20Capstone/BetflagSportBook_infneq.png",
     "betman": "https://res.cloudinary.com/dnadfuxk0/image/upload/v1600693154/Solo%20Capstone/Betman_ybpb2v.webp",

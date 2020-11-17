@@ -20,7 +20,7 @@ class MultiplaModal extends Component {
   render() {
     return (
       <>
-        <Button variant="primary" onClick={this.handleShow}>
+        <Button variant="light" onClick={this.handleShow}>
           Modalità Multipla
         </Button>
   

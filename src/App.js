@@ -30,7 +30,7 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <Switch>
+        <Switch className="p-0">
           
           {/* LOGIN ROUTE */}
           <Route path="/" exact >

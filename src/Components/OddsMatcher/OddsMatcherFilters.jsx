@@ -6,7 +6,6 @@ class OddsMatcherModal extends Component {
 
   state = {
     show: false,
-    sport: "",
     mercato: "",
     dataInizio: "",
     oraInizio: "",
@@ -42,7 +41,7 @@ class OddsMatcherModal extends Component {
   render() {
     return (
          <div style={{display: "inline-block", marginRight:"1rem", marginLeft: "0", paddingLeft: "0"}}>
-          <Button variant="primary" onClick={this.handleShow}>
+          <Button variant="light" onClick={this.handleShow}>
             Opzioni di Ricerca
           </Button>
 
@@ -52,7 +51,9 @@ class OddsMatcherModal extends Component {
 
                 {/* FILTRI PER SPORT */}
                 <Col xs={2}>
-                  <h5>Filtra per sport</h5>
+                  <h5>
+                    <strong>Filtra per sport</strong>
+                  </h5>
                   <Row className="mt-5"> 
                     <Col>
                     
@@ -112,19 +113,23 @@ class OddsMatcherModal extends Component {
 
                 {/* FILTRI PER MERCATO */}
                 <Col xs={2}>
-                  <h5>Filtra per mercato</h5>
+                  <h5>
+                    <strong>Filtra per mercato</strong>
+                  </h5>
                   <Row className="mt-5"> 
                     <Col>
                     
                     <InputGroup className="mb-3">
                       <InputGroup.Prepend>
-                        <InputGroup.Checkbox aria-label="Checkbox for following text input" />
+                        <InputGroup.Checkbox aria-label="Checkbox for following text input" onChange={(e) => {
+                        console.log(e.currentTarget)
+                        this.setState({ mercato: e.currentTarget.checked })}}
+                      />
                       </InputGroup.Prepend>
                       <FormControl 
                       aria-label="Text input with checkbox" 
                       placeholder="TUTTI" 
                       value="TUTTI"
-                      onChange={(e) => {this.setState({ mercato: e.currentTarget.value })}}
                       />
                     </InputGroup>
 
@@ -184,7 +189,9 @@ class OddsMatcherModal extends Component {
 
                 {/* FILTRI PER DATA */}
                 <Col xs={4}>
-                <h5>Filtra per data</h5>
+                <h5>
+                  <strong>Filtra per data</strong>
+                </h5>
                 <Row className="mt-5">
                   <Col xs={6}>
                     <p>Data inizio:</p>
@@ -226,7 +233,9 @@ class OddsMatcherModal extends Component {
 
                 {/* FILTRI PER LIQUIDITà E QUOTA */}
                 <Col xs={2}>
-                  <h5>Liquidità e Quota</h5>
+                  <h5>
+                    <strong>Liquidità e Quota</strong>
+                  </h5>
                   <Row className="mt-5">
                     <Col xs={12}>
                       <p>Liquidità:</p>
@@ -273,7 +282,9 @@ class OddsMatcherModal extends Component {
 
                 {/* FILTRI PER RATING RIMBORSO */}
                 <Col xs={2}>
-                  <h5>Modalità rimborso</h5>
+                  <h5>
+                    <strong>Modalità rimborso</strong>
+                  </h5>
                   <Row className="mt-5">
                     <Col xs={12}>
                       <p>Puntata:</p>
@@ -310,7 +321,7 @@ class OddsMatcherModal extends Component {
 
               </Row>
             </Modal.Body>
-            <Modal.Footer>
+            <Modal.Footer style={{backgroundColor: "#edf1f2", borderTop: "none"}}>
               <Button variant="secondary" onClick={this.handleClose}>
                 Chiudi
               </Button>

@@ -1,0 +1,56 @@
+.row{
+    padding-left: 0.5rem!important;
+    padding-right: 0.5rem;
+}
+
+.sorting_desc{
+    background-color: #37474f;
+    color: white;
+    border: 1px solid #37474f!important;
+}
+
+td{
+    font-size: 16px!important;
+    text-align: center; 
+    vertical-align: middle!important;
+}
+
+th{
+    font-weight: 600!important;
+    font-style: normal;
+}
+
+i{
+    font-size: 25px;
+    color: rgb(250, 179, 25);
+}
+
+i:hover{    
+    font-size: 25px;
+    color: rgb(255, 209, 109);
+}
+
+.table-data-image{
+    width: 100px;
+    height: 40px;
+    border-radius: 20px;
+    background-color: black;
+}
+
+.dataTables_wrapper.dt-bootstrap4 .row{
+    padding: 0;
+    width: 100%;
+    margin: 0;
+}
+
+table thead:last-child {
+    display: none
+}
+
+td:nth-child(8){
+    background-color: #a7d7fd;
+}
+
+td:nth-child(9){
+    background-color: #f8cad0;
+}

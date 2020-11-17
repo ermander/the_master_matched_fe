@@ -19,6 +19,7 @@ import { faTimesCircle } from '@fortawesome/free-solid-svg-icons'
 
 // CSS
 import "./oddsmatcher.css"
+import "./oddsmatchermatchmodal.css"
 
 // Bookmakers logos
 import { bookLogos } from "../BookLogos/bookLogos"
@@ -42,7 +43,7 @@ class OddsMatcherMatchModal extends Component {
     noShowUserModal = () => {this.setState({showUserModal: false})}
 
     // Calculating risk and lay stake
-    layStake = async () => {
+    layStake = () => {
         this.setState({ 
             quotaPunta: this.state.quotaPunta !== "" ? this.state.quotaPunta : this.props.odd.quota,
             quotaBanca: this.state.quotaBanca !== "" ? this.state.quotaBanca : this.props.odd.quota_banca
@@ -51,9 +52,9 @@ class OddsMatcherMatchModal extends Component {
             const lay_odd = parseFloat(this.state.quotaBanca !== "" ? this.state.quotaBanca : this.props.odd.quota_banca)
             const bet_stake = parseInt(this.state.puntata)
             const commission = parseFloat(this.state.commissione)
-            const lay_stake = ((back_odd * bet_stake) / (lay_odd - commission))
+            const lay_stake = parseFloat((back_odd * bet_stake) / (lay_odd - commission))
             const risk = (lay_stake * (lay_odd - 1))
-            this.setState({bancata: lay_stake.toFixed(2), risk: risk.toFixed(2)})
+            this.setState({bancata: parseFloat(lay_stake).toFixed(2), risk: parseFloat(risk).toFixed(2)})
         })       
     }
 
@@ -82,12 +83,12 @@ class OddsMatcherMatchModal extends Component {
                 inCorso={true}
             />
 
-            <Modal show={this.props.show} onHide={this.props.noShow}>
-                <Modal.Body className="pt-0">
+            <Modal show={this.props.show} onHide={this.props.noShow} style={{backgroundColor: "transparent"}}>
+                <Modal.Body className="p-0" style={{maxHeight: "85vh"}}>
                     {/* SELEZIONE MODALITà NORMALE, BONUS O RIMBORSO*/}
-                    <Row className="mt-3 mx-1" style={{backgroundColor: "#37474f"}}>
-                        <Col xs={4}></Col>
-                        <Col xs={4}>
+                    <Row className="no-gutters" style={{backgroundColor: "#37474f"}}>
+                        <Col xs={4} style={{backgroundColor: "#37474f"}}></Col>
+                        <Col xs={4} style={{backgroundColor: "#37474f"}}>
                             <Form.Group style={{display: "flex"}} className="mt-3">
                                 <InputGroup.Prepend style={{display: "inline-block"}}>
                                     <InputGroup.Text>Tipologia</InputGroup.Text>
@@ -103,54 +104,54 @@ class OddsMatcherMatchModal extends Component {
                                 </Form.Control>
                             </Form.Group>
                         </Col>
-                        <Col xs={4} className="d-flex flex-row-reverse">
-                            <Button onClick={this.props.noShow} style={{backgroundColor: "#37474f", border: "none"}}>
-                                <FontAwesomeIcon icon={faTimesCircle} style={{fontSize: "25px"}} />
+                        <Col xs={4} className="d-flex flex-row-reverse" style={{backgroundColor: "#37474f"}}>
+                            <Button  size="sm" variant="transparent" style={{backgroundColor: "#37474f", border: "none", boxShadow:"none"}}>
+                                <FontAwesomeIcon onClick={this.props.noShow} icon={faTimesCircle} style={{fontSize: "25px", color: "white"}} />
                             </Button>
                         </Col>
                     </Row>
                     {/* INFORMAZIONI MATCH */}
-                    <Row className="mt-4">
-                        <Col style={{backgroundColor: "#edf1f2"}} xs={3}>
+                    <Row className="mt-4 no-gutters">
+                        <Col style={{backgroundColor: "#edf1f2"}} className="p-2" xs={3}>
                             {/* INFORMAZIONI SQUADRE, DATA, ORA, RATING ECC... */}
                             <span className="match-infoes">
                                 <FontAwesomeIcon icon={faCalendarAlt}/>
-                                <p className="mb-0">Data: <strong>{this.props.odd.data}</strong></p>
+                                <p className="mb-0 ml-2">Data: <strong>{this.props.odd.data}</strong></p>
                             </span >
                             <span className="match-infoes">
                                 <FontAwesomeIcon icon={faClock}/>
-                                <p className="mb-0">Ora: <strong>{this.props.odd.ora}</strong></p>
+                                <p className="mb-0 ml-2">Ora: <strong>{this.props.odd.ora}</strong></p>
                             </span>
                             <span className="match-infoes">
                                 <FontAwesomeIcon icon={faFlag}/>
-                                <p className="mb-0">Paese: <strong>{this.props.odd.nazione}</strong></p>
+                                <p className="mb-0 ml-2">Paese: <strong>{this.props.odd.nazione}</strong></p>
                             </span>
                             <span className="match-infoes">
                                 <FontAwesomeIcon icon={faInfoCircle}/>
-                                <p className="mb-0">Torneo: <strong>{this.props.odd.campionato}</strong></p>
+                                <p className="mb-0 ml-2">Torneo: <strong>{this.props.odd.campionato}</strong></p>
                             </span>
                             <span className="match-infoes">
                                 <FontAwesomeIcon icon={faFutbol}/>
-                                <p className="mb-0">Casa: <strong>{this.props.odd.home}</strong></p>
+                                <p className="mb-0 ml-2">Casa: <strong>{this.props.odd.home}</strong></p>
                             </span>
                             <span className="match-infoes">
                                 <FontAwesomeIcon icon={faFutbol}/>
-                                <p className="mb-0">Ospite: <strong>{this.props.odd.away}</strong></p>
+                                <p className="mb-0 ml-2">Ospite: <strong>{this.props.odd.away}</strong></p>
                             </span>
                             <span className="match-infoes">
                                 <FontAwesomeIcon icon={faMoneyCheck}/>
-                                <p className="mb-0">Mercato: <strong>{this.props.odd.tipo}</strong></p>
+                                <p className="mb-0 ml-2">Mercato: <strong>{this.props.odd.tipo}</strong></p>
                             </span>
                             <span className="match-infoes">
                                 <FontAwesomeIcon icon={faPercent}/>
-                                <p className="mb-0">Rating: <strong>{this.props.odd.rating}%</strong></p>
+                                <p className="mb-0 ml-2">Rating: <strong>{this.props.odd.rating}%</strong></p>
                             </span> 
                         
                         </Col>
                         <Col xs={6}>
                             <Row>
-                                <Col xs={6}>
-                                <Card className="text-center" style={{minHeight: "300px", maxWidth: "250px"}}>
+                                <Col xs={6} style={{display: "flex"}}>
+                                <Card className="text-center" style={{minHeight: "300px", maxWidth: "350px", minWidth: "230px", margin: "auto"}}>
                                     <Card.Header style={{backgroundColor: "#a7d7fd"}}>PUNTA</Card.Header>
                                         <Card.Body>
                                             <Card.Title style={{fontSize: "17px"}}>{this.props.odd.home}</Card.Title>
@@ -165,8 +166,8 @@ class OddsMatcherMatchModal extends Component {
                                         </Card.Body>
                                 </Card>
                                 </Col>
-                                <Col xs={6}>
-                                <Card className="text-center" style={{minHeight: "300px", maxWidth: "250px"}}>
+                                <Col xs={6} style={{display: "flex"}}>
+                                <Card className="text-center" style={{minHeight: "300px", maxWidth: "350px", minWidth: "230px", margin: "auto"}}>
                                     <Card.Header style={{backgroundColor: "#f8cad0"}}>BANCA</Card.Header>
                                         <Card.Body>
                                         <Card.Title style={{fontSize: "17px"}}>{this.props.odd.away}</Card.Title>
@@ -193,7 +194,7 @@ class OddsMatcherMatchModal extends Component {
                                 </Col>
                             </Row>
                         </Col>
-                        <Col  style={{backgroundColor: "#edf1f2"}} xs={3}>
+                        <Col  style={{backgroundColor: "#edf1f2"}} xs={3}  className="p-2">
                             {this.state.selettoreRimborso !== "RIMBORSO"
                             ?
                             <>                        
@@ -204,7 +205,7 @@ class OddsMatcherMatchModal extends Component {
                                         </InputGroup.Prepend>
                                         <FormControl 
                                             type="text"
-                                            onChange={ (e) => this.setState({puntata: e.currentTarget.value}, () => this.layStake())}
+                                            onChange={ (e) => this.setState({puntata: parseFloat(e.currentTarget.value)}, () => this.layStake())}
                                             
                                         />
                                         <InputGroup.Prepend>
@@ -267,7 +268,7 @@ class OddsMatcherMatchModal extends Component {
                                         </Form.Label>
                                         <Form.Control type="range" />
                                         <Form.Label>
-                                            <strong className="py-5 my-2" style={{color: "green"}}>#Bancata Standard#</strong>
+                                            <strong className="py-5 my-2" style={{color: "green", backgroundColor: "transparent"}}>#Bancata Standard#</strong>
                                         </Form.Label>                                       
                                     </Form.Group>
                                 </Form>
@@ -366,13 +367,14 @@ class OddsMatcherMatchModal extends Component {
                             }
                         </Col>
                     </Row>
-                    <Row className="mt-4">
-                        <Col xs={7}>
+                    <Row className="mt-4 no-gutters">
+                        <Col xs={7} style={{backgroundColor: "#edf1f2"}} className="mb-2">
                             <div className="py-2" style={{backgroundColor: "#37474f", textAlign: "center", color: "white"}}>
                                 <strong>
                                     TABELLA DEI PROFITTI
                                 </strong>
                             </div>
+                            <div style={{backgroundColor: "#edf1f2"}}>
                             <Row className="mt-2">
                                 <Col xs={5}></Col>
                                 <Col xs={2}><strong>{this.props.odd.book}</strong></Col>
@@ -380,35 +382,96 @@ class OddsMatcherMatchModal extends Component {
                                 <Col xs={1}></Col>
                                 <Col xs={2}><strong>Totale</strong></Col>
                             </Row>
-                            <Row className="mt-3">
+                            <Row className="py-3 mx-1" style={{backgroundColor: "#a7d7fd"}}>
                                 <Col xs={5}>Se vinci su <strong>{this.props.odd.book}</strong></Col>
-                                <Col xs={2}>###</Col>
-                                <Col xs={2}>###</Col>
+                                <Col xs={2}>{
+                                    this.state.puntata !== ""
+                                    ?
+                                    "+" + ((this.props.odd.quota * this.state.puntata)-this.state.puntata).toFixed(2)
+                                    :
+                                    "+0.00"
+                                    }
+                                </Col>
+                                <Col xs={2}>{
+                                    this.state.risk === ""
+                                    ?
+                                    "+0.00"
+                                    :
+                                    -parseFloat(this.state.risk)
+                                    }
+                                </Col>
                                 <Col xs={1}>=</Col>
-                                <Col xs={2}>###</Col>
+                                <Col xs={2}>{
+                                    this.state.puntata === ""
+                                    ?
+                                    "+0.00"
+                                    :
+                                    (
+                                        (((parseFloat(this.props.odd.quota) * parseFloat(this.state.puntata)) - parseFloat(this.state.risk)) - this.state.puntata).toFixed(2) > 0
+                                        ?
+                                        "+" + 
+                                        (((parseFloat(this.props.odd.quota) * parseFloat(this.state.puntata)) - parseFloat(this.state.risk)) - this.state.puntata).toFixed(2)
+                                        :
+                                        "-" + 
+                                        (((parseFloat(this.props.odd.quota) * parseFloat(this.state.puntata)) - parseFloat(this.state.risk)) - this.state.puntata).toFixed(2)
+
+                                    )
+                                    
+                                }</Col>
                             </Row>
-                            <Row className="mt-3">
+                            <Row className="py-3 mx-1" style={{backgroundColor: "#f8cad0"}}>
                                 <Col xs={5}>Se vinci su <strong>{this.props.odd.book2}</strong></Col>
-                                <Col xs={2}>###</Col>
-                                <Col xs={2}>###</Col>
+                                <Col xs={2}>{
+                                        this.state.puntata === ""
+                                        ?
+                                        "+0.00"
+                                        :
+                                        -parseFloat(this.state.puntata).toFixed(2)
+                                    }                   
+                                </Col>
+                                <Col xs={2}>{
+                                    this.state.puntata !== ""
+                                    ?
+                                    "+" + this.state.bancata
+                                    :
+                                    "+0.00"
+                                }</Col>
                                 <Col xs={1}>=</Col>
-                                <Col xs={2}>###</Col>
+                                <Col xs={2}>{
+                                    this.state.puntata === ""
+                                    ?
+                                    (
+                                        "+0.00"
+                                    )
+                                    :
+                                    (
+                                        (this.state.bancata - (this.state.bancata - (this.state.bancata * 0.95)) - this.state.puntata).toFixed(2) > 0
+                                        ?
+                                        "+" + (this.state.bancata - (this.state.bancata - (this.state.bancata * 0.95)) - this.state.puntata).toFixed(2)
+                                        : 
+                                        "-" + (this.state.bancata - (this.state.bancata - (this.state.bancata * 0.95)) - this.state.puntata).toFixed(2)
+                                    )
+                                    }
+                                </Col>
                             </Row>
+                            </div>
                         </Col>
                         <Col xs={5}>
-                            <div className="py-2" style={{backgroundColor: "#37474f", textAlign: "center", color: "white"}}>
+                            <div className="py-2" style={{backgroundColor: "#37474f", textAlign: "center", color: "white", borderLeft: "10px solid white"}}>
                                 <strong>
                                     RIEPILOGO
                                 </strong>
                             </div>
-                            <p className="mt-3 pl-5">Punta {this.state.puntata}€ a @{this.props.odd.quota} su <strong>{this.props.odd.book}</strong></p>
-                            <p className="mt-3 pl-5">Banca {this.state.bancata}€ a @{this.props.odd.quota_banca} su <strong>{this.props.odd.book2}</strong></p>
-                            <div style={{textAlign: "center"}}>
-                                <p>
-                                    <strong>Responsabilità di {this.state.risk}€</strong>
-                                </p>
-                                <h4>Il guadagno minimo sarà: ###</h4>
-                            </div>
+                                <div style={{backgroundColor: "#edf1f2", borderLeft: "10px solid white"}} className="py-2 mb-2">
+                                    <p className="mt-3 pl-5">Punta {this.state.puntata}€ a @{this.props.odd.quota} su <strong>{this.props.odd.book}</strong></p>
+                                    <p className="mt-3 pl-5">Banca {this.state.bancata}€ a @{this.props.odd.quota_banca} su <strong>{this.props.odd.book2}</strong></p>
+                                    <div style={{textAlign: "center"}}>
+                                    <p>
+                                        <strong>Responsabilità di {this.state.risk}€</strong>
+                                    </p>
+                                    {/*<h4>Il guadagno minimo sarà: ###</h4>*/}
+                                    </div>
+                                </div>
                         </Col>
                     </Row>
                 </Modal.Body>

@@ -1,88 +1,105 @@
-import React, { Component } from 'react';
-import { Nav, NavDropdown, Navbar, Image } from "react-bootstrap"
-import { Link } from "react-router-dom"
+import React, { Component } from "react";
+import { MDBNavbarBrand } from "mdbreact";
+import { Link } from 'react-router-dom';
 import "./navbar.css"
 
-class NavBar extends Component {
-    render() {
-        return (
-            <div>
-                <Navbar collapseOnSelect expand="lg" bg="dark" className="navbar-backgroundcolor" style={{padding: "0 16px"}}>
-                    <Navbar.Brand>
-                        <Image 
-                        src="https://res.cloudinary.com/dnadfuxk0/image/upload/v1600363858/photo_2020-03-25_21.25.52_2_qsz4ss.png"
-                        style={{minWidth: "50px", paddingRight : "5vw", paddingLeft: "1vw"}}/>
-                    </Navbar.Brand>
-                    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-                    <Navbar.Collapse id="responsive-navbar-nav">
-                        <Nav className="mr-auto links">
-                        <Nav.Link className="links mx-3">HOME</Nav.Link>
-                        <Nav.Link className="links mx-3">GUIDE</Nav.Link>
-                        <Nav.Link className="links mx-3">FORUM</Nav.Link>
+class NavbarPage extends Component {
+state = {
+  collapseID: ""
+};
 
-                        {/* OFFERTE DI BENVENUTO E  RICORRENTI */}
+toggleCollapse = collapseID => () =>
+  this.setState(prevState => ({
+  collapseID: prevState.collapseID !== collapseID ? collapseID : ""
+}));
 
-                        <NavDropdown title="OFFERTE" id="collasible-nav-dropdown" className="mx-3">
-                            <NavDropdown.Item>BONUS DI BENVENUTO</NavDropdown.Item>
-                            <NavDropdown.Item>BONUS RICORRENTI</NavDropdown.Item>
-                            <NavDropdown.Item>BONUS PERSONALI</NavDropdown.Item>
-                        </NavDropdown>
+render() {
+  return (
+    <div style={{display: "flex"}}>
+      <MDBNavbarBrand>
+       {/*} <img src="https://res.cloudinary.com/dnadfuxk0/image/upload/v1600363858/photo_2020-03-25_21.25.52_2_qsz4ss.png" alt="TheMasterMatchedLogo" id="logo"/>*/}
+        <img src="https://res.cloudinary.com/dnadfuxk0/image/upload/v1600095327/Solo%20Capstone/Immagine_k8ekqo.jpg" alt="IlDiarioDelMatchedBettista" id="logo" />
+      </MDBNavbarBrand>
+      <button className="dropbtn ml-auto">
+        <Link to="/oddsmatcher" style={{fontWeight: "400"}}>HOME</Link>
+      </button>
+      <button className="dropbtn">GUIDE</button>
+      <div className="dropdown">
+        <button className="dropbtn">OFFERTE</button>
+        <div className="dropdown-content">
+          <Link>
+            OFFERTE DI BENVENUTO
+          </Link>
+          <Link>
+            OFFERTE RICORRENTI
+          </Link>
+          <Link>
+              CANALE TELEGRAM
+          </Link>
+        </div>
+      </div>
 
-                        {/* ODDSMATCHER, DUTCHER, TRIMATCHER E BEST ODDS */}
+      <div className="dropdown">
+        <button className="dropbtn">STRUMENTI</button>
+        <div className="dropdown-content">
+          <Link to="/oddsmatcher">
+            ODDSMATCHER
+          </Link>
+          <Link to="/dutcher">
+            DUTCHER
+          </Link>
+          <Link to="/trimatcher">
+            TRIMATCHER
+          </Link>
+          <Link>
+            TARGETER
+          </Link>
+        </div>
+      </div>
 
-                        <NavDropdown title="STRUMENTI" id="collasible-nav-dropdown" className="mx-3">
-                            <Link to="/oddsmatcher" className="dropdown-item">
-                                ODDSMATCHER
-                            </Link>
-                            <Link to="/dutcher" className="dropdown-item">
-                                DUTCHER
-                            </Link>
-                            <Link to="/trimatcher" className="dropdown-item">
-                                TRIMATCHER
-                            </Link>
-                            <NavDropdown.Divider />
-                            <Link to="/bestodds" className="dropdown-item">
-                                BEST ODDS
-                            </Link>
-                        </NavDropdown>
+      <div className="dropdown">
+        <button className="dropbtn">CALCOLATORI</button>
+        <div className="dropdown-content">
+        <Link to="">
+            PUNTA - BANCA
+          </Link>
+          <Link to="">
+            PUNTA - PUNTA
+          </Link>
+          <Link to="">
+            DUTCH - TOOL
+          </Link>
+          <Link>
+            MULTI- TOOL
+          </Link>
+          <Link to="">
+            CONDIZIONATO
+          </Link>
+          <Link to="">
+            COMBO - TOOL
+          </Link>
+          <Link to="">
+            CONVERTER
+          </Link>
+          <Link>
+            CASINO
+          </Link>
+        </div>
+      </div>
 
-                        {/* CALCOLATORI PUNTA-BANCA, PUNTA-PUNTA, PUNTA 1X2, MULTITOOL, CONVERTER, CASINO */}
-
-
-                        <NavDropdown title="CALCOLATORI" id="collasible-nav-dropdown" className="mx-3">
-                            <Link to="/punta-banca" className="dropdown-item">
-                                PUNTA-BANCA
-                            </Link>
-                            <Link to="/punta-punta" className="dropdown-item">
-                                PUNTA-PUNTA
-                            </Link>
-                            <Link to="/multi-tool" className="dropdown-item">
-                                MULTITOOL
-                            </Link>
-                            <Link to="/converter" className="dropdown-item">
-                                CONVERTER
-                            </Link>
-                            <Link to="/casino" className="dropdown-item">
-                                CASINO
-                            </Link>
-                        </NavDropdown>
-
-                        {/* OPZIONI ACCOUNT PERSONALE */}
-
-                        <NavDropdown title="ACCOUNT" id="collasible-nav-dropdown" className="mx-3">
-                            <NavDropdown.Item>PROFILO PERSONALE</NavDropdown.Item>
-                            <Link to="/profit_tracker/in-progress" className="dropdown-item">
-                                PROFIT TRACKER
-                            </Link>
-                            <NavDropdown.Divider/>
-                            <NavDropdown.Item>LOG OUT</NavDropdown.Item>
-                        </NavDropdown>
-                        </Nav>
-                    </Navbar.Collapse>
-                    </Navbar>                
-            </div>
-        );
-    }
+      <div className="dropdown">
+        <button className="dropbtn">ACCOUNT</button>
+        <div className="dropdown-content">
+          <Link>PROFILO</Link>
+          <Link to="/profit_tracker/in-progress">PROFIT TRACKER</Link>
+          <Link>LOG OUT</Link>
+        </div>
+      </div>
+      
+      <button className="dropbtn mr-3">FORUM</button>
+      </div>
+    );
+  }
 }
 
-export default NavBar;
+export default NavbarPage;
