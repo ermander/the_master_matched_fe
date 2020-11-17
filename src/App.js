@@ -1,48 +1,46 @@
-import React from 'react'
+import React from "react";
 // Bootstrap
-import 'bootstrap/dist/css/bootstrap.min.css'
+import "bootstrap/dist/css/bootstrap.min.css";
 
 // React Router Dom
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 // Components
-import Login from './Components/Login/Login'
-import OddsMatcher from "./Components/OddsMatcher/OddsMatcher"
-import Dutcher from "./Components/Dutcher/Dutcher"
-import BestOdds from "./Components/BestOdds/BestOdds"
-import Trimatcher from "./Components/Trimatcher/Trimatcher"
-import InCorso from "./Components/ProfitTracker/InProgressGames/InCorso"
-import Archiviate from "./Components/ProfitTracker/ArchievedGames/Archiviate"
-import PuntaPunta from "./Components/Calcolatori/PuntaPunta"
-import PuntaBanca from "./Components/Calcolatori/PuntaBanca"
-import MultiTool from "./Components/Calcolatori/MultiTool" 
-import Casino from "./Components/Calcolatori/Casino"
-import Converter from "./Components/Calcolatori/Converter"
-import BetDetails from "./Components/ProfitTracker/InProgressGames/BetDetails"
-import CasinoDetails from "./Components/ProfitTracker/CasinoGames/CasinoDetails"
-import Utenti from "./Components/ProfitTracker/Users/Utenti"
-import PaymentMethods from "./Components/ProfitTracker/PaymentMethods/PaymentMethods"
-import Bookmakers from "./Components/ProfitTracker/Bookmakers/Bookmakers"
-import ArchivedBetDetails from './Components/ProfitTracker/ArchievedGames/ArchivedBetDetails'
-import Transactions from './Components/ProfitTracker/Transactions/Transactions'
+import Login from "./Components/Login/Login";
+import OddsMatcher from "./Components/OddsMatcher/OddsMatcher";
+import Dutcher from "./Components/Dutcher/Dutcher";
+import BestOdds from "./Components/BestOdds/BestOdds";
+import Trimatcher from "./Components/Trimatcher/Trimatcher";
+import InCorso from "./Components/ProfitTracker/InProgressGames/InCorso";
+import Archiviate from "./Components/ProfitTracker/ArchievedGames/Archiviate";
+import PuntaPunta from "./Components/Calcolatori/PuntaPunta";
+import PuntaBanca from "./Components/Calcolatori/PuntaBanca";
+import MultiTool from "./Components/Calcolatori/MultiTool";
+import Casino from "./Components/Calcolatori/Casino";
+import Converter from "./Components/Calcolatori/Converter";
+import BetDetails from "./Components/ProfitTracker/InProgressGames/BetDetails";
+import CasinoDetails from "./Components/ProfitTracker/CasinoGames/CasinoDetails";
+import Utenti from "./Components/ProfitTracker/Users/Utenti";
+import PaymentMethods from "./Components/ProfitTracker/PaymentMethods/PaymentMethods";
+import Bookmakers from "./Components/ProfitTracker/bookmakers/Bookmakers";
+import ArchivedBetDetails from "./Components/ProfitTracker/ArchievedGames/ArchivedBetDetails";
+import Transactions from "./Components/ProfitTracker/Transactions/Transactions";
 
 function App() {
   return (
     <Router>
       <div className="App">
         <Switch className="p-0">
-          
           {/* LOGIN ROUTE */}
-          <Route path="/" exact >
+          <Route path="/" exact>
             <Login />
           </Route>
-       
 
           {/* ODDS ROUTE */}
-          <Route path="/oddsmatcher" exact >
+          <Route path="/oddsmatcher" exact>
             <OddsMatcher />
           </Route>
-          <Route path="/dutcher" exact >
+          <Route path="/dutcher" exact>
             <Dutcher />
           </Route>
           <Route path="/trimatcher" exact>
@@ -70,10 +68,10 @@ function App() {
           </Route>
 
           {/* ACCOUNT ROUTES */}
-          
+
           <Route path="/profit_tracker/bet_details/:id">
             <BetDetails />
-          </Route>          
+          </Route>
           <Route path="/profit_tracker/in-progress" exact>
             <InCorso />
           </Route>
@@ -98,7 +96,6 @@ function App() {
           <Route path="/profit_tracker/transactions" exact>
             <Transactions />
           </Route>
-         
         </Switch>
       </div>
     </Router>
