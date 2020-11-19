@@ -128,11 +128,17 @@ class PaymentMethods extends Component {
                 <Col xs={11}>
                     <Row>
                         <Col xs={12}>
-                            <h2>Metodi Di Pagamento</h2>
+                            <div style={{
+                                        backgroundColor: "#d08e46",
+                                        textAlign: "center",
+                                        fontSize: "50px",
+                                        marginBottom: "3vh",
+                                        color: "#efd9c0",
+                                        }}>Payment Methods</div>
                             <div style={{maxWidth: "350px"}} id="balance-counter">
                             <h3 id="counter">{this.state.totalBalance}€</h3>
-                            <h4 id="saldo">Saldo Attuale</h4>
-                            <p id="saldo-info">Totale saldo scommesse chiuse, casinò e depositi.</p>
+                            <h4 id="saldo">Current Balance</h4>
+                            <p id="saldo-info">Total closed bets, casino and deposits balance.</p>
                             </div>
                             <Button 
                                 size="sm" 
@@ -140,20 +146,20 @@ class PaymentMethods extends Component {
                                 className="mr-1"
                                 onClick={ () => this.setState({ showNewPaymentMethodModal: true })}
                                 > 
-                                    Nuovo Metodo Di Pagamento</Button>
+                                    New Payment Method</Button>
                             <Button 
                                 size="sm" 
                                 variant="warning" 
                                 className="mr-1"
                                 onClick={ () => this.setState({ trasferimentoModalShow: true })}
                                 >
-                                    Trasferisci Saldo</Button>
+                                   Transfer Balance</Button>
                             <Button 
                                 size="sm" 
                                 variant="info"
                                 onClick={ () => this.setState({ showRicaricaSpesa: true })}
                                 >
-                                    Ricarica/Spesa</Button>
+                                    Recharge / Spend</Button>
                         </Col>
                     </Row>
                     <Row>
@@ -162,12 +168,12 @@ class PaymentMethods extends Component {
                                 <thead className="table-data">
                                     <tr>
                                         <th>#</th>
-                                        <th>Intestatario conto</th>
-                                        <th>Nome</th>
-                                        <th>Descrizione</th>
-                                        <th>Saldo</th>
-                                        <th>Opzioni</th>
-                                        <th>Opzioni</th>
+                                        <th>Account holder</th>
+                                        <th>Name</th>
+                                        <th>Description</th>
+                                        <th>Balance</th>
+                                        <th>Option</th>
+                                        <th>Option</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -206,7 +212,7 @@ class PaymentMethods extends Component {
                                                                     description: element.description,
                                                                     accountName: element.accountName
                                                                     })} >
-                                                                    Modifica
+                                                                    Modify
                                                             </Button>
                                                         </td>
                                                         <td>
@@ -216,7 +222,7 @@ class PaymentMethods extends Component {
                                                                 onClick={ () => {
                                                                     this.setState({ id: element._id }, this.deletePaymentMethod)
                                                                 }}>
-                                                                    Elimina
+                                                                    Delete
                                                             </Button>
                                                         </td>
                                                     </tr>

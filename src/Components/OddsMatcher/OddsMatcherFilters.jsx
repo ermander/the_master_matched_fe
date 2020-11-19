@@ -5,44 +5,18 @@ import React, { Component } from 'react';
 class OddsMatcherModal extends Component {
 
   state = {
-    show: false,
-    mercato: "",
-    dataInizio: "",
-    oraInizio: "",
-    dataFine: "",
-    oraFine: "",
-    liquidita: "",
-    quotaMin: "",
-    quotaMax: "",
-    stakeRimborso: "",
-    stakeBonusRimborso: ""
+    ...this.props.filtersStatus
   }
 
   handleClose = () => { this.setState({ show: false })}
 
   handleShow = () => { this.setState({ show: true })}
 
-  handleReset = () => { 
-    this.setState({
-      show: true,
-      sport: "",
-      mercato: "",
-      dataInizio: "",
-      oraInizio: "",
-      dataFine: "",
-      oraFine: "",
-      liquidita: "",
-      quotaMin: "",
-      quotaMax: "",
-      stakeRimborso: "",
-      stakeBonusRimborso: ""
-  })}
-
   render() {
     return (
-         <div style={{display: "inline-block", marginRight:"1rem", marginLeft: "0", paddingLeft: "0"}}>
-          <Button variant="light" onClick={this.handleShow}>
-            Opzioni di Ricerca
+         <div style={{display: "inline-block", marginRight:"1rem", paddingLeft: "0important!"}}>
+          <Button variant="light" onClick={this.handleShow} className="ml-0">
+            Search Options
           </Button>
 
           <Modal show={this.state.show} onHide={this.handleClose} >
@@ -52,59 +26,84 @@ class OddsMatcherModal extends Component {
                 {/* FILTRI PER SPORT */}
                 <Col xs={2}>
                   <h5>
-                    <strong>Filtra per sport</strong>
+                    <strong>Filter by Sport</strong>
                   </h5>
                   <Row className="mt-5"> 
                     <Col>
                     
                     <InputGroup className="mb-3">
                       <InputGroup.Prepend>
-                        <InputGroup.Checkbox aria-label="Checkbox for following text input" />
+                        <InputGroup.Checkbox 
+                          aria-label="Checkbox for following text input" 
+                          checked={this.state.allSports}
+                          onChange={(e) => this.setState({
+                            allSports: e.currentTarget.checked,
+                            soccer: false,
+                            tennis: false,
+                            basket: false
+                          })}/>
                       </InputGroup.Prepend>
                       <FormControl 
-                      aria-label="Text input with checkbox" 
-                      placeholder="TUTTI" 
-                      value="TUTTI"
-                      onChange={(e) => {this.setState({ sport: e.currentTarget.value })}}
+                        aria-label="Text input with checkbox" 
+                        placeholder="All" 
+                        value="All"
                       />
                     </InputGroup>
 
                     
                     <InputGroup className="mb-3">
                       <InputGroup.Prepend>
-                        <InputGroup.Checkbox aria-label="Checkbox for following text input" />
+                        <InputGroup.Checkbox 
+                          aria-label="Checkbox for following text input"
+                          checked={this.state.soccer}
+                          onChange={(e) => {this.setState({
+                            soccer: e.currentTarget.checked,
+                            allSports: false
+                          })}}
+                         />
                       </InputGroup.Prepend>
                       <FormControl 
                       aria-label="Text input with checkbox" 
-                      placeholder="CALCIO" 
-                      value="CALCIO"
-                      onChange={(e) => {this.setState({ sport: e.currentTarget.value })}}
+                      placeholder="SOCCER" 
+                      value="SOCCER"
                       />
                     </InputGroup>
 
                     
                     <InputGroup className="mb-3">
                       <InputGroup.Prepend>
-                        <InputGroup.Checkbox aria-label="Checkbox for following text input" />
+                        <InputGroup.Checkbox 
+                          aria-label="Checkbox for following text input" 
+                          checked={this.state.tennis}
+                          onChange={(e) => {this.setState({ 
+                            tennis: e.currentTarget.checked,
+                            allSports: false
+                          })}}
+                        />
                       </InputGroup.Prepend>
                       <FormControl 
                       aria-label="Text input with checkbox" 
                       placeholder="TENNIS"
                       value="TENNIS"
-                      onChange={(e) => {this.setState({ sport: e.currentTarget.value })}}
                       />
                     </InputGroup>
 
                     
                     <InputGroup className="mb-3">
                       <InputGroup.Prepend>
-                        <InputGroup.Checkbox aria-label="Checkbox for following text input" />
+                        <InputGroup.Checkbox 
+                          aria-label="Checkbox for following text input"
+                          checked={this.state.basket}
+                          onChange={(e) => {this.setState({ 
+                            basket: e.currentTarget.checked,
+                            allSports: false
+                          })}}
+                        />
                       </InputGroup.Prepend>
                       <FormControl 
                       aria-label="Text input with checkbox" 
                       placeholder="BASKET "
-                      value="BASKET"
-                      onChange={(e) => {this.setState({ sport: e.currentTarget.value })}}/>
+                      value="BASKET"/>
                     </InputGroup>
 
                     </Col>
@@ -114,73 +113,100 @@ class OddsMatcherModal extends Component {
                 {/* FILTRI PER MERCATO */}
                 <Col xs={2}>
                   <h5>
-                    <strong>Filtra per mercato</strong>
+                    <strong>Filter by Market</strong>
                   </h5>
                   <Row className="mt-5"> 
-                    <Col>
-                    
+                    <Col>                    
                     <InputGroup className="mb-3">
                       <InputGroup.Prepend>
-                        <InputGroup.Checkbox aria-label="Checkbox for following text input" onChange={(e) => {
-                        console.log(e.currentTarget)
-                        this.setState({ mercato: e.currentTarget.checked })}}
+                        <InputGroup.Checkbox 
+                        aria-label="Checkbox for following text input" 
+                        checked={this.state.allMarkets}
+                        onChange={(e) => {this.setState({ 
+                          allMarkets: e.currentTarget.checked,
+                          underOver: false,
+                          goalNoGoal: false,
+                          homeTieAway: false 
+                        })}}
                       />
                       </InputGroup.Prepend>
                       <FormControl 
-                      aria-label="Text input with checkbox" 
-                      placeholder="TUTTI" 
-                      value="TUTTI"
+                        aria-label="Text input with checkbox" 
+                        placeholder="All" 
+                        value="All"
                       />
                     </InputGroup>
 
                     
                     <InputGroup className="mb-3">
                       <InputGroup.Prepend>
-                        <InputGroup.Checkbox aria-label="Checkbox for following text input" />
+                        <InputGroup.Checkbox 
+                          aria-label="Checkbox for following text input" 
+                          checked={this.state.homeTieAway}
+                          onChange={(e) => {this.setState({
+                            homeTieAway: e.currentTarget.checked,
+                            allMarkets: false
+                          })}}  
+                        />
                       </InputGroup.Prepend>
                       <FormControl 
                       aria-label="Text input with checkbox" 
                       placeholder="1X2" 
-                      value="1X2"
-                      onChange={(e) => {this.setState({ mercato: e.currentTarget.value })}}                      
+                      value="1X2"                    
                       />
                     </InputGroup>
 
                     
                     <InputGroup className="mb-3">
                       <InputGroup.Prepend>
-                        <InputGroup.Checkbox aria-label="Checkbox for following text input" />
+                        <InputGroup.Checkbox 
+                          aria-label="Checkbox for following text input" 
+                          checked={this.state.underOver}
+                          onChange={(e) => {this.setState({ 
+                            underOver: e.currentTarget.checked,
+                            allMarkets: false
+                            })}}/>
                       </InputGroup.Prepend>
                       <FormControl 
                       aria-label="Text input with checkbox" 
                       placeholder="U/O"
                       value="U/O"
-                      onChange={(e) => {this.setState({ mercato: e.currentTarget.value })}}
                       />
                     </InputGroup>
 
                     
                     <InputGroup className="mb-3">
                       <InputGroup.Prepend>
-                        <InputGroup.Checkbox aria-label="Checkbox for following text input" />
+                        <InputGroup.Checkbox 
+                          aria-label="Checkbox for following text input" 
+                          checked={this.state.goalNoGoal}
+                          onChange={(e) => {this.setState({ 
+                            goalNoGoal: e.currentTarget.checked,
+                            allMarkets: false,
+                          })}}  
+                        />
                       </InputGroup.Prepend>
                       <FormControl 
                       aria-label="Text input with checkbox" 
                       placeholder="GG/NG"
-                      value="GG/NG"
-                      onChange={(e) => {this.setState({ mercato: e.currentTarget.value })}}                      
+                      value="GG/NG"                    
                       />
                     </InputGroup>
 
                     <InputGroup className="mb-3">
                       <InputGroup.Prepend>
-                        <InputGroup.Checkbox aria-label="Checkbox for following text input" />
+                        <InputGroup.Checkbox 
+                          aria-label="Checkbox for following text input" 
+                          checked={this.state.headToHead}
+                          onChange={(e) => {this.setState({ 
+                            headToHead: e.currentTarget.checked,
+                            allMarkets: false
+                          })}}/>
                       </InputGroup.Prepend>
                       <FormControl 
                       aria-label="Text input with checkbox" 
                       placeholder="TT"
-                      value="TT"
-                      onChange={(e) => {this.setState({ mercato: e.currentTarget.value })}}/>
+                      value="TT"/>
                     </InputGroup>
 
                     </Col>
@@ -190,11 +216,11 @@ class OddsMatcherModal extends Component {
                 {/* FILTRI PER DATA */}
                 <Col xs={4}>
                 <h5>
-                  <strong>Filtra per data</strong>
+                  <strong>Filter by Date</strong>
                 </h5>
                 <Row className="mt-5">
                   <Col xs={6}>
-                    <p>Data inizio:</p>
+                    <p>Start date:</p>
                     <InputGroup>
                       <FormControl 
                       type="date"
@@ -202,7 +228,7 @@ class OddsMatcherModal extends Component {
                     </InputGroup>
                   </Col>
                   <Col xs={6}>
-                    <p>Ora inizio:</p>
+                    <p>Start time:</p>
                     <InputGroup>
                       <FormControl 
                       type="time" 
@@ -213,7 +239,7 @@ class OddsMatcherModal extends Component {
 
                 <Row className="mt-5">
                   <Col xs={6}>
-                    <p>Data fine:</p>
+                    <p>End date:</p>
                     <InputGroup>
                       <FormControl 
                       type="date" 
@@ -221,7 +247,7 @@ class OddsMatcherModal extends Component {
                     </InputGroup>
                   </Col>
                   <Col xs={6}>
-                    <p>Ora fine:</p>
+                    <p>End time:</p>
                     <InputGroup>
                       <FormControl 
                       type="time" 
@@ -234,11 +260,11 @@ class OddsMatcherModal extends Component {
                 {/* FILTRI PER LIQUIDITà E QUOTA */}
                 <Col xs={2}>
                   <h5>
-                    <strong>Liquidità e Quota</strong>
+                    <strong>Liquidity and Quote</strong>
                   </h5>
-                  <Row className="mt-5">
+                  <Row className="mt-3">
                     <Col xs={12}>
-                      <p>Liquidità:</p>
+                      <p>Liquidity:</p>
                     </Col>
                   </Row>
                   <Row>
@@ -246,15 +272,16 @@ class OddsMatcherModal extends Component {
                       <InputGroup>
                         <FormControl 
                         type="text"
-                        placeholder="Minima €"
-                        onChange={(e) => { this.setState({ liquidita: parseFloat(e.currentTarget.value)})}}
+                        placeholder="Min €"
+                        value={this.state.liquidita}
+                        onChange={(e) => { this.setState({ liquidita: e.currentTarget.value})}}
                         />
                       </InputGroup>
                     </Col>
                   </Row>
                   <Row className="mt-5">
                     <Col xs={12}>
-                      <p>Quota:</p>
+                      <p>Quote:</p>
                     </Col>
                   </Row>
                   <Row>
@@ -263,7 +290,8 @@ class OddsMatcherModal extends Component {
                         <FormControl 
                         type="text" 
                         placeholder="Min" 
-                        onChange={(e) => {this.setState({quotaMin: parseFloat(e.currentTarget.value)})}}
+                        value={this.state.quotaMin}
+                        onChange={(e) => {this.setState({quotaMin: e.currentTarget.value})}}
                         />
                       </InputGroup>
                     </Col>
@@ -272,7 +300,8 @@ class OddsMatcherModal extends Component {
                         <FormControl 
                         type="text" 
                         placeholder="Max" 
-                        onChange={(e) => {this.setState({quotaMax: parseFloat(e.currentTarget.value)})}}
+                        value={this.state.quotaMax}
+                        onChange={(e) => {this.setState({quotaMax: e.currentTarget.value})}}
                         />
                       </InputGroup>
                     </Col>
@@ -283,15 +312,15 @@ class OddsMatcherModal extends Component {
                 {/* FILTRI PER RATING RIMBORSO */}
                 <Col xs={2}>
                   <h5>
-                    <strong>Modalità rimborso</strong>
+                    <strong>Refund Method</strong>
                   </h5>
                   <Row className="mt-5">
                     <Col xs={12}>
-                      <p>Puntata:</p>
+                      <p>Stake:</p>
                       <InputGroup className="mb-3">
                         <FormControl 
                         type="number" 
-                        placeholder="Puntata €" 
+                        placeholder="Stake €" 
                         onChange={(e) => {this.setState({ stakeRimborso: e.currentTarget.value })}}
                         />
                       </InputGroup>
@@ -299,11 +328,11 @@ class OddsMatcherModal extends Component {
                   </Row>
                   <Row>
                     <Col xs={12}>
-                    <p>Rimborso:</p>
+                    <p>Refund:</p>
                       <InputGroup className="mb-3">
                         <FormControl 
                         type="number" 
-                        placeholder="Rimborso €"
+                        placeholder="Refund €"
                         onChange={(e) => {this.setState({ stakeBonusRimborso: e.currentTarget.value })}}
                         />
                       </InputGroup>
@@ -312,7 +341,7 @@ class OddsMatcherModal extends Component {
                   <Row>
                     <Col xs={12}>
                       <Button>
-                        Ordina per CR%
+                        Sort by CR%
                       </Button>
                     </Col>
                   </Row>
@@ -323,15 +352,36 @@ class OddsMatcherModal extends Component {
             </Modal.Body>
             <Modal.Footer style={{backgroundColor: "#edf1f2", borderTop: "none"}}>
               <Button variant="secondary" onClick={this.handleClose}>
-                Chiudi
+                Close
               </Button>
               <Button variant="primary" onClick={()=>{
                 this.props.setFiltersToFather({...this.state})
                 this.handleClose()}
                 }>
-                Applica Filtri
+                Apply Filters
               </Button>
-              <Button variant="danger" onClick={this.handleReset}>
+              <Button variant="danger" onClick={ () => this.setState({
+                  show: true,
+                  allSports: false,
+                  soccer: false,
+                  tennis: false,
+                  basket: false,
+                  allMarkets: false,
+                  homeTieAway: false,
+                  underOver: false,
+                  goalNoGoal: false,
+                  headToHead: false,
+                  dataInizio: "",
+                  oraInizio: "",
+                  dataFine: "",
+                  oraFine: "",
+                  liquidita: "",
+                  quotaMin: "",
+                  quotaMax: "",
+                  stakeRimborso: "",
+                  stakeBonusRimborso: ""
+                },() => this.props.reloadOdds())}
+                >
                 Reset
               </Button>
             </Modal.Footer>

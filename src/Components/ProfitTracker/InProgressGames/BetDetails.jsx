@@ -91,28 +91,26 @@ class BetDetails extends Component {
                 </Col>
                 <Col xs={11}>
                     <>
-                    <div>
-                        <h2>
-                            DETTAGLI PUNTATA #{this.state.betInfo._id}
-                        </h2>
+                    <div style={{backgroundColor: "#d08e46",textAlign: "center",fontSize: "50px",marginBottom: "3vh",color: "#efd9c0"}}> 
+                        BET DETAILS #{this.state.betInfo._id}
                     </div>
                     <div id="left-buttons-div">
                         <Button 
                             variant="light"
                             size="sm"
-                            className="bet-buttons">Nuova Puntata</Button>
+                            className="bet-buttons">New Back Bet</Button>
                         <Button 
                             variant="light"
                             size="sm"
-                            className="bet-buttons">Nuova Bancata</Button>
+                            className="bet-buttons">New Lay Bet</Button>
                         <Button 
                             variant="light"
                             size="sm"
-                            className="bet-buttons">Nuovo Deposito</Button>
+                            className="bet-buttons">New Deposit</Button>
                     </div>
                     <div className="right-buttons-div">
-                        <Button className="right-buttons-div" size="sm" onClick={ () => this.archiveMatch(this.state.betInfo._id)}>
-                            Archivia
+                        <Button className="right-buttons-div" size="sm"  variant="warning" onClick={ () => this.archiveMatch(this.state.betInfo._id)}>
+                            Archive
                         </Button>
                         <Button variant="danger" size="sm" className="ml-1" onClick={ () => this.deleteMatch(this.state.betInfo._id)}>
                             <FontAwesomeIcon icon={faTrashAlt} />
@@ -121,21 +119,22 @@ class BetDetails extends Component {
                     <Table striped bordered hover className="mt-3">
                         <thead>
                             <tr className="table-head">
-                                <th style={{width: "130px"}}>Data Evento</th>
-                                <th>Evento</th> 
-                                <th>Competizione</th> 
-                                <th>Mercato</th> 
-                                <th>Tipo</th> 
-                                <th style={{minWidth: "85px"}}>Tipo Bonus</th>
-                                <th>Conto</th>
+                                <th style={{width: "130px"}}>Event Date</th>
+                                <th>Event</th> 
+                                <th>Tournamet</th> 
+                                <th>Market</th> 
+                                <th>Type</th> 
+                                <th style={{minWidth: "85px"}}>Bonus Type</th>
+                                <th>Book</th>
                                 <th>Stake</th> 
-                                <th>Quota</th>
-                                <th>Rischio</th>
+                                <th>Back Odd</th>
+                                <th>Risk</th>
                                 <th>Bonus</th> 
-                                <th>Rimborso</th> 
-                                <th style={{minWidth: "85px"}}>Tasse %</th> 
-                                <th>Movimento</th> 
-                                <th style={{width: "130px"}}>Stato Evento</th>
+                                <th>Refund</th> 
+                                <th style={{minWidth: "85px"}}>Tax %</th> 
+                                <th>Movemet</th> 
+                                <th style={{width: "130px"}}>Event State</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -174,9 +173,9 @@ class BetDetails extends Component {
                                             <td>
                                                 <Form.Group>
                                                     <Form.Control as="select" variant="light" size="sm">
-                                                    <option>Nessuno</option>
+                                                    <option>None</option>
                                                     <option>Bonus</option>
-                                                    <option>Rimborso</option>
+                                                    <option>Refund</option>
                                                     <option>FreeBet</option>
                                                     </Form.Control>
                                                 </Form.Group>
@@ -197,11 +196,11 @@ class BetDetails extends Component {
                                                         size="sm"
                                                         onChange={(e)=>this.setState({bgColor1: e.currentTarget.value})}
                                                         >
-                                                        <option>Bozza</option>
-                                                        <option value="#FFA500">In Corso</option>
-                                                        <option value="#98FB98">Vinto</option>
-                                                        <option value="#FF0000">Perso</option>
-                                                        <option value="#FFA500">Annullato</option>
+                                                        <option>Draft</option>
+                                                        <option value="#FFA500">In Progress</option>
+                                                        <option value="#98FB98">Won</option>
+                                                        <option value="#FF0000">Lost</option>
+                                                        <option value="#FFA500">Cancelled</option>
                                                     </Form.Control>
                                                 </Form.Group>
                                             </td>
@@ -219,8 +218,8 @@ class BetDetails extends Component {
                                             <td>{this.state.betInfo.rischio}€</td>
                                             <td>/</td>
                                             <td>/</td>
-                                            <td>{this.state.betInfo.commissione}</td>
-                                            <td>{this.state.betInfo.rischio}</td>
+                                            <td>{this.state.betInfo.commissione * 100}%</td>
+                                            <td>{this.state.betInfo.rischio}€</td>
                                             <td>
                                                 <Form.Group>
                                                     <Form.Control 
@@ -229,11 +228,11 @@ class BetDetails extends Component {
                                                     size="sm"
                                                     onChange={(e)=>this.setState({bgColor2: e.currentTarget.value})}
                                                     >
-                                                        <option>Bozza</option>
-                                                        <option value="#FFA500">In Corso</option>
-                                                        <option value="#98FB98">Vinto</option>
-                                                        <option value="#FF0000">Perso</option>
-                                                        <option value="#FFA500">Annullato</option>
+                                                        <option>Draft</option>
+                                                        <option value="#FFA500">In Progress</option>
+                                                        <option value="#98FB98">Won</option>
+                                                        <option value="#FF0000">Lost</option>
+                                                        <option value="#FFA500">Cancelled</option>
                                                     </Form.Control>
                                                 </Form.Group>
                                             </td>

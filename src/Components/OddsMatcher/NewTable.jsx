@@ -1,108 +1,94 @@
-import React from 'react';
-import { MDBDataTable } from 'mdbreact';
-import "./newtable.css"
+import React from "react";
+import "./newtable.css";
+import ReactTable from "react-table-v6";
+import "react-table-v6/react-table.css";
 
 const DatatablePage = (props) => {
   const data = {
     columns: [
       {
-        label: 'Data',
-        field: 'data',
-        sort: 'asc',
-        width: 150
+        Header: "Date",
+        accessor: "data",
+        minWidth: 100,
+        filterable: true,
       },
       {
-        label: 'Ora',
-        field: 'ora',
-        sort: 'asc',
-        width: 270
+        Header: "Time",
+        accessor: "ora",
+        minWidth: 80,
+        filterable: true,
       },
       {
-        label: 'Torneo',
-        field: 'campionato',
-        sort: 'asc',
-        width: 200
+        Header: "Tournament",
+        accessor: "campionato",
+        minWidth: 160,
+        filterable: true,
       },
       {
-        label: 'Evento',
-        field: 'evento',
-        sort: 'asc',
-        width: 100
+        Header: "Event",
+        accessor: "evento",
+        minWidth: 250,
+        filterable: true,
       },
       {
-        label: 'Mercato',
-        field: 'tipo',
-        sort: 'asc',
-        width: 150
+        Header: "Market",
+        accessor: "tipo",
+        minWidth: 100,
       },
       {
-        label: 'Book',
-        field: 'bookLogo',
-        sort: 'asc',
-        width: 100
+        Header: "Book",
+        accessor: "bookLogo",
+        minWidth: 120,
       },
       {
-        label: 'Tipo',
-        field: 'a',
-        sort: 'asc',
-        width: 100
+        Header: "Type",
+        accessor: "a",
+        minWidth: 70,
       },
       {
-        label: 'Punta',
-        field: 'quota',
-        sort: 'asc',
-        width: 100
+        Header: "Back",
+        accessor: "quota",
+        minWidth: 80,
       },
       {
-        label: 'Banca',
-        field: 'quota_banca',
-        sort: 'asc',
-        width: 100
+        Header: "Lay",
+        accessor: "quota_banca",
+        minWidth: 80,
       },
       {
-        label: 'Liquidità',
-        field: 'liquidità',
-        sort: 'asc',
-        width: 100
+        Header: "Liquidity",
+        accessor: "liquidità",
+        minWidth: 100,
       },
       {
-        label: 'Exchange',
-        field: 'exchangeLogo',
-        sort: 'asc',
-        width: 100
+        Header: "Exchange",
+        accessor: "exchangeLogo",
+        minWidth: 100,
       },
       {
-        label: 'Rating',
-        field: 'tableRating',
-        sort: 'asc',
-        width: 100
+        Header: "Rating",
+        accessor: "tableRating",
+        minWidth: 100,
       },
       {
-        label: 'Aggior.',
-        field: 'lastupdate',
-        sort: 'asc',
-        width: 100
+        Header: "Last Up.",
+        accessor: "lastupdate",
+        minWidth: 100,
       },
       {
-        label: '',
-        field: 'button',
-        sort: 'asc',
-        width: '20'
-      }
+        Header: "",
+        accessor: "button",
+        minWidth: 40,
+      },
     ],
-    rows: props.odds
   };
 
-  console.log('ROWS', props.odds)
-
-  return (
-    <MDBDataTable
-      striped
-      bordered
-      small
-      data={data}
-    />
-  );
-}
+  return <ReactTable 
+    className="oddsmatcher-table"
+    data={props.odds} 
+    columns={data.columns}
+    defaultPageSize={10}
+  />;
+};
 
 export default DatatablePage;

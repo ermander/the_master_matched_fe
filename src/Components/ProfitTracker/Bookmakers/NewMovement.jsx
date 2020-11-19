@@ -61,13 +61,13 @@ class NewMovement extends Component {
                     <Modal show={this.props.show} onHide={this.props.noShow}>
                         <Modal.Header closeButton>
                             <Modal.Title>
-                                Saldo Bookmaker --- {this.props.bookmakerInfo.balance}€
+                                Bookmaker Balance --- {this.props.bookmakerInfo.balance}€
                             </Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
                             <Form.Group controlId="exampleForm.ControlSelect1">
                                 <Form.Label>
-                                    <strong>Tipologia</strong>
+                                    <strong>Type</strong>
                                 </Form.Label>
                                 <Form.Control as="select" onChange={(e)=>this.setState({type: e.currentTarget.value})}>
                                     <option>Deposito</option>
@@ -77,7 +77,7 @@ class NewMovement extends Component {
                             </Form.Group>
                             <Form.Group controlId="exampleForm.ControlSelect1">
                                 <Form.Label>
-                                    <strong>Metodo Di Pagamento</strong>
+                                    <strong>Payment Method</strong>
                                 </Form.Label>
                                 <Form.Control as="select" onChange={e=>this.setState({sender: e.currentTarget.value})}>
                                     {
@@ -102,22 +102,23 @@ class NewMovement extends Component {
                                 </Form.Control>
                             </Form.Group>
                             <label>
-                                <strong>Movimento</strong>
+                                <strong>Movement</strong>
                             </label>
                             <InputGroup>
                                 <FormControl 
+                                    placeholder="€"
                                     type="text"
                                     onChange={ e => this.setState({movement: e.currentTarget.value})}
                                 />
                             </InputGroup>
                             <label>
-                                <strong>Descrizione</strong>
+                                <strong>Description</strong>
                             </label>
                             <InputGroup>
                                 <FormControl 
                                 as="textarea"
                                 aria-label="With textarea"
-                                placeholder="Facoltativo"
+                                placeholder="Optional"
                                 onChange={e => this.setState({descrizione: e.currentTarget.value })}/>
                             </InputGroup>
                         </Modal.Body>
@@ -125,13 +126,13 @@ class NewMovement extends Component {
                             <Button
                                 onClick={this.props.noShow}
                                 variant="secondary">
-                                Chiudi
+                                Close
                             </Button>
                             <Button
                                 variant="primary"
                                 onClick={this.saveMovement}
                                 >
-                                Salva
+                                Save
                             </Button>
                         </Modal.Footer>
                     </Modal>
@@ -141,13 +142,13 @@ class NewMovement extends Component {
                     <Modal show={this.props.show} onHide={this.props.noShow}>
                         <Modal.Header closeButton>
                             <Modal.Title>
-                                Nuovo Movimento
+                                New Movement
                             </Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
                             <Form.Group controlId="exampleForm.ControlSelect1">
                                 <Form.Label>
-                                    <strong>Tipologia</strong>
+                                    <strong>Type</strong>
                                 </Form.Label>
                                 <Form.Control as="select" onChange={(e)=>this.setState({type: e.currentTarget.value})}>
                                     <option>Deposito</option>
@@ -156,22 +157,23 @@ class NewMovement extends Component {
                                 </Form.Control>
                             </Form.Group>
                             <label>
-                                <strong>Movimento</strong>
+                                <strong>Movement</strong>
                             </label>
                             <InputGroup>
                                 <FormControl 
+                                    placeholder="€"
                                     type="text"
                                     onChange={ e => this.setState({movememnt: e.currentTarget.value})}
                                 />
                             </InputGroup>
                             <label>
-                                <strong>Descrizione</strong>
+                                <strong>Description</strong>
                             </label>
                             <InputGroup>
                                 <FormControl 
                                 as="textarea"
                                 aria-label="With textarea"
-                                placeholder="Facoltativo"
+                                placeholder="Optional"
                                 onChange={e => this.setState({descrizione: e.currentTarget.value })}/>
                             </InputGroup>
                         </Modal.Body>
@@ -179,13 +181,13 @@ class NewMovement extends Component {
                             <Button
                                 onClick={this.props.noShow}
                                 variant="secondary">
-                                Chiudi
+                                Close
                             </Button>
                             <Button
                                 variant="primary"
                                 onClick={this.saveMovement}
                                 >
-                                Salva
+                                Save
                             </Button>
                         </Modal.Footer>
                     </Modal>                    

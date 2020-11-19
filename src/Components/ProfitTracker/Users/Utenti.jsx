@@ -120,27 +120,27 @@ class Utenti extends Component {
                 </Col>
                 <Col xs={11}>
                     <Row>
-                        <Col xs={12}>
-                            <h2>LISTA UTENTI</h2>
+                        <Col xs={12} className="pl-0 pr-0">
+                            <div style={{backgroundColor: "#d08e46",textAlign: "center",fontSize: "50px",marginBottom: "3vh",color: "#efd9c0"}}>USERS LIST</div>
                             <Row>
-                                <Col xs={12} className="pl-0">
+                                <Col xs={12} className="pl-0 pr-0">
                                     <Button size="sm" variant="secondary" onClick={this.handleShow}>
-                                        Nuovo Utente
+                                        New User
                                     </Button>
 
                                     <Modal show={this.state.show} onHide={this.handleClose} className="new-user-modal">
                                         <Modal.Header closeButton>
-                                            <Modal.Title>Nuovo Utente</Modal.Title>
+                                            <Modal.Title>New User</Modal.Title>
                                         </Modal.Header>
                                         <Modal.Body>                                    
-                                            <label>Nome</label>
+                                            <label>Name</label>
                                             <InputGroup size="sm" className="mb-3">
                                                 <FormControl 
                                                     type="text" 
                                                     onChange={ (e) => { this.setState({ name: e.currentTarget.value })}}
                                                 />
                                             </InputGroup>
-                                            <label>Descrizione</label>
+                                            <label>Description</label>
                                             <InputGroup className="new-user-modal-text-area">
                                                 <FormControl 
                                                     as="textarea" 
@@ -151,10 +151,10 @@ class Utenti extends Component {
                                         </Modal.Body>
                                         <Modal.Footer>
                                             <Button variant="secondary" onClick={this.handleNewUser}>
-                                                Salva
+                                                Save
                                             </Button>
                                             <Button variant="primary" onClick={this.handleClose}>
-                                                Chiudi
+                                                Close
                                             </Button>
                                         </Modal.Footer>
                                     </Modal>
@@ -168,8 +168,8 @@ class Utenti extends Component {
                                 <thead className="table-data">
                                     <tr>
                                         <th>#</th>
-                                        <th>Nome</th>
-                                        <th>Descrizione</th>
+                                        <th>Name</th>
+                                        <th>Description</th>
                                         <th>Opzioni</th>
                                         <th>Opzioni</th>
                                         <th>Opzioni</th>
@@ -209,12 +209,12 @@ class Utenti extends Component {
                                                                     id: element._id
                                                                 })}
                                                             >
-                                                                Nuovo Metodo di Pagamento
+                                                                New Payment Method
                                                             </Button>
                                                         </td>
                                                         <td>
                                                             <Button variant="success" size="sm">
-                                                                Nuovo Conto
+                                                                New Bookmaker
                                                             </Button>
                                                         </td>
                                                         <td>
@@ -228,7 +228,7 @@ class Utenti extends Component {
                                                                         id: element._id
                                                                     })}
                                                             >
-                                                                Modifica
+                                                                Modify
                                                             </Button>
                                                         </td>
                                                         <td>

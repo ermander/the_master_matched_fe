@@ -113,18 +113,18 @@ class InCorso extends Component {
                         <Col>
                             <Row> 
                                 <Col xs={12}>
-                                    <div style={{display: "flex"}}>
-                                        <p className="inCorso-title">SCOMMESSE IN CORSO</p>
+                                    <div style={{backgroundColor: "#d08e46",textAlign: "center",fontSize: "50px",marginBottom: "3vh",color: "#efd9c0"}}>
+                                        IN PROGRESS BETS
                                     </div>
                                     <div>
                                         <Table striped bordered hover>
                                             <thead>
                                                 <tr>
                                                     <th>ID</th>
-                                                    <th>Creata il:</th>
-                                                    <th>Data evento</th>
-                                                    <th>Evento</th>
-                                                    <th>Conto</th>
+                                                    <th>Created at:</th>
+                                                    <th>Event Date</th>
+                                                    <th>Event</th>
+                                                    <th>Book</th>
                                                     <th>Notes</th>
                                                     <th>+</th>
                                                     <th>+</th>
@@ -141,10 +141,10 @@ class InCorso extends Component {
                                                             <td>
                                                                 <Spinner />
                                                             </td>
-                                                            <td>Creata il:</td>
-                                                            <td>Data evento</td>
-                                                            <td>Evento</td>
-                                                            <td>Conto</td>
+                                                            <td>Created at:</td>
+                                                            <td>Event Date</td>
+                                                            <td>Event</td>
+                                                            <td>Book</td>
                                                             <td>Notes</td>
                                                             <td>+</td>
                                                             <td>+</td>
@@ -157,16 +157,16 @@ class InCorso extends Component {
                                                         this.state.inProgress.map((element) => {
                                                             return(
                                                                 <tr key={element._id} style={{alignItems: "center", fontWeight: "bold"}}>
-                                                                    <td>Puntata #{element._id}</td>
+                                                                    <td>Bet #{element._id}</td>
                                                                     <td>{element.createdAt.split("T")[0]} {element.createdAt.split("T")[1].split(".")[0]}</td>
                                                                     <td>{element.data}</td>
                                                                     <td>{element.home} vs {element.away}</td>
-                                                                    <td>Conto</td>
+                                                                    <td>Book</td>
                                                                     <td>Notes</td>
                                                                     <td>
                                                                         <Button size="sm" variant="light">                                                                            
                                                                             <Link to={"/profit_tracker/bet_details/" + element._id} style={{color: "black" }}>
-                                                                                Dettagli
+                                                                                Details
                                                                             </Link>
                                                                         </Button>
                                                                     </td>

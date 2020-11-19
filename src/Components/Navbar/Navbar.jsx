@@ -23,24 +23,24 @@ render() {
       <button className="dropbtn ml-auto">
         <Link to="/oddsmatcher" style={{fontWeight: "400"}}>HOME</Link>
       </button>
-      <button className="dropbtn">GUIDE</button>
+      <button className="dropbtn">GUIDES</button>
       <div className="dropdown">
-        <button className="dropbtn">OFFERTE</button>
+        <button className="dropbtn">OFFERS</button>
         <div className="dropdown-content">
           <Link>
-            OFFERTE DI BENVENUTO
+            WELCOME BONUS
           </Link>
           <Link>
-            OFFERTE RICORRENTI
+            RECURRING BONUS
           </Link>
           <Link>
-              CANALE TELEGRAM
+            TELEGRAM CHANNEL
           </Link>
         </div>
       </div>
 
       <div className="dropdown">
-        <button className="dropbtn">STRUMENTI</button>
+        <button className="dropbtn">TOOLS</button>
         <div className="dropdown-content">
           <Link to="/oddsmatcher">
             ODDSMATCHER
@@ -58,27 +58,27 @@ render() {
       </div>
 
       <div className="dropdown">
-        <button className="dropbtn">CALCOLATORI</button>
+        <button className="dropbtn">CALCULATORS</button>
         <div className="dropdown-content">
-        <Link to="">
-            PUNTA - BANCA
+        <Link to="/punta-banca">
+            BACK - LAY
           </Link>
-          <Link to="">
-            PUNTA - PUNTA
+          <Link to="/punta-punta">
+            BACK - BACK
           </Link>
-          <Link to="">
+          <Link to="/multi-tool">
             DUTCH - TOOL
           </Link>
-          <Link>
+          <Link to="/casino">
             MULTI- TOOL
           </Link>
           <Link to="">
-            CONDIZIONATO
+            CONDITIONED
           </Link>
           <Link to="">
             COMBO - TOOL
           </Link>
-          <Link to="">
+          <Link to="/converter">
             CONVERTER
           </Link>
           <Link>
@@ -90,7 +90,7 @@ render() {
       <div className="dropdown">
         <button className="dropbtn">ACCOUNT</button>
         <div className="dropdown-content">
-          <Link>PROFILO</Link>
+          <Link>PROFILE</Link>
           <Link to="/profit_tracker/in-progress">PROFIT TRACKER</Link>
           <Link>LOG OUT</Link>
         </div>

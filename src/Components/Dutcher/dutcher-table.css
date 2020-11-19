@@ -1,0 +1,21 @@
+.table-data-image {
+    width: 90px!important;
+    height: 30px!important;
+    border-radius: 3px!important;
+    background-color: black!important;
+}
+
+.dutcher-table .rt-tbody .rt-td:nth-child(8) {
+    background-color: #7299c3;
+    color: white;
+    font-weight: bold;
+}
+  
+.dutcher-table .rt-tbody .rt-td:nth-child(9) {
+    background-color: #7299c3;
+    color: white;
+    font-weight: bold;
+}
+
+
+  

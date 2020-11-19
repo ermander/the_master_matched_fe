@@ -21,7 +21,7 @@ class MultiplaModal extends Component {
     return (
       <>
         <Button variant="light" onClick={this.handleShow}>
-          Modalità Multipla
+          Multipla Mode
         </Button>
   
         <Modal show={this.state.show} onHide={this.handleClose}>

@@ -1,56 +1,94 @@
-.row{
-    padding-left: 0.5rem!important;
-    padding-right: 0.5rem;
+.row {
+  padding-left: 0.5rem !important;
+  padding-right: 0.5rem;
 }
 
-.sorting_desc{
-    background-color: #37474f;
-    color: white;
-    border: 1px solid #37474f!important;
+.sorting_desc {
+  background-color: #37474f;
+  color: white;
+  border: 1px solid #37474f !important;
 }
 
-td{
-    font-size: 16px!important;
-    text-align: center; 
-    vertical-align: middle!important;
+td {
+  font-size: 16px !important;
+  text-align: center;
+  vertical-align: middle !important;
 }
 
-th{
-    font-weight: 600!important;
-    font-style: normal;
+th {
+  font-weight: 600 !important;
+  font-style: normal;
 }
 
-i{
-    font-size: 25px;
-    color: rgb(250, 179, 25);
+i {
+  font-size: 25px;
+  color: rgb(250, 179, 25);
 }
 
-i:hover{    
-    font-size: 25px;
-    color: rgb(255, 209, 109);
+i:hover {
+  font-size: 25px;
+  color: rgb(255, 209, 109);
 }
 
-.table-data-image{
-    width: 100px;
-    height: 40px;
-    border-radius: 20px;
-    background-color: black;
+.table-data-image {
+  width: 100px;
+  height: 40px;
+  border-radius: 5px;
+  background-color: black;
 }
 
-.dataTables_wrapper.dt-bootstrap4 .row{
-    padding: 0;
-    width: 100%;
-    margin: 0;
+.dataTables_wrapper.dt-bootstrap4 .row {
+  padding: 0;
+  width: 100%;
+  margin: 0;
 }
 
-table thead:last-child {
-    display: none
+.ReactTable {
+  margin-top: 2rem;
 }
 
-td:nth-child(8){
-    background-color: #a7d7fd;
+.rt-tbody {
+  text-align: center;
 }
 
-td:nth-child(9){
-    background-color: #f8cad0;
+.rt-td {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-overflow: initial;
+  white-space: initial;
+}
+
+.oddsmatcher-table  .rt-tbody .rt-td:nth-child(8) {
+  background-color: #a7d7fd;
+}
+
+.oddsmatcher-table  .rt-tbody .rt-td:nth-child(9) {
+  background-color: #f8cad0;
+}
+
+.rt-thead.-header {
+  background-color: #37474f;
+  color: white;
+}
+
+.-sort-asc {
+  box-shadow: none !important;
+  float: left;
+}
+.-sort-asc:before {
+  content: "▲";
+  float: right;
+}
+.-sort-desc {
+  box-shadow: none !important;
+  float: left;
+}
+.-sort-desc:before {
+  content: "▼";
+  float: right;
+}
+
+.rt-tr.-odd {
+  background-color: #f2f2f2;
 }

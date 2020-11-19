@@ -47,13 +47,13 @@ class NewPaymentMethod extends Component {
             <Modal show={this.props.show} onHide={this.props.noShow}>
                 <Modal.Header closeButton>
                     <Modal.Title>
-                        Nuovo Metodo Di Pagamento
+                        New Payment Method
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form.Group controlId="exampleForm.ControlSelect1">
                         <Form.Label>
-                            <strong>Intestatario</strong>
+                            <strong>Account Holder</strong>
                         </Form.Label>
                         <Form.Control as="select" onChange={ (e) => this.setState({ accountHolder: e.currentTarget.value.split(")")[0] })}>
                             {
@@ -77,7 +77,7 @@ class NewPaymentMethod extends Component {
                         </Form.Control>
                     </Form.Group> 
                     <label>
-                        <strong>Nome</strong>
+                        <strong>Name</strong>
                     </label>              
                     <InputGroup>
                         <FormControl
@@ -87,7 +87,7 @@ class NewPaymentMethod extends Component {
                         />
                     </InputGroup>
                     <label>
-                        <strong>Descrizione</strong>
+                        <strong>Description</strong>
                     </label>
                     <InputGroup>
                         <FormControl 
@@ -97,7 +97,7 @@ class NewPaymentMethod extends Component {
                         />
                     </InputGroup>
                     <label>
-                        <strong>Bilancio Iniziale</strong>
+                        <strong>Starting Balance</strong>
                     </label>              
                     <InputGroup>
                         <FormControl
@@ -111,12 +111,12 @@ class NewPaymentMethod extends Component {
                     <Button 
                         variant="secondary"
                         onClick={this.props.noShow}>
-                            Chiudi
+                            Close
                     </Button>
                     <Button 
                         variant="primary"
                         onClick={this.saveNewPaymentMethod}>
-                            Salva
+                            Save
                     </Button>
                 </Modal.Footer>
             </Modal>

@@ -68,13 +68,13 @@ class NewBookmaker extends Component {
                 <Modal show={this.props.show} onHide={this.props.noShow}>
                     <Modal.Header closeButton>
                         <Modal.Title>
-                            Nuovo Bookmaker
+                            New Bookmaker
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <Form.Group controlId="exampleForm.ControlSelect1">
                             <Form.Label>
-                                <strong>Intestatario</strong>
+                                <strong>Account Holder</strong>
                             </Form.Label>
                             <Form.Control as="select" onChange={ (e) => this.setState({ bookmakerHolder: e.currentTarget.value.split(")")[0]-1 })}>
                                 {
@@ -124,18 +124,19 @@ class NewBookmaker extends Component {
                             </Form.Control>
                         </Form.Group>
                         <label>
-                            <strong>Descrizione</strong>
+                            <strong>Description</strong>
                         </label>
                         <InputGroup>
                             <FormControl 
                                 as="textarea"
                                 aria-label="With textarea"
+                                placeholder="Optional"
                                 onChange={ (e) => this.setState({ description: e.currentTarget.value })}
                             />
                         </InputGroup>
                         <Form.Group controlId="exampleForm.ControlSelect1">
                             <Form.Label>
-                                <strong>Abilitato</strong>
+                                <strong>Available</strong>
                             </Form.Label>
                             <Form.Control as="select" onChange={ (e) => {this.setState({ isActive: e.currentTarget.value })}}>
                                 <option>Abilitato</option>
@@ -148,13 +149,13 @@ class NewBookmaker extends Component {
                             variant="secondary"
                             onClick={this.props.noShow}
                             >
-                                Chiudi
+                                Close
                         </Button>
                         <Button
                             variant="primary"
                             onClick={this.saveNewBookmaker}
                             >
-                                Salva
+                                Save
                         </Button>
                     </Modal.Footer>
                 </Modal>

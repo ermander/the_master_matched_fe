@@ -48,7 +48,7 @@ class ModifyUser extends Component {
                 <Modal.Title>Modifica Utente</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                <label>Nome</label>
+                <label>Name</label>
                     <InputGroup size="sm" className="mb-3">
                     <FormControl 
                         type="text" 
@@ -56,7 +56,7 @@ class ModifyUser extends Component {
                         onChange={ (e) => { this.setState({ name: e.currentTarget.value })}}
                     />
                 </InputGroup>
-                <label>Descrizione</label>
+                <label>Description</label>
                 <InputGroup className="new-user-modal-text-area">
                     <FormControl 
                         as="textarea" 
@@ -71,7 +71,7 @@ class ModifyUser extends Component {
                     Close
                 </Button>
                 <Button variant="primary" onClick={this.saveChanges}>
-                    Salva
+                    Save
                 </Button>
                 </Modal.Footer>
             </Modal>
