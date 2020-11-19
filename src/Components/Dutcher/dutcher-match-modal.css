@@ -1,0 +1,9 @@
+.modal-dialog{
+    max-width: 70vw!important;
+}
+
+.mt-3 .mx-1 .row{
+    margin-top: 0!important;
+    margin-left: 0;
+    margin-right: 0;
+}

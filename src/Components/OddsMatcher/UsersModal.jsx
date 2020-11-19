@@ -34,10 +34,10 @@ class UsersModal extends Component {
                 torneo: this.props.torneo,
                 mercato: this.props.mercato,
                 tipoPuntata: this.props.tipoPuntata,
-                book: this.props.book.charAt(0).toUpperCase() + this.props.book.slice(1),
+                book: this.props.book.toLowerCase(),
                 puntata: this.props.puntata,
                 quotaPunta: this.props.quotaPunta,
-                exchange: this.props.exchange.charAt(0).toUpperCase() + this.props.exchange.slice(1),
+                exchange: this.props.exchange.toLowerCase(),
                 bancata: this.props.bancata,
                 quotaBanca: this.props.quotaBanca,
                 // Inserire puntata bonus

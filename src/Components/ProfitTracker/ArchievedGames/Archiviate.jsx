@@ -83,27 +83,33 @@ class Archiviate extends Component {
         return (
             <>
             <NavBar />
-            <Row className="main-row">
-                <Col xs="1">
+            <Row className="main-row p-0">
+                <Col xs={1} className="p-0">
                     <SideBar />
                 </Col>
-                <Col xs="11">
-                    <Row>
-                        <Col>
-                            <Row> 
-                                <Col xs={12}>
-                                    <div style={{display: "flex"}}>
-                                        <p className="inCorso-title">SCOMMESSE ARCHIVIATE</p>
+                <Col xs={11} className="p-0">
+                    <Row >
+                        <Col xs={12} className="p-0 ml-0">
+                            <Row className="m-0"> 
+                                <Col className="p-0">
+                                    <div style={{
+                                            backgroundColor: "#d08e46",
+                                            textAlign: "center",
+                                            fontSize: "50px",
+                                            marginBottom: "3vh",
+                                            color: "#efd9c0",
+                                        }}>
+                                            ARCHIVED BETS
                                     </div>
                                     <div>
                                         <Table striped bordered hover>
                                             <thead>
                                                 <tr>
                                                     <th>ID</th>
-                                                    <th>Creata il:</th>
-                                                    <th>Data evento</th>
-                                                    <th>Evento</th>
-                                                    <th>Conto</th>
+                                                    <th>Created at:</th>
+                                                    <th>Event Date</th>
+                                                    <th>Event</th>
+                                                    <th>Book</th>
                                                     <th>Notes</th>
                                                     <th></th>
                                                     <th></th>
@@ -120,10 +126,10 @@ class Archiviate extends Component {
                                                             <td>
                                                                 <Spinner />
                                                             </td>
-                                                            <td>Creata il:</td>
-                                                            <td>Data evento</td>
-                                                            <td>Evento</td>
-                                                            <td>Conto</td>
+                                                            <td>Created at:</td>
+                                                            <td>Event Date</td>
+                                                            <td>Event</td>
+                                                            <td>Book</td>
                                                             <td>Notes</td>
                                                             <td></td>
                                                             <td></td>
@@ -136,22 +142,22 @@ class Archiviate extends Component {
                                                             return(
                                                                 <tr key={element._id} style={{alignItems: "center", fontWeight: "bold"}}>
                                                                     {console.log(element)}
-                                                                    <td>Puntata #{element._id}</td>
+                                                                    <td>Bet #{element._id}</td>
                                                                     <td>{element.createdAt.split("T")[0]} {element.createdAt.split("T")[1].split(".")[0]}</td>
                                                                     <td>{element.data}</td>
                                                                     <td>{element.home} vs {element.away}</td>
-                                                                    <td>Conto</td>
+                                                                    <td>{element.book}</td>
                                                                     <td>Notes</td>
                                                                     <td>
-                                                                        <Button size="sm">                                                                            
+                                                                        <Button size="sm" variant="light">                                                                            
                                                                             <Link to={"/profit_tracker/archived-bet-details/" + element._id} style={{color: "white" }}>
-                                                                                Dettagli
+                                                                                Details
                                                                             </Link>
                                                                         </Button>
                                                                     </td>
                                                                     <td>
                                                                         <Button size="sm" variant="success" onClick={ () => this.restoreMatch(element._id)}>                                                                            
-                                                                            Ripristina
+                                                                            Restore
                                                                         </Button>
                                                                     </td>
                                                                     <td>

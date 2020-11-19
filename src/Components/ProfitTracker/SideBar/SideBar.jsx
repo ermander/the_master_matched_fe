@@ -26,83 +26,84 @@ class SideBar extends Component {
     render() {
         return (
             <>
-            <Row>
+            <Row className="no-gutters">
                 <Col>
                     <Link to="/profit_tracker/in-progress">
                         <FontAwesomeIcon icon={faSpinner} className="fa-iconss"/>                            
-                        <p className="fa-iconss-description">In Corso</p>
+                        <p className="fa-iconss-description"><strong>In Progress</strong></p>
                     </Link>                            
                 </Col>
             </Row>
-            <Row>
+            <Row className="no-gutters">
                 <Col>
                     <Link to="/profit_tracker/archived">
                         <FontAwesomeIcon icon={faArchive} className="fa-iconss"/>
-                        <p className="fa-iconss-description">Archivio</p>
+                        <p className="fa-iconss-description"><strong>Archived</strong></p>
                     </Link>                            
                 </Col>
             </Row>
-             <Row>
+            <Row className="no-gutters">
                 <Col>
                     <Link to="/profit_tracker/casino">
                         <FontAwesomeIcon icon={faDiceTwo} className="fa-iconss"/>
-                        <p className="fa-iconss-description">Casino</p>
+                        <p className="fa-iconss-description"><strong>Casino</strong></p>
                     </Link>                            
                 </Col>
             </Row>
-            <Row>
+            <Row className="no-gutters">
                 <Col>
                     <Link to="/profit_tracker/memo">
                         <FontAwesomeIcon icon={faCalendarAlt} className="fa-iconss"/>
-                        <p className="fa-iconss-description">Promemoria</p>
+                        <p className="fa-iconss-description"><strong>Memo</strong></p>
                     </Link>
                 </Col>
             </Row>
-            <Row>
+            <Row className="no-gutters">
                 <Col>
                     <Link to="/profit_tracker/users">
                         <FontAwesomeIcon icon={faUserFriends} className="fa-iconss"/>
-                        <p className="fa-iconss-description">Utenti</p>
+                        <p className="fa-iconss-description"><strong>Users</strong></p>
                     </Link>
                 </Col>
             </Row>
-            <Row>
+            <Row className="no-gutters">
                 <Col>
                     <Link to="/profit_tracker/payments">
                         <FontAwesomeIcon icon={faCreditCard} className="fa-iconss"/>
-                        <p className="fa-iconss-description">Pagamenti</p>
+                        <p className="fa-iconss-description"><strong>Payments</strong></p>
                     </Link>
                 </Col>
             </Row>
-            <Row>
+            <Row className="no-gutters">
                 <Col>
                     <Link to="/profit_tracker/bookmakers">
                         <FontAwesomeIcon icon={faUserCircle} className="fa-iconss"/>
-                        <p className="fa-iconss-description">Books</p>
+                        <p className="fa-iconss-description"><strong>Book</strong></p>
                     </Link>
                 </Col>
             </Row>
-            <Row>
+            <Row className="no-gutters">
                 <Col>
                     <Link to="/profit_tracker/transactions">
                         <FontAwesomeIcon icon={faList} className="fa-iconss"/>
-                        <p className="fa-iconss-description">Transazioni</p>
+                        <p className="fa-iconss-description"><strong>Transactions</strong></p>
                     </Link>
                 </Col>
             </Row>
-            <Row>
+            <Row className="no-gutters">
                 <Col>
                     <Link to="/profit_tracker/balance">
                         <FontAwesomeIcon icon={faBalanceScale} className="fa-iconss"/>
-                        <p className="fa-iconss-description">Bilancio</p>
+                        <p className="fa-iconss-description"><strong>Balance</strong></p>
                     </Link>
                 </Col>
             </Row>
-            <Row>
+            <Row className="no-gutters">
                 <Col>
-                <Link to="/profit_tracker/earnings"></Link>
-                    <FontAwesomeIcon icon={faMoneyBill} className="fa-iconss"/>
-                    <p className="fa-iconss-description">Profit/Loss</p>
+                    <Link to="/profit_tracker/earnings">
+                        <FontAwesomeIcon icon={faMoneyBill} className="fa-iconss"/>
+                        <p className="fa-iconss-description"><strong>Profit/Loss</strong></p>
+                    </Link>                    
                 </Col>
             </Row>
             </>

@@ -33,7 +33,7 @@ i:hover {
 .table-data-image {
   width: 100px;
   height: 40px;
-  border-radius: 20px;
+  border-radius: 5px;
   background-color: black;
 }
 
@@ -59,11 +59,11 @@ i:hover {
   white-space: initial;
 }
 
-.rt-tbody .rt-td:nth-child(8) {
+.oddsmatcher-table  .rt-tbody .rt-td:nth-child(8) {
   background-color: #a7d7fd;
 }
 
-.rt-tbody .rt-td:nth-child(9) {
+.oddsmatcher-table  .rt-tbody .rt-td:nth-child(9) {
   background-color: #f8cad0;
 }
 

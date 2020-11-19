@@ -35,22 +35,22 @@ class ModificaGiocata extends Component {
             <Modal show={this.props.show} onHide={this.props.noShow}>
                 <Modal.Header closeButton>
                     <Modal.Title>
-                        Modifica Giocata 
+                        Modify Bet
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <label>
-                        <strong>Conto</strong>
+                        <strong>Book</strong>
                     </label>
                     <Form.Control type="text" readOnly placeholder={this.props.betInfo.bookmakerName}/>
-                    <p style={{fontSize: "10px"}}>Il conto non può essere modificato una volta inserita la giocata</p>
+                    <p style={{fontSize: "10px"}}>The book cannot be changed once the bet has been entered</p>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button
                         variant="secondary"
-                        onClick={this.props.noShow}>Chiudi</Button>
+                        onClick={this.props.noShow}>Close</Button>
                     <Button
-                        variant="primary">Salva</Button>
+                        variant="primary">Save</Button>
                 </Modal.Footer>
             </Modal>
             </>

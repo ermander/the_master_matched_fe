@@ -91,15 +91,15 @@ class OddsMatcherMatchModal extends Component {
                         <Col xs={4} style={{backgroundColor: "#37474f"}}>
                             <Form.Group style={{display: "flex"}} className="mt-3">
                                 <InputGroup.Prepend style={{display: "inline-block"}}>
-                                    <InputGroup.Text>Tipologia</InputGroup.Text>
+                                    <InputGroup.Text>Type</InputGroup.Text>
                                 </InputGroup.Prepend>  
                                 <Form.Control 
                                     as="select" 
                                     style={{display: "inline-block"}}
                                     onChange={ (e) => { this.setState({ selettoreRimborso: e.currentTarget.value })}}
                                 >
-                                    <option>NORMALE</option>
-                                    <option>RIMBORSO</option>
+                                    <option>NORMAL</option>
+                                    <option>REFUND</option>
                                     <option>BONUS</option>
                                 </Form.Control>
                             </Form.Group>
@@ -116,31 +116,31 @@ class OddsMatcherMatchModal extends Component {
                             {/* INFORMAZIONI SQUADRE, DATA, ORA, RATING ECC... */}
                             <span className="match-infoes">
                                 <FontAwesomeIcon icon={faCalendarAlt}/>
-                                <p className="mb-0 ml-2">Data: <strong>{this.props.odd.data}</strong></p>
+                                <p className="mb-0 ml-2">Date: <strong>{this.props.odd.data}</strong></p>
                             </span >
                             <span className="match-infoes">
                                 <FontAwesomeIcon icon={faClock}/>
-                                <p className="mb-0 ml-2">Ora: <strong>{this.props.odd.ora}</strong></p>
+                                <p className="mb-0 ml-2">Time: <strong>{this.props.odd.ora}</strong></p>
                             </span>
                             <span className="match-infoes">
                                 <FontAwesomeIcon icon={faFlag}/>
-                                <p className="mb-0 ml-2">Paese: <strong>{this.props.odd.nazione}</strong></p>
+                                <p className="mb-0 ml-2">Contry: <strong>{this.props.odd.nazione}</strong></p>
                             </span>
                             <span className="match-infoes">
                                 <FontAwesomeIcon icon={faInfoCircle}/>
-                                <p className="mb-0 ml-2">Torneo: <strong>{this.props.odd.campionato}</strong></p>
+                                <p className="mb-0 ml-2">Tournament: <strong>{this.props.odd.campionato}</strong></p>
                             </span>
                             <span className="match-infoes">
                                 <FontAwesomeIcon icon={faFutbol}/>
-                                <p className="mb-0 ml-2">Casa: <strong>{this.props.odd.home}</strong></p>
+                                <p className="mb-0 ml-2">Home: <strong>{this.props.odd.home}</strong></p>
                             </span>
                             <span className="match-infoes">
                                 <FontAwesomeIcon icon={faFutbol}/>
-                                <p className="mb-0 ml-2">Ospite: <strong>{this.props.odd.away}</strong></p>
+                                <p className="mb-0 ml-2">Away: <strong>{this.props.odd.away}</strong></p>
                             </span>
                             <span className="match-infoes">
                                 <FontAwesomeIcon icon={faMoneyCheck}/>
-                                <p className="mb-0 ml-2">Mercato: <strong>{this.props.odd.tipo}</strong></p>
+                                <p className="mb-0 ml-2">Market: <strong>{this.props.odd.tipo}</strong></p>
                             </span>
                             <span className="match-infoes">
                                 <FontAwesomeIcon icon={faPercent}/>
@@ -152,14 +152,14 @@ class OddsMatcherMatchModal extends Component {
                             <Row>
                                 <Col xs={6} style={{display: "flex"}}>
                                 <Card className="text-center" style={{minHeight: "300px", maxWidth: "350px", minWidth: "230px", margin: "auto"}}>
-                                    <Card.Header style={{backgroundColor: "#a7d7fd"}}>PUNTA</Card.Header>
+                                    <Card.Header style={{backgroundColor: "#a7d7fd"}}>Back</Card.Header>
                                         <Card.Body>
                                             <Card.Title style={{fontSize: "17px"}}>{this.props.odd.home}</Card.Title>
                                                 <Card.Text  className="mt-3" style={{border: "2px grey solid", borderRadius: "10px"}}>
                                                     @{this.props.odd.quota}
                                                 </Card.Text>
                                                 <img 
-                                                    style={{width: "150px", height: "80px"}}
+                                                    style={{width: "150px", height: "80px", objectFit: "contain", backgroundColor: "black"}}
                                                     src={bookLogos[this.props.odd.book]} 
                                                     alt={bookLogos[this.props.odd.book]} 
                                                 />
@@ -168,14 +168,14 @@ class OddsMatcherMatchModal extends Component {
                                 </Col>
                                 <Col xs={6} style={{display: "flex"}}>
                                 <Card className="text-center" style={{minHeight: "300px", maxWidth: "350px", minWidth: "230px", margin: "auto"}}>
-                                    <Card.Header style={{backgroundColor: "#f8cad0"}}>BANCA</Card.Header>
+                                    <Card.Header style={{backgroundColor: "#f8cad0"}}>Lay</Card.Header>
                                         <Card.Body>
                                         <Card.Title style={{fontSize: "17px"}}>{this.props.odd.away}</Card.Title>
                                                 <Card.Text className="mt-3" style={{border: "2px grey solid", borderRadius: "10px"}}>
                                                     @{this.props.odd.quota_banca}
                                                 </Card.Text>
                                                 <img 
-                                                    style={{width: "150px", height: "80px"}}
+                                                    style={{width: "150px", height: "80px", objectFit: "contain"}}
                                                     src={bookLogos[this.props.odd.book2]}
                                                     alt={bookLogos[this.props.odd.book2]}
                                                 />
@@ -189,7 +189,7 @@ class OddsMatcherMatchModal extends Component {
                                         className="mt-3" style={{minWidth: "70%"}}
                                         onClick={this.showUserModal}
                                         >
-                                        Invia al Profit Tracker
+                                        Send to the Profit Tracker
                                     </Button>
                                 </Col>
                             </Row>
@@ -201,7 +201,7 @@ class OddsMatcherMatchModal extends Component {
                                 <span>
                                     <InputGroup>
                                         <InputGroup.Prepend>
-                                            <InputGroup.Text style={{minWidth: "130px"}}>Puntata</InputGroup.Text>
+                                            <InputGroup.Text style={{minWidth: "130px"}}>Stake</InputGroup.Text>
                                         </InputGroup.Prepend>
                                         <FormControl 
                                             type="text"
@@ -216,7 +216,7 @@ class OddsMatcherMatchModal extends Component {
                                 <span>
                                     <InputGroup>
                                         <InputGroup.Prepend>
-                                            <InputGroup.Text style={{minWidth: "130px"}}>Quota Punta</InputGroup.Text>
+                                            <InputGroup.Text style={{minWidth: "130px"}}>Back Odd</InputGroup.Text>
                                         </InputGroup.Prepend>
                                         <FormControl 
                                                 type="text"
@@ -232,7 +232,7 @@ class OddsMatcherMatchModal extends Component {
                                 <span>
                                     <InputGroup>
                                         <InputGroup.Prepend>
-                                            <InputGroup.Text style={{minWidth: "130px"}}>Quota Banca</InputGroup.Text>
+                                            <InputGroup.Text style={{minWidth: "130px"}}>Lay Odd</InputGroup.Text>
                                         </InputGroup.Prepend>
                                         <FormControl 
                                                 type="text"
@@ -247,7 +247,7 @@ class OddsMatcherMatchModal extends Component {
                                 <span>
                                     <InputGroup>
                                         <InputGroup.Prepend>
-                                            <InputGroup.Text style={{minWidth: "130px"}}>Commissione</InputGroup.Text>
+                                            <InputGroup.Text style={{minWidth: "130px"}}>Commission</InputGroup.Text>
                                         </InputGroup.Prepend>
                                         <FormControl 
                                                 type="text"
@@ -263,12 +263,12 @@ class OddsMatcherMatchModal extends Component {
                                     <Form.Group controlId="formBasicRange" style={{textAlign: "center"}}>
                                         <Form.Label>
                                             <strong>
-                                                Sbilanciamento Bancata
+                                                Imbalance Lay
                                             </strong>
                                         </Form.Label>
                                         <Form.Control type="range" />
                                         <Form.Label>
-                                            <strong className="py-5 my-2" style={{color: "green", backgroundColor: "transparent"}}>#Bancata Standard#</strong>
+                                            <strong className="py-5 my-2" style={{color: "green", backgroundColor: "transparent"}}>#Standard Lay#</strong>
                                         </Form.Label>                                       
                                     </Form.Group>
                                 </Form>
@@ -280,7 +280,7 @@ class OddsMatcherMatchModal extends Component {
                                 <span>
                                         <InputGroup>
                                             <InputGroup.Prepend>
-                                                <InputGroup.Text style={{minWidth: "130px"}}>Puntata</InputGroup.Text>
+                                                <InputGroup.Text style={{minWidth: "130px"}}>Stake</InputGroup.Text>
                                             </InputGroup.Prepend>
                                             <FormControl 
                                                 type="text"
@@ -294,7 +294,7 @@ class OddsMatcherMatchModal extends Component {
                                     <span>
                                         <InputGroup>
                                             <InputGroup.Prepend>
-                                                <InputGroup.Text style={{minWidth: "130px"}}>Rimborso</InputGroup.Text>
+                                                <InputGroup.Text style={{minWidth: "130px"}}>Refund</InputGroup.Text>
                                             </InputGroup.Prepend>
                                             <FormControl 
                                                 type="text"
@@ -308,7 +308,7 @@ class OddsMatcherMatchModal extends Component {
                                     <span>
                                         <InputGroup>
                                             <InputGroup.Prepend>
-                                                <InputGroup.Text style={{minWidth: "130px"}}>Quota Punta</InputGroup.Text>
+                                                <InputGroup.Text style={{minWidth: "130px"}}>Back Odd</InputGroup.Text>
                                             </InputGroup.Prepend>
                                             <FormControl 
                                                     type="text"
@@ -323,7 +323,7 @@ class OddsMatcherMatchModal extends Component {
                                     <span>
                                         <InputGroup>
                                             <InputGroup.Prepend>
-                                                <InputGroup.Text style={{minWidth: "130px"}}>Quota Banca</InputGroup.Text>
+                                                <InputGroup.Text style={{minWidth: "130px"}}>Lay Odd</InputGroup.Text>
                                             </InputGroup.Prepend>
                                             <FormControl 
                                                     type="text"
@@ -338,7 +338,7 @@ class OddsMatcherMatchModal extends Component {
                                     <span>
                                         <InputGroup>
                                             <InputGroup.Prepend>
-                                                <InputGroup.Text style={{minWidth: "130px"}}>Commissione</InputGroup.Text>
+                                                <InputGroup.Text style={{minWidth: "130px"}}>Commission</InputGroup.Text>
                                             </InputGroup.Prepend>
                                             <FormControl 
                                                     type="text"
@@ -354,12 +354,12 @@ class OddsMatcherMatchModal extends Component {
                                         <Form.Group controlId="formBasicRange" style={{textAlign: "center"}}>
                                             <Form.Label>
                                                 <strong>
-                                                    Sbilanciamento Bancata
+                                                    Imbalance Lay
                                                 </strong>
                                             </Form.Label>
                                             <Form.Control type="range" />
                                             <Form.Label>
-                                                <strong className="py-5 my-2" style={{color: "green"}}>#Bancata Standard#</strong>
+                                                <strong className="py-5 my-2" style={{color: "green"}}>#Standard Lay#</strong>
                                             </Form.Label>                                       
                                         </Form.Group>
                                     </Form>
@@ -371,7 +371,7 @@ class OddsMatcherMatchModal extends Component {
                         <Col xs={7} style={{backgroundColor: "#edf1f2"}} className="mb-2">
                             <div className="py-2" style={{backgroundColor: "#37474f", textAlign: "center", color: "white"}}>
                                 <strong>
-                                    TABELLA DEI PROFITTI
+                                    PROFIT TABLE
                                 </strong>
                             </div>
                             <div style={{backgroundColor: "#edf1f2"}}>
@@ -380,10 +380,10 @@ class OddsMatcherMatchModal extends Component {
                                 <Col xs={2}><strong>{this.props.odd.book}</strong></Col>
                                 <Col xs={2}><strong>{this.props.odd.book2}</strong></Col>
                                 <Col xs={1}></Col>
-                                <Col xs={2}><strong>Totale</strong></Col>
+                                <Col xs={2}><strong>Total</strong></Col>
                             </Row>
                             <Row className="py-3 mx-1" style={{backgroundColor: "#a7d7fd"}}>
-                                <Col xs={5}>Se vinci su <strong>{this.props.odd.book}</strong></Col>
+                                <Col xs={5}>If you win on <strong>{this.props.odd.book}</strong></Col>
                                 <Col xs={2}>{
                                     this.state.puntata !== ""
                                     ?
@@ -412,7 +412,6 @@ class OddsMatcherMatchModal extends Component {
                                         "+" + 
                                         (((parseFloat(this.props.odd.quota) * parseFloat(this.state.puntata)) - parseFloat(this.state.risk)) - this.state.puntata).toFixed(2)
                                         :
-                                        "-" + 
                                         (((parseFloat(this.props.odd.quota) * parseFloat(this.state.puntata)) - parseFloat(this.state.risk)) - this.state.puntata).toFixed(2)
 
                                     )
@@ -420,7 +419,7 @@ class OddsMatcherMatchModal extends Component {
                                 }</Col>
                             </Row>
                             <Row className="py-3 mx-1" style={{backgroundColor: "#f8cad0"}}>
-                                <Col xs={5}>Se vinci su <strong>{this.props.odd.book2}</strong></Col>
+                                <Col xs={5}>If you win on <strong>{this.props.odd.book2}</strong></Col>
                                 <Col xs={2}>{
                                         this.state.puntata === ""
                                         ?
@@ -447,9 +446,10 @@ class OddsMatcherMatchModal extends Component {
                                     (
                                         (this.state.bancata - (this.state.bancata - (this.state.bancata * 0.95)) - this.state.puntata).toFixed(2) > 0
                                         ?
-                                        "+" + (this.state.bancata - (this.state.bancata - (this.state.bancata * 0.95)) - this.state.puntata).toFixed(2)
+                                        "+" + 
+                                        (this.state.bancata - (this.state.bancata - (this.state.bancata * 0.95)) - this.state.puntata).toFixed(2)
                                         : 
-                                        "-" + (this.state.bancata - (this.state.bancata - (this.state.bancata * 0.95)) - this.state.puntata).toFixed(2)
+                                        (this.state.bancata - (this.state.bancata - (this.state.bancata * 0.95)) - this.state.puntata).toFixed(2)
                                     )
                                     }
                                 </Col>
@@ -459,16 +459,35 @@ class OddsMatcherMatchModal extends Component {
                         <Col xs={5}>
                             <div className="py-2" style={{backgroundColor: "#37474f", textAlign: "center", color: "white", borderLeft: "10px solid white"}}>
                                 <strong>
-                                    RIEPILOGO
+                                    SUMMARY
                                 </strong>
                             </div>
                                 <div style={{backgroundColor: "#edf1f2", borderLeft: "10px solid white"}} className="py-2 mb-2">
-                                    <p className="mt-3 pl-5">Punta {this.state.puntata}€ a @{this.props.odd.quota} su <strong>{this.props.odd.book}</strong></p>
-                                    <p className="mt-3 pl-5">Banca {this.state.bancata}€ a @{this.props.odd.quota_banca} su <strong>{this.props.odd.book2}</strong></p>
+                                    {
+                                        this.state.puntata
+                                        ?
+                                        <>
+                                            <p className="mt-3 pl-5">Back <strong>{this.state.puntata}€</strong> at <strong>@{this.props.odd.quota}</strong> on <strong>{this.props.odd.book}</strong></p>
+                                            <p className="mt-3 pl-5">Lay <strong>{this.state.bancata}€</strong> at <strong>@{this.props.odd.quota_banca}</strong> on <strong>{this.props.odd.book2}</strong></p>
+                                        </>
+                                        :
+                                        <>
+                                            <p className="mt-3 pl-5">Back <strong>0€</strong> at <strong>@{this.props.odd.quota}</strong> on <strong>{this.props.odd.book}</strong></p>
+                                            <p className="mt-3 pl-5">Lay <strong>0€</strong> at <strong>@{this.props.odd.quota_banca}</strong> on <strong>{this.props.odd.book2}</strong></p>
+                                        </>
+                                    }
                                     <div style={{textAlign: "center"}}>
-                                    <p>
-                                        <strong>Responsabilità di {this.state.risk}€</strong>
-                                    </p>
+                                        {
+                                            this.state.risk
+                                            ?
+                                            <p>
+                                                <strong>Lay of {this.state.risk}€</strong>
+                                            </p>
+                                            :
+                                            <p>
+                                                <strong>Lay of 0.00€</strong>
+                                            </p>
+                                        }                                    
                                     {/*<h4>Il guadagno minimo sarà: ###</h4>*/}
                                     </div>
                                 </div>

@@ -43,16 +43,16 @@ class modifyPaymentMethod extends Component {
             <Modal show={this.props.show} onHide={this.props.noShow}>
                 <Modal.Header closeButton>
                     <Modal.Title>
-                        Modifica Metodo Di Pagamento
+                        Modify Payment Method
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <label>
-                        <strong>Intestatario</strong>
+                        <strong>Account Holder</strong>
                     </label>
                     <Form.Control type="text" placeholder={this.props.accountHolder} readOnly />
                     <label>
-                        <strong>Nome</strong>
+                        <strong>Name</strong>
                     </label>
                     <InputGroup>
                         <FormControl 
@@ -62,7 +62,7 @@ class modifyPaymentMethod extends Component {
                         />
                     </InputGroup>
                     <label>
-                        <strong>Descrizione</strong>
+                        <strong>Description</strong>
                     </label>
                     <InputGroup>
                         <FormControl 
@@ -74,10 +74,10 @@ class modifyPaymentMethod extends Component {
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={this.props.noShow}>
-                        Chiudi
+                        Close
                     </Button>
                     <Button variant="primary" onClick={this.saveChanges}>
-                        Salva
+                        Save
                     </Button>
                 </Modal.Footer>
             </Modal>

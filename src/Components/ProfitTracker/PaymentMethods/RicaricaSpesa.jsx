@@ -67,13 +67,13 @@ class Ricarica_Spesa extends Component {
             <Modal show={this.props.show} onHide={this.props.noShow}>
                 <Modal.Header closeButton>
                     <Modal.Title>
-                        Ricarica/Spesa
+                        Recharge / Spend
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form.Group>
                         <Form.Label>
-                            <strong>Tipologia</strong>
+                            <strong>Type</strong>
                         </Form.Label>
                         <Form.Control 
                             as="select"
@@ -85,7 +85,7 @@ class Ricarica_Spesa extends Component {
                     </Form.Group>
                     <Form.Group controlId="exampleForm.ControlSelect1">
                         <Form.Label>
-                            <strong>Seleziona Metodo Di Pagamento</strong>
+                            <strong>Select Payment Method</strong>
                         </Form.Label>
                         <Form.Control 
                             as="select"
@@ -112,7 +112,7 @@ class Ricarica_Spesa extends Component {
                         </Form.Control>
                     </Form.Group>
                     <label>
-                        <strong>Movimento</strong>
+                        <strong>Movement</strong>
                     </label>
                     <InputGroup>
                         <FormControl 
@@ -123,13 +123,13 @@ class Ricarica_Spesa extends Component {
                         />
                     </InputGroup>
                     <label>
-                        <strong>Descrizione</strong>
+                        <strong>Description</strong>
                     </label>
                     <InputGroup>
                         <FormControl 
                             as="textarea"
                             aria-label="With textarea"
-                            placeholder="Facoltativo"
+                            placeholder="Optional"
                             onChange={ (e) => this.setState({ description: e.currentTarget.value })}
                         />
                     </InputGroup>
@@ -138,12 +138,12 @@ class Ricarica_Spesa extends Component {
                     <Button 
                         variant="secondary"
                         onClick={this.props.noShow}>
-                            Chiudi
+                            Close
                         </Button>
                     <Button 
                         variant="primary"
                         onClick={this.saveTransaction}>
-                            Salva
+                            Save
                         </Button>
                 </Modal.Footer>
             </Modal>

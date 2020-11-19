@@ -9,11 +9,10 @@ import { Row, Col, Button } from "react-bootstrap";
 // Components
 import MultiplaModal from "./MultiplaModal.jsx";
 import OddsMatcherFilters from "./OddsMatcherFilters";
-import OddsmatcherTable from "./OddsmatcherTable";
 import NavBar from "../Navbar/Navbar";
-import BookmakersFilter from "./BookmakersFilter";
 import NewTable from "./NewTable";
 import OpenMatchModalButton from "./OpenMatchModalButton";
+import PrimaryBookmaker from "./PrimaryBookmaker"
 
 // CSS
 import "./oddsmatcher.css";
@@ -24,8 +23,29 @@ const url = "https://jobista.altervista.org/api.php?cookies=cookie: ";
 class OddsMatcher extends Component {
   state = {
     show: false,
-    filters: {},
+    filters: {
+      show: false,
+      allSports: false,
+      soccer: false,
+      tennis: false,
+      basket: false,
+      allMarkets: false,
+      homeTieAway: false,
+      underOver: false,
+      goalNoGoal: false,
+      headToHead: false,
+      dataInizio: "",
+      oraInizio: "",
+      dataFine: "",
+      oraFine: "",
+      liquidita: "",
+      quotaMin: "",
+      quotaMax: "",
+      stakeRimborso: "",
+      stakeBonusRimborso: ""
+    },
     odds: [],
+    filteredOdds: [],
     isLoading: true,
     updateOdds: false,
     showBookmakersFilterModal: false,
@@ -50,13 +70,13 @@ class OddsMatcher extends Component {
       this.setState({ isLoading: true });
       const rawOdds = await fetch(
         url +
-          "__cfduid=d42c3624a5e9c4a87cc7b36cda80fbb371605536749; cookieconsent_status=dismiss; _gid=GA1.2.1838765952.1605538205; flarum_remember=BnuNTpTOw7ToG2cmPUk5soqhesVwQOyVSsHkz5IS; wordpress_logged_in_fa686efef513bdb6e3e44099da671de0=ermander%7C1605727046%7CEmxdIp7plhJSnuKGsJ4d4BcaxWDUE2j5DloSF2vAEVU%7C21a30c7b964f4ae03098ea4210083bb18c543bf38c6064a9df27e860e091f340; _gat_gtag_UA_134094661_1=1; _ga_M6CJV63K6Z=GS1.1.1605562101.5.1.1605562112.49; _ga_SD5RC6H9GW=GS1.1.1605562101.5.1.1605562112.49; _ga=GA1.2.1816920760.1605441772"
+          "__cfduid=d70bde2ca62202a33009749886a3a802a1605651291; _gid=GA1.2.555543434.1605651298; cookieconsent_status=dismiss; flarum_remember=QB5QZIOiV86zQCV8JqjMSPyfFmtdLSS1Pun1KpJf; wordpress_logged_in_fa686efef513bdb6e3e44099da671de0=ermander%7C1605972666%7CFUB2oYQIrhsrHXIbz2GTS8uUAsSYGIOe0TGQugYW1jL%7C1ca3dabb89308ff393db76e0ddd049f277eaab0c5c412e5df35ed123da03bbef; _gat_gtag_UA_134094661_1=1; _ga_M6CJV63K6Z=GS1.1.1605799797.10.1.1605799875.53; _ga_SD5RC6H9GW=GS1.1.1605799797.10.1.1605799875.53; _ga=GA1.2.424916475.1605651298"
       );
+      console.log(rawOdds)
       if (rawOdds.ok) {
         const odds = await rawOdds.json();
         const slicedOdds = await odds.slice(0, 3500);
         const bookLogoss = bookLogos;
-        console.log(bookLogoss);
         // Calculating odds rating
         for (let i = 0; i < slicedOdds.length; i++) {
           const puntata = 100;
@@ -66,6 +86,8 @@ class OddsMatcher extends Component {
             (slicedOdds[i].quota_banca - commission);
           let rawRating = (1 - commission) * lay_stake;
           let rating = rawRating.toFixed(2);
+          slicedOdds[i].book = slicedOdds[i].book.toLowerCase()
+          slicedOdds[i].book2 = slicedOdds[i].book2.toLowerCase()
           slicedOdds[i].liquidita = parseFloat(slicedOdds[i].liquidita);
           slicedOdds[i].rating = rating;
           slicedOdds[i].quota = parseFloat(slicedOdds[i].quota);
@@ -75,15 +97,15 @@ class OddsMatcher extends Component {
           slicedOdds[i].bookLogo = (
             <img
               className="table-data-image"
-              src={bookLogos[slicedOdds[i].book]}
-              alt={i.book1}
+              src={bookLogoss[slicedOdds[i].book]}
+              alt={slicedOdds[i].book}
             />
           );
           slicedOdds[i].exchangeLogo = (
             <img
               className="table-data-image"
               src={bookLogoss[slicedOdds[i].book2]}
-              alt={i.book2}
+              alt={slicedOdds[i].book2}
             />
           );
           slicedOdds[i].evento =
@@ -94,7 +116,8 @@ class OddsMatcher extends Component {
         slicedOdds.sort(function (a, b) {
           return b.rating - a.rating;
         });
-        this.setState({ odds: slicedOdds, isLoading: false });
+        this.setState({ odds: slicedOdds, filteredOdds: slicedOdds, isLoading: false });
+        
       }
     } catch (error) {
       console.log("fetchOdds function error: ", error);
@@ -108,78 +131,65 @@ class OddsMatcher extends Component {
   setFilters = () => {
     let odds = this.state.odds;
     const filters = this.state.filters;
+    console.log(odds)
+    console.log(filters)
 
     // Filter based on min odd
     if (filters.quotaMin !== "") {
-      console.log("controllo quotamin");
       odds = odds.filter((odd) => odd.quota > filters.quotaMin);
     }
+
     // Filter based on max odd
     if (filters.quotaMax !== "") {
-      console.log("controllo quotamax");
       odds = odds.filter((odd) => odd.quota < filters.quotaMax);
     }
+
     // Filter based on min liquidity
     if (filters.liquidita !== "") {
-      console.log("controllo liquidita", filters);
       odds = odds.filter((odd) => {
-        console.log(odd.liquidita);
         return odd.liquidita > filters.liquidita;
       });
-      // odds = odds.filter((odd) => odd)
     }
-    // Filter based on mercato
-    if (filters.mercato !== "") {
-      odds = odds.filter((odd) => odd.tipo === filters.mercato);
-    }
-    // Filter based on start date
-    if (filters.dataInizio !== "") {
-      let filterDay = parseInt(filters.dataInizio.split("-")[0]);
-      let filterMonth = parseInt(filters.dataInizio.split("-")[1]);
-      let filterYear = parseInt(filters.dataInizio.split("-")[2].split(" ")[0]);
-      let oddDay = parseInt(odds.data.split("-"));
-      console.log(oddDay);
-      let oddMonth = parseInt(odds.data.split("-")[1]);
-      let oddYear = parseInt(odds.data.split("-")[0]);
+    // 0 = calcio, 1 = tennis, 2 = basket
+    // Filters based on sports
 
-      if (filterYear > oddYear) {
-        odds = odds.filter(
-          (odd) =>
-            parseInt(odd.data.split("-")[0]) >
-            parseInt(filters.dataInizio.split("-")[2].split(" ")[0])
-        );
-      } else if (filterYear === oddYear && filterMonth >= oddMonth) {
-        odds = odds.filter(
-          (odd) =>
-            parseInt(odd.data.split("-")[0]) ===
-              parseInt(filters.dataInizio.split("-")[2].split(" ")[0]) &&
-            parseInt(odd.data.split("-")[1]) >=
-              parseInt(filters.dataInizio.split("-")[1])
-        );
-      } else if (
-        filterYear === oddYear &&
-        filterMonth === oddMonth &&
-        filterDay >= oddDay
-      ) {
-        odds = odds.filter(
-          (odd) =>
-            parseInt(odd.data.split("-")[0]) ===
-              parseInt(filters.dataInizio.split("-")[2].split(" ")[0]) &&
-            parseInt(odd.data.split("-")[1]) >=
-              parseInt(filters.dataInizio.split("-")[1]) &&
-            parseInt(odd.data.split("-")[2]) >=
-              parseInt(filters.dataInizio.split("-")[0])
-        );
-      }
+    if(filters.allSports){
+      odds = odds.filter((odd) => odd)
+    }else if(filters.soccer || filters.tennis || filters.basket){
+      odds = odds.filter((odd) => {
+        return (
+          (filters.soccer && odd.sport === "0") ||
+          (filters.tennis && odd.sport === "1") ||
+          (filters.basket && odd.sport === "2") 
+        )}
+      )
+    }
+
+    // Filter based on markets (1, 2, X, GG, NG, O.25, U.25)
+    if(filters.allMarkets === true){
+      odds = odds.filter((odd) => odd.tipo === "1X2" || odd.tipo === "GG/NG" || odd.tipo === "U/O")
+    }else if(filters.homeTieAway || filters.underOver || filters.goalNoGoal){
+      odds = odds.filter(odd => 
+        (filters.homeTieAway && odd.tipo === "1X2") ||
+        (filters.underOver && odd.tipo === "U/O") ||
+        (filters.goalNoGoal && odd.tipo === "GG/NG")
+      )
     }
     // Filter based on start time
     // Filter based on end date
     // Filter based on end time
 
     console.log(odds);
-    this.setState({ odds: odds });
+    this.setState({ filteredOdds: odds });
     console.log(odds[0]);
   };
+
+  reloadOdds = () => {
+    console.log("ciao")
+    const odds = this.state.odds
+    this.setState({ filteredOdds: odds })
+  }
+
 
   componentDidMount = () => {
     this.fetchOdds();
@@ -206,23 +216,32 @@ class OddsMatcher extends Component {
           Odds - Matcher
         </div>
         <Row className="no-gutters">
-          <Col className="ml-0 pl-3" style={{ marginLeft: "0" }} xs={12}>
+          <Col className="ml-0" style={{ marginLeft: "0!important" }} xs={12}>
             <OddsMatcherFilters
-              setFiltersToFather={(e) =>
-                this.setState({ filters: e }, this.setFilters)
+              setFiltersToFather={(filters) =>{
+                this.setState({ filters }, () => this.setFilters())}
               }
+              reloadOdds={this.reloadOdds}
+              filtersStatus={this.state.filters}
+              fetchOdds={this.fetchOdds}
             />
 
             <Button
               className="mr-3"
               variant="light"
-              onClick={(e) =>
+              onClick={() =>
                 this.setState({ showBookmakersFilterModal: true })
               }
             >
-              Seleziona Bookmakers
+              Select Owned Bookmakers
             </Button>
-            <MultiplaModal />
+            {/*<Button
+              className="mr-3"
+              variant="light"
+              onClick={() => this.setState({showMainBookmaker: true})}
+              > Primary Bookmaker
+            </Button>*/}
+            {/*<MultiplaModal />*/}
             <Button className="ml-3" variant="danger" onClick={this.fetchOdds}>
               Reset
             </Button>
@@ -232,8 +251,7 @@ class OddsMatcher extends Component {
           <Col xs={12}>
             <NewTable
               isLoading={this.state.isLoading}
-              odds={this.state.odds}
-              filters={this.state.filter}
+              odds={this.state.filteredOdds}
             />
           </Col>
         </Row>

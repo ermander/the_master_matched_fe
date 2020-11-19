@@ -45,16 +45,16 @@ class NewPaymentMethod extends Component {
             <Modal show={this.props.show} onHide={this.props.noShow}>
                 <Modal.Header closeButton>
                     <Modal.Title>
-                        Nuovo Metodo Di Pagamento
+                        New Payment Method
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <label>
-                        <strong>Intestatario</strong>
+                        <strong>Accountholder</strong>
                     </label>
                     <FormControl type="text" placeholder={this.props.accountHolder} readOnly />  
                     <label>
-                        <strong>Nome</strong>
+                        <strong>Name</strong>
                     </label>              
                     <InputGroup>
                         <FormControl
@@ -64,7 +64,7 @@ class NewPaymentMethod extends Component {
                         />
                     </InputGroup>
                     <label>
-                        <strong>Descrizione</strong>
+                        <strong>Description</strong>
                     </label>
                     <InputGroup>
                         <FormControl 
@@ -74,7 +74,7 @@ class NewPaymentMethod extends Component {
                         />
                     </InputGroup>
                     <label>
-                        <strong>Bilancio Iniziale</strong>
+                        <strong>Starting Balance</strong>
                     </label>              
                     <InputGroup>
                         <FormControl
@@ -88,12 +88,12 @@ class NewPaymentMethod extends Component {
                     <Button 
                         variant="secondary"
                         onClick={this.props.noShow}>
-                            Chiudi
+                            Close
                     </Button>
                     <Button 
                         variant="primary"
                         onClick={ () => this.saveNewPaymentMethod(this.props.id)}>
-                            Salva
+                            Save
                     </Button>
                 </Modal.Footer>
             </Modal>

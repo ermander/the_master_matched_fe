@@ -108,21 +108,28 @@ class CasinoDetails extends Component {
                     <Col xs={11}>
                         <Row>
                             <Col xs={12}>
-                                <h2>Casinò</h2>
+                                <div style={{
+                                            backgroundColor: "#d08e46",
+                                            textAlign: "center",
+                                            fontSize: "50px",
+                                            marginBottom: "3vh",
+                                            color: "#efd9c0",
+                                        }}>CASINO</div>
                                 <div style={{maxWidth: "350px"}} id="balance-counter">
                                 <h3 id="counter">{this.state.balance}€</h3>
-                                <h4 id="saldo">Saldo Attuale Casino</h4>
-                                <p id="saldo-info">Questo è il saldo attuale di tutte le giocate casinò.</p>
+                                <h4 id="saldo">Current Casino Balance</h4>
+                                <p id="saldo-info">This is the current balance of all casino bets.</p>
                                 </div>
                             </Col>
                         </Row>
                         <Row>
                             <Col xs={12}>
                                 <Button 
+                                    className="ml-0"
                                     variant="success"
                                     size="sm"
                                     onClick={this.handleShow}>
-                                        Nuova Giocata
+                                        New Bet
                                 </Button>
 
                             </Col>
@@ -133,13 +140,13 @@ class CasinoDetails extends Component {
                                 <thead className="table-data">
                                     <tr>
                                         <th>#</th>
-                                        <th>Creato il:</th>
-                                        <th>Conto</th>
-                                        <th>Tipo</th>
-                                        <th>Descrizione</th>
-                                        <th>Movimento</th>
-                                        <th>Opzioni</th>
-                                        <th>Opzioni</th>
+                                        <th>Created at:</th>
+                                        <th>Book</th>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                        <th>Movement</th>
+                                        <th>Options</th>
+                                        <th>Options</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -159,13 +166,13 @@ class CasinoDetails extends Component {
                                                         <Button
                                                             variant="warning"
                                                             size="sm"
-                                                            onClick={() => this.showModificaGiocata(element)}>Modifica</Button>
+                                                            onClick={() => this.showModificaGiocata(element)}>Modify</Button>
                                                     </td>
                                                     <td>
                                                         <Button
                                                             variant="danger"
                                                             size="sm"
-                                                            onClick={() => this.deleteCasinoBet(element._id)}>Elimina</Button>
+                                                            onClick={() => this.deleteCasinoBet(element._id)}>Delete</Button>
                                                     </td>
                                                 </tr>
                                             )
@@ -182,13 +189,13 @@ class CasinoDetails extends Component {
                                                 <td>
                                                     <Button
                                                         variant="warning"
-                                                        size="sm">Modifica</Button>
+                                                        size="sm">Modify</Button>
                                                 </td>
                                                 <td>
                                                     <Button
                                                         variant="danger"
                                                         size="sm"
-                                                        >Elimina</Button>
+                                                        >Delete</Button>
                                                 </td>    
                                             </tr>                                            
                                         )

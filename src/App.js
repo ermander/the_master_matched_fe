@@ -22,9 +22,10 @@ import BetDetails from "./Components/ProfitTracker/InProgressGames/BetDetails";
 import CasinoDetails from "./Components/ProfitTracker/CasinoGames/CasinoDetails";
 import Utenti from "./Components/ProfitTracker/Users/Utenti";
 import PaymentMethods from "./Components/ProfitTracker/PaymentMethods/PaymentMethods";
-import Bookmakers from "./Components/ProfitTracker/bookmakers/Bookmakers";
+import Bookmakers from "./Components/ProfitTracker/Bookmakers/Bookmakers";
 import ArchivedBetDetails from "./Components/ProfitTracker/ArchievedGames/ArchivedBetDetails";
 import Transactions from "./Components/ProfitTracker/Transactions/Transactions";
+import Registration from "./Components/Login/Registration"
 
 function App() {
   return (
@@ -34,6 +35,9 @@ function App() {
           {/* LOGIN ROUTE */}
           <Route path="/" exact>
             <Login />
+          </Route>
+          <Route path="/register" exact>
+            <Registration />
           </Route>
 
           {/* ODDS ROUTE */}

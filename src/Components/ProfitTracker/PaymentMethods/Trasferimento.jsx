@@ -60,12 +60,12 @@ class Trasferimento extends Component {
             <Modal show={this.props.show} onHide={this.props.noShow}>
                 <Modal.Header closeButton>
                     <Modal.Title>
-                        Nuovo Trasferimento
+                    New Transfer
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form.Label>
-                        <strong>Da intestatario:</strong>
+                        <strong>From holder:</strong>
                     </Form.Label>
                     <Form.Control as="select" onChange={(e)=>this.setState({sender: e.currentTarget.value.split(")")[0]})}>
                         {
@@ -90,7 +90,7 @@ class Trasferimento extends Component {
                         }
                     </Form.Control>
                     <Form.Label>
-                        <strong>A intestatario:</strong>
+                        <strong>To holder:</strong>
                     </Form.Label>
                     <Form.Control as="select" onChange={(e)=>this.setState({receiver: e.currentTarget.value.split(")")[0]})}>
                         {
@@ -115,7 +115,7 @@ class Trasferimento extends Component {
                         }
                     </Form.Control>
                     <Form.Label>
-                        <strong>Movimento</strong>
+                        <strong>Movement</strong>
                     </Form.Label>
                     <InputGroup>
                         <FormControl 
@@ -132,6 +132,7 @@ class Trasferimento extends Component {
                         <FormControl
                         as="textarea"
                         aria-label="With textarea"
+                        placeholder="Optional"
                         onChange={(e)=>this.setState({descrizione: e.currentTarget.value})} />
                     </InputGroup>
                 </Modal.Body>
@@ -139,12 +140,12 @@ class Trasferimento extends Component {
                     <Button
                         variant="secondary"
                         onClick={this.props.noShow}>
-                        Chiudi
+                        Close
                     </Button>
                     <Button
                         variant="primary"
                         onClick={this.saveTrasferment}>
-                            Salva
+                            Save
                         </Button>
                 </Modal.Footer>
             </Modal>

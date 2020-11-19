@@ -146,9 +146,9 @@ class Bookmakers extends Component {
           <Col xs={11}>
             <Row>
               <Col xs={12}>
-                <h2>BOOKMAKERS</h2>
+                <div style={{backgroundColor: "#d08e46",textAlign: "center",fontSize: "50px",marginBottom: "3vh",color: "#efd9c0"}}>BOOKMAKERS</div>
                 <Button size="sm" variant="success" onClick={this.handleShow}>
-                  Nuovo Bookmaker
+                New Bookmaker
                 </Button>
                 <Button
                   className="ml-1"
@@ -157,7 +157,7 @@ class Bookmakers extends Component {
                   variant="dark"
                   onClick={this.showNewDefaultBookmakerModal}
                 >
-                  Nuovo Bookmaker Personale
+                  New Personal Bookmaker
                 </Button>
               </Col>
             </Row>
@@ -173,15 +173,15 @@ class Bookmakers extends Component {
                   <thead className="table-data">
                     <tr>
                       <th>#</th>
-                      <th>Creato</th>
-                      <th>Intestatario</th>
-                      <th>Conto</th>
-                      <th>Descrizione</th>
-                      <th>Saldo</th>
-                      <th>Stato</th>
-                      <th>Opzioni</th>
-                      <th>Opzioni</th>
-                      <th>Opzioni</th>
+                      <th>Created at:</th>
+                      <th>Account Holder</th>
+                      <th>Book</th>
+                      <th>Description</th>
+                      <th>Balance</th>
+                      <th>State</th>
+                      <th>Options</th>
+                      <th>Options</th>
+                      <th>Options</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -216,7 +216,7 @@ class Bookmakers extends Component {
                             </td>
                             <td>{element.balance}€</td>
                             <td>
-                              {element.isActive ? "Abilitato" : "Non Abilitato"}
+                              {element.isActive ? "Available" : "Not Available"}
                             </td>
                             <td>
                               <Button
@@ -229,12 +229,12 @@ class Bookmakers extends Component {
                                   )
                                 }
                               >
-                                Nuovo Movimento
+                               New Movement
                               </Button>
                             </td>
                             <td>
                               <Button size="sm" variant="warning">
-                                Modifica
+                                Modify
                               </Button>
                             </td>
                             <td>

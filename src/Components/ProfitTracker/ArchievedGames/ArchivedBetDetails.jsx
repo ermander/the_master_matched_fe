@@ -8,7 +8,7 @@ import SideBar from "../SideBar/SideBar"
 import { withRouter } from "react-router-dom"
 
 // React bootstrap
-import { Col, Row, Table, Button } from "react-bootstrap"
+import { Col, Row, Table, Button, Form } from "react-bootstrap"
 
 // CSS
 import "./bet_details.css"
@@ -35,6 +35,24 @@ class ArchivedBetDetails extends Component {
             betInfo: betInfo,
             isLoading: false
         })
+    }
+
+    restoreMatch = async(id) => {
+        try {
+            const restoreMatch = await fetch("http://localhost:3002/profit-tracker/modify-match/" + id, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ inCorso: true })
+            })
+            if(restoreMatch.ok){
+                console.log("ok")
+                this.props.history.push("/profit_tracker/bet_details/" + id )
+            }
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     deleteMatch = async (id) => {
@@ -64,32 +82,36 @@ class ArchivedBetDetails extends Component {
         return (
             <>
             <NavBar />
-            <Row className="main-row">
-                <Col xs={1}>
+            <Row className="main-row no-gutters">
+                <Col xs={1} className="p-0">
                     <SideBar />
                 </Col>
-                <Col xs={11}>                    
-                    <div>
-                        <h2>
-                            DETTAGLI PUNTATA #{this.state.betInfo._id}
-                        </h2>
+                <Col xs={11} className="p-0">                    
+                    <div style={{
+                            backgroundColor: "#d08e46",
+                            textAlign: "center",
+                            fontSize: "50px",
+                            marginBottom: "3vh",
+                            color: "#efd9c0",
+                        }}>
+                            BET DETAILS #{this.state.betInfo._id}
                     </div>
-                    <Row className="mt-3">
-                        <Col xs={12}>
+                    <Row className="mt-3 no-gutters">
+                        <Col xs={12} className="p-0">
                     <>
                     <div id="left-buttons-div">
                         <Button 
                             variant="light"
                             size="sm"
-                            className="bet-buttons">Nuova Puntata</Button>
+                            className="bet-buttons">New Back Bet</Button>
                         <Button 
                             variant="light"
                             size="sm"
-                            className="bet-buttons">Nuova Bancata</Button>
+                            className="bet-buttons">New Lay Bet</Button>
                         <Button 
                             variant="light"
                             size="sm"
-                            className="bet-buttons">Nuovo Deposito</Button>
+                            className="bet-buttons">New Deposit</Button>
                     </div>
                     <div className="right-buttons-div">
                         <Button 
@@ -99,37 +121,37 @@ class ArchivedBetDetails extends Component {
                             onClick={ () => this.deleteMatch(this.state.betInfo._id)}
                             >
                                 <FontAwesomeIcon icon={faTrashAlt} />
-                                <p style={{display: "inline-block", marginBottom: "0px", marginLeft: "0.5vw"}}>Cancella</p>
+                                <p style={{display: "inline-block", marginBottom: "0px", marginLeft: "0.5vw"}}>Delete</p>
                         </Button>
                         <Button 
                             className="mb-1 ml-1"
                             size="sm"
                             variant="warning"
                             style={{color: "white"}}
+                            onClick={this.restoreMatch(this.state.betInfo._id)}
                             >
                                 <FontAwesomeIcon icon={faArchive} />
-                                <p style={{display: "inline-block", marginBottom: "0px", marginLeft: "0.5vw"}}>Ripristina</p>
+                                <p style={{display: "inline-block", marginBottom: "0px", marginLeft: "0.5vw"}}>Restore</p>
                         </Button>
                     </div>
-                    <Table striped bordered hover>
+                    <Table striped bordered hover className="mt-4">
                         <thead>
                             <tr className="table-head">
-                                <th style={{width: "130px"}}>Data Evento</th>
-                                <th>Evento</th> 
-                                <th>Competizione</th> 
-                                <th>Mercato</th> 
-                                <th>Tipo</th> 
-                                <th style={{minWidth: "85px"}}>Tipo Bonus</th>
-                                <th>Conto</th>
+                                <th style={{width: "130px"}}>Event Date</th>
+                                <th>Event</th> 
+                                <th>Tournament</th> 
+                                <th>Market</th> 
+                                <th>Type</th> 
+                                <th style={{minWidth: "85px"}}>Bonus Type</th>
+                                <th>Book</th>
                                 <th>Stake</th> 
-                                <th>Quota</th>
-                                <th>Rischio</th>
+                                <th>Quote</th>
+                                <th>Risk</th>
                                 <th>Bonus</th> 
-                                <th>Rimborso</th> 
-                                <th style={{minWidth: "85px"}}>Tasse %</th> 
-                                <th>Movimento</th> 
-                                <th style={{width: "130px"}}>Stato Evento</th>
-                                <th></th>
+                                <th>Refund</th> 
+                                <th style={{minWidth: "85px"}}>Tax %</th> 
+                                <th>Movement</th> 
+                                <th style={{width: "130px"}}>Event State</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -164,34 +186,73 @@ class ArchivedBetDetails extends Component {
                                             <td>{this.state.betInfo.home} vs {this.state.betInfo.away}</td>
                                             <td>{this.state.betInfo.torneo}</td>
                                             <td>{this.state.betInfo.tipoPuntata}</td>
-                                            <td>inserire tipo puntata</td>
-                                            <td>inseire bonus button</td>
-                                            <td>inserire conto</td>
+                                            <td>{this.state.betInfo.exchange ? "Punta" : "..."}</td>
+                                            <td>
+                                                <Form.Group>
+                                                    <Form.Control as="select" variant="light" size="sm">
+                                                    <option>None</option>
+                                                    <option>Bonus</option>
+                                                    <option>Refund</option>
+                                                    <option>FreeBet</option>
+                                                    </Form.Control>
+                                                </Form.Group>
+                                            </td>
+                                            <td>{this.state.betInfo.book}</td>
                                             <td>{this.state.betInfo.puntata}€</td>
                                             <td>{this.state.betInfo.quotaBanca}</td>
                                             <td>{this.state.betInfo.puntata}€</td>
-                                            <td>inserire puntata bonus</td>
-                                            <td>inserire rimborso</td>
+                                            <td>{this.state.betInfo.puntataBonus ? this.state.betInfo.puntataBonus : "0.00€"}</td>
+                                            <td>{this.state.betInfo.puntataRimborso ? this.state.betInfo.puntataRimborso : "0.00€"}</td>
                                             <td>0%</td>
                                             <td>{this.state.betInfo.puntata}€</td>
-                                            <td>inserire stato evento button</td>
+                                            <td>
+                                                <Form.Group>
+                                                    <Form.Control 
+                                                        as="select"
+                                                        style={{backgroundColor: this.state.bgColor1}}
+                                                        size="sm"
+                                                        onChange={(e)=>this.setState({bgColor1: e.currentTarget.value})}
+                                                        >
+                                                        <option>Draft</option>
+                                                        <option value="#FFA500">In Progress</option>
+                                                        <option value="#98FB98">Won</option>
+                                                        <option value="#FF0000">Lost</option>
+                                                        <option value="#FFA500">Cancelled</option>
+                                                    </Form.Control>
+                                                </Form.Group>
+                                            </td>
                                         </tr>
                                         <tr className="table-row">
                                             <td>{this.state.betInfo.data}</td>
                                             <td>{this.state.betInfo.home} vs {this.state.betInfo.away}</td>
                                             <td>{this.state.betInfo.torneo}</td>
                                             <td>{this.state.betInfo.tipoPuntata}</td>
-                                            <td>inserire tipo puntata</td>
-                                            <td>inseire bonus button</td>
-                                            <td>inserire conto</td>
+                                            <td>{this.state.betInfo.exchange ? "Banca" : "..."}</td>
+                                            <td>/</td>
+                                            <td>{this.state.betInfo.exchange}</td>
                                             <td>{this.state.betInfo.bancata}€</td>
                                             <td>{this.state.betInfo.quotaBanca}</td>
                                             <td>{this.state.betInfo.rischio}€</td>
-                                            <td>inserire bonus banca</td>
-                                            <td>inserire rimborso banca</td>
+                                            <td>/</td>
+                                            <td>/</td>
                                             <td>{this.state.betInfo.commissione}</td>
                                             <td>{this.state.betInfo.rischio}</td>
-                                            <td>inserire stato evento button</td>
+                                            <td>
+                                                <Form.Group>
+                                                    <Form.Control 
+                                                    as="select"
+                                                    style={{backgroundColor: this.state.bgColor2}}
+                                                    size="sm"
+                                                    onChange={(e)=>this.setState({bgColor2: e.currentTarget.value})}
+                                                    >
+                                                        <option>Draft</option>
+                                                        <option value="#FFA500">In Progress</option>
+                                                        <option value="#98FB98">Won</option>
+                                                        <option value="#FF0000">Lost</option>
+                                                        <option value="#FFA500">Cancelled</option>
+                                                    </Form.Control>
+                                                </Form.Group>
+                                            </td>
                                         </tr>
                                         </>
                                     )

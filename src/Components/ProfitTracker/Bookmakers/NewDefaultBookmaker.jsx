@@ -6,13 +6,24 @@ import { Modal, Button, InputGroup, FormControl, Form } from 'react-bootstrap';
 class NewDefaultBookmaker extends Component {
 
     state = {
-        name: "",
+        bookmakerName: "",
         isActive: ""
     }
 
     saveNewDefaultBookmaker = async () => {
         try {
-            const response = await fetch("http://localhost:3002/profit-tracker/new-default-bookmaker")
+            const data = {
+                bookmakerName: this.state.bookmakerName,
+                isActive: this.state.isActive === "Non Abilitato" ? true : false
+            }
+
+            const response = await fetch("http://localhost:3002/profit-tracker/new-default-bookmaker", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            })
             if(response.ok){
                 console.log("OK")
                 window.location.reload()
@@ -28,25 +39,25 @@ class NewDefaultBookmaker extends Component {
             <Modal show={this.props.show} onHide={this.props.noShow}>
                 <Modal.Header closeButton>
                     <Modal.Title>
-                        Nuovo Bookmaker Personale
+                        New Personal Bookmaker 
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <label>
-                        <strong>Nome</strong>
+                        <strong>Name</strong>
                     </label>
                     <InputGroup>
                         <FormControl 
                             type="text"
-                            placeholder="Inserire il nome del nuovo bookmaker"
-                            onChange={(e) => this.setState({name: e.currentTarget.value})}
+                            placeholder="Enter the name of the new bookmaker"
+                            onChange={(e) => this.setState({bookmakerName: e.currentTarget.value})}
                         />
                     </InputGroup>
                     <Form.Group controlId="formBasicCheckbox">
                         <Form.Check type="checkbox" label="Exchange" className="mt-2" />
                     </Form.Group>
                     <Form.Label>
-                        <strong>Stato</strong>
+                        <strong>State</strong>
                     </Form.Label>
                     <Form.Control as="select" onChange={(e) => this.setState({isActive: e.currentTarget.value})}>
                         <option>Abilitato</option>
@@ -57,12 +68,12 @@ class NewDefaultBookmaker extends Component {
                     <Button
                         variant="secondary"
                         onClick={this.props.noShow}>
-                            Chiudi
+                            Close
                             </Button>
                     <Button
                         variant="primary"
                         onClick={this.saveNewDefaultBookmaker}>
-                            Salva
+                            Save
                             </Button>
                 </Modal.Footer>
             </Modal>

@@ -1,5 +1,4 @@
 import React from "react";
-import { MDBDataTable } from "mdbreact";
 import "./newtable.css";
 import ReactTable from "react-table-v6";
 import "react-table-v6/react-table.css";
@@ -8,27 +7,27 @@ const DatatablePage = (props) => {
   const data = {
     columns: [
       {
-        Header: "Data",
+        Header: "Date",
         accessor: "data",
         minWidth: 100,
       },
       {
-        Header: "Ora",
+        Header: "Time",
         accessor: "ora",
         minWidth: 80,
       },
       {
-        Header: "Torneo",
+        Header: "Tournament",
         accessor: "campionato",
         minWidth: 160,
       },
       {
-        Header: "Evento",
+        Header: "Event",
         accessor: "evento",
         minWidth: 250,
       },
       {
-        Header: "Mercato",
+        Header: "Market",
         accessor: "tipo",
         minWidth: 100,
       },
@@ -38,22 +37,22 @@ const DatatablePage = (props) => {
         minWidth: 120,
       },
       {
-        Header: "Tipo",
+        Header: "Type",
         accessor: "a",
         minWidth: 70,
       },
       {
-        Header: "Punta",
+        Header: "Back",
         accessor: "quota",
         minWidth: 80,
       },
       {
-        Header: "Banca",
+        Header: "Lay",
         accessor: "quota_banca",
         minWidth: 80,
       },
       {
-        Header: "Liquidità",
+        Header: "Liquidity",
         accessor: "liquidità",
         minWidth: 100,
       },
@@ -68,7 +67,7 @@ const DatatablePage = (props) => {
         minWidth: 100,
       },
       {
-        Header: "Aggior.",
+        Header: "Last Up.",
         accessor: "lastupdate",
         minWidth: 100,
       },
@@ -80,7 +79,12 @@ const DatatablePage = (props) => {
     ],
   };
 
-  return <ReactTable data={props.odds} columns={data.columns} />;
+  return <ReactTable 
+    className="oddsmatcher-table"
+    data={props.odds} 
+    columns={data.columns}
+    defaultPageSize={10}
+  />;
 };
 
 export default DatatablePage;
