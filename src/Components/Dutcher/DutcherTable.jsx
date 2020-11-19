@@ -12,21 +12,25 @@ const DutcherTable = (props) => {
         Header: "Date",
         accessor: "data",
         minWidth: 100,
+        filterable: true,
       },
       {
         Header: "Time",
         accessor: "ora",
         minWidth: 80,
+        filterable: true,
       },
       {
         Header: "Tournament",
         accessor: "campionato",
         minWidth: 160,
+        filterable: true,
       },
       {
         Header: "Event",
         accessor: "evento",
         minWidth: 250,
+        filterable: true,
       },
       {
         Header: "Market",

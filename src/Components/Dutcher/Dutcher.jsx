@@ -49,7 +49,7 @@ class Dutcher extends Component {
     // Fetching all available odds
     fetchOdds = async() => {
         try {
-            const rawOdds = await fetch(url + "__cfduid=d70bde2ca62202a33009749886a3a802a1605651291; _gid=GA1.2.555543434.1605651298; cookieconsent_status=dismiss; flarum_remember=leIA3Y6tKvLAXMeAja9tuTrHNvlQRGRaAtCXjfuE; wordpress_logged_in_fa686efef513bdb6e3e44099da671de0=ermander%7C1605884146%7CGy4cbS6gquXk5zDz3r6BduXs9Sd1xwFNMYtagQrCM7A%7C6406f7055e4e2ed861484aa37a0fa81c324644ee2e6dea8adf03ba6faa70008a; _gat_gtag_UA_134094661_2=1; _ga=GA1.1.424916475.1605651298; _ga_M6CJV63K6Z=GS1.1.1605711343.4.1.1605711410.59; _ga_SD5RC6H9GW=GS1.1.1605711343.4.1.1605711410.60")
+            const rawOdds = await fetch(url + "__cfduid=d70bde2ca62202a33009749886a3a802a1605651291; _gid=GA1.2.555543434.1605651298; cookieconsent_status=dismiss; flarum_remember=QB5QZIOiV86zQCV8JqjMSPyfFmtdLSS1Pun1KpJf; wordpress_logged_in_fa686efef513bdb6e3e44099da671de0=ermander%7C1605972666%7CFUB2oYQIrhsrHXIbz2GTS8uUAsSYGIOe0TGQugYW1jL%7C1ca3dabb89308ff393db76e0ddd049f277eaab0c5c412e5df35ed123da03bbef; _ga_M6CJV63K6Z=GS1.1.1605799797.10.1.1605800576.59; _ga_SD5RC6H9GW=GS1.1.1605799797.10.1.1605800576.59; _ga=GA1.2.424916475.1605651298")
             if(rawOdds.ok){
                 const odds = await rawOdds.json()
                 const slicedOdds = odds.data
@@ -113,7 +113,6 @@ class Dutcher extends Component {
            
             odds = odds.filter((odd) => odd.tipo === "DC" || odd.tipo === "O25" || odd.tipo === "U25" || odd.tipo === "O35" || odd.tipo === "U35" || odd.tipo === "O15" || odd.tipo === "U15" || odd.tipo === "GG" || odd.tipo === "NG")
         }else if(filters.doubleChange || filters.underOver || filters.goalNoGoal){
-            debugger
             odds = odds.filter((odd) =>{
             return(
                 (filters.doubleChange && odd.tipo === "DC") ||
