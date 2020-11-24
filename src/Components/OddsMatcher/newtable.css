@@ -35,6 +35,7 @@ i:hover {
   height: 40px;
   border-radius: 5px;
   background-color: black;
+  object-fit: cover;
 }
 
 .dataTables_wrapper.dt-bootstrap4 .row {

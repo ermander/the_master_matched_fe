@@ -3,6 +3,7 @@
     height: 30px!important;
     border-radius: 3px!important;
     background-color: black!important;
+    object-fit: cover;
 }
 
 .dutcher-table .rt-tbody .rt-td:nth-child(8) {
