@@ -15,7 +15,7 @@ class NewBookmaker extends Component {
 
     fetchDefaultBookmakers = async() => {
         try {
-            const response = await fetch("http://localhost:3002/profit-tracker/default-bookmakers")
+            const response = await fetch("https://the-master-matched-be.herokuapp.com/profit-tracker/default-bookmakers")
             if(response.ok){
                 const parsedResponse = await response.json()
                 this.setState({ defaultBoomakers: parsedResponse })
@@ -41,7 +41,7 @@ class NewBookmaker extends Component {
 
             
 
-            const response = await fetch("http://localhost:3002/profit-tracker/new-bookmaker", {
+            const response = await fetch("https://the-master-matched-be.herokuapp.com/profit-tracker/new-bookmaker", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

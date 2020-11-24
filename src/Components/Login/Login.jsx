@@ -17,7 +17,7 @@ class Login extends Component {
             email: this.state.email,
             password: this.state.password
         }
-        const res = await fetch(`http://localhost:3002/login`, {
+        const res = await fetch(`https://the-master-matched-be.herokuapp.com/login`, {
           headers: {
             "Content-Type": "application/json",
           },
@@ -31,7 +31,7 @@ class Login extends Component {
           //localStorage.setItem("accessToken", json.token)
           //localStorage.setItem("refreshToken", json.refreshToken)
           history.push("/oddsmatcher");
-          window.location.href = "http://localhost:3000/oddsmatcher"
+          window.location.href = "https://the-master-matched-be.herokuapp.com/oddsmatcher"
         }
       }
 

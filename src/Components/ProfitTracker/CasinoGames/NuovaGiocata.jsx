@@ -21,7 +21,7 @@ class NuovaGiocata extends Component {
         }
         console.log(data)
 
-        const response = await fetch("http://localhost:3002/profit-tracker/new-casino-bet", {
+        const response = await fetch("https://the-master-matched-be.herokuapp.com/profit-tracker/new-casino-bet", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

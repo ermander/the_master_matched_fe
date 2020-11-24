@@ -30,7 +30,7 @@ class BetDetails extends Component {
     }
 
     fetchBet = async () => {
-        const response = await fetch("http://localhost:3002/profit-tracker/in-progress/" + this.props.match.params.id)
+        const response = await fetch("https://the-master-matched-be.herokuapp.com/profit-tracker/in-progress/" + this.props.match.params.id)
         const betInfo = await response.json()
         console.log(betInfo)
         this.setState({
@@ -42,7 +42,7 @@ class BetDetails extends Component {
     deleteMatch = async (id) => {
         try {
             console.log(id)
-            const deleteMatch = await fetch("http://localhost:3002/profit-tracker/delete-match/" + id, {
+            const deleteMatch = await fetch("https://the-master-matched-be.herokuapp.com/profit-tracker/delete-match/" + id, {
                 method: "DELETE"
             })
 
@@ -60,7 +60,7 @@ class BetDetails extends Component {
 
     archiveMatch = async(id) => {
         try {
-            const response = await fetch("http://localhost:3002/profit-tracker/modify-match/" + id, {
+            const response = await fetch("https://the-master-matched-be.herokuapp.com/profit-tracker/modify-match/" + id, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json"

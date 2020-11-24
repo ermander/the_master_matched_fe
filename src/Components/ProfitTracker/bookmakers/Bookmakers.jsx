@@ -37,7 +37,7 @@ class Bookmakers extends Component {
   fetchUsers = async () => {
     try {
       const rawUsers = await fetch(
-        "http://localhost:3002/profit-tracker/get-users"
+        "https://the-master-matched-be.herokuapp.com/profit-tracker/get-users"
       );
       if (rawUsers.ok) {
         const users = await rawUsers.json();
@@ -51,7 +51,7 @@ class Bookmakers extends Component {
   fetchBookmakers = async () => {
     try {
       const response = await fetch(
-        "http://localhost:3002/profit-tracker/bookmakers"
+        "https://the-master-matched-be.herokuapp.com/profit-tracker/bookmakers"
       );
       if (response.ok) {
         const parsedResponse = await response.json();
@@ -67,7 +67,7 @@ class Bookmakers extends Component {
   deleteBookmaker = async (id) => {
     try {
       const deleteBookmaker = await fetch(
-        "http://localhost:3002/profit-tracker/delete-bookmaker/" + id,
+        "https://the-master-matched-be.herokuapp.com/profit-tracker/delete-bookmaker/" + id,
         {
           method: "DELETE",
         }
@@ -85,7 +85,7 @@ class Bookmakers extends Component {
   showNewMovement = async (holderID) => {
     try {
       const response = await fetch(
-        "http://localhost:3002/profit-tracker/payment-methods/" + holderID
+        "https://the-master-matched-be.herokuapp.com/profit-tracker/payment-methods/" + holderID
       );
       if (response.ok) {
         const parsedResponse = await response.json();

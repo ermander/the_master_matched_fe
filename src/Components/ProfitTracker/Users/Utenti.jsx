@@ -41,7 +41,7 @@ class Utenti extends Component {
 
     deleteUser = async(id) => {
         try {
-            const deleteUser = await fetch("http://localhost:3002/profit-tracker/delete-user/" + id, {
+            const deleteUser = await fetch("https://the-master-matched-be.herokuapp.com/profit-tracker/delete-user/" + id, {
                 method: "DELETE"
             })
             if(deleteUser.ok){
@@ -57,7 +57,7 @@ class Utenti extends Component {
 
     fetchUsers = async () => {
         try {
-            const response = await fetch("http://localhost:3002/profit-tracker/get-users")
+            const response = await fetch("https://the-master-matched-be.herokuapp.com/profit-tracker/get-users")
             const users = await response.json()
             if(users){
                 console.log(users)
@@ -81,7 +81,7 @@ class Utenti extends Component {
                 name: this.state.name,
                 description: this.state.description
             }
-            const newUser = await fetch("http://localhost:3002/profit-tracker/new-user", {
+            const newUser = await fetch("https://the-master-matched-be.herokuapp.com/profit-tracker/new-user", {
                 method: "POST",
                 headers: {
                     "Content-Type": 'application/json'

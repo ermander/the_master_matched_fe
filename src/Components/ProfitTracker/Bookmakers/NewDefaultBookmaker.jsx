@@ -17,7 +17,7 @@ class NewDefaultBookmaker extends Component {
                 isActive: this.state.isActive === "Non Abilitato" ? true : false
             }
 
-            const response = await fetch("http://localhost:3002/profit-tracker/new-default-bookmaker", {
+            const response = await fetch("https://the-master-matched-be.herokuapp.com/profit-tracker/new-default-bookmaker", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

@@ -18,7 +18,7 @@ class modifyPaymentMethod extends Component {
     
             console.log(data)
     
-            const response = await fetch("http://localhost:3002/profit-tracker/modify-payment-method", {
+            const response = await fetch("https://the-master-matched-be.herokuapp.com/profit-tracker/modify-payment-method", {
                     method: "PUT",
                     headers: {
                         "Content-Type": "application/json"

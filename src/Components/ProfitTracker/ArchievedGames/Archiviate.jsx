@@ -23,7 +23,7 @@ class Archiviate extends Component {
     }
 
     fetchInProgressMatches = async() => {
-        const url = "http://localhost:3002/profit-tracker/archived"
+        const url = "https://the-master-matched-be.herokuapp.com/profit-tracker/archived"
         const response = await fetch(url)
         const parsedResponse = await response.json()
         
@@ -40,7 +40,7 @@ class Archiviate extends Component {
     deleteMatch = async (id) => {
         try {
             console.log(id)
-            const deleteMatch = await fetch("http://localhost:3002/profit-tracker/delete-match/" + id, {
+            const deleteMatch = await fetch("https://the-master-matched-be.herokuapp.com/profit-tracker/delete-match/" + id, {
                 method: "DELETE"
             })
 
@@ -58,7 +58,7 @@ class Archiviate extends Component {
 
     restoreMatch = async(id) => {
         try {
-            const restoreMatch = await fetch("http://localhost:3002/profit-tracker/modify-match/" + id, {
+            const restoreMatch = await fetch("https://the-master-matched-be.herokuapp.com/profit-tracker/modify-match/" + id, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json"

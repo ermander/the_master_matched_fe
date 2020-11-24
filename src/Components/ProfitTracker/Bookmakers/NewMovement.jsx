@@ -24,7 +24,7 @@ class NewMovement extends Component {
         console.log(data)
 
         // PUT the new movement
-        const response = await fetch("http://localhost:3002/profit-tracker/deposit-into-bookmaker", {
+        const response = await fetch("https://the-master-matched-be.herokuapp.com/profit-tracker/deposit-into-bookmaker", {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"
@@ -34,7 +34,7 @@ class NewMovement extends Component {
 
         // If the PUT is done, i will POST the new transaction in the proper section
         if(response.ok){
-            const response = await fetch("http://localhost:3002/profit-tracker/save-transaction", {
+            const response = await fetch("https://the-master-matched-be.herokuapp.com/profit-tracker/save-transaction", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

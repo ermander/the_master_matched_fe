@@ -32,7 +32,7 @@ class PaymentMethods extends Component {
     }
 
     fetchPaymentMethos = async () => {
-        const response = await fetch("http://localhost:3002/profit-tracker/payment-methods")
+        const response = await fetch("https://the-master-matched-be.herokuapp.com/profit-tracker/payment-methods")
         if(response){
             const paymentMethods = await response.json()
             this.setState({ conti: paymentMethods, isLoading: false })
@@ -42,7 +42,7 @@ class PaymentMethods extends Component {
     }
 
     calculateTotalBalance = async () => {
-        const response = await fetch("http://localhost:3002/profit-tracker/payment-methods")
+        const response = await fetch("https://the-master-matched-be.herokuapp.com/profit-tracker/payment-methods")
         const parsedResponde = await response.json()
 
         let balance = 0
@@ -55,7 +55,7 @@ class PaymentMethods extends Component {
     }
 
     deletePaymentMethod = async() => {
-        const response = await fetch("http://localhost:3002/profit-tracker/delete-payment-method/" + this.state.id, {
+        const response = await fetch("https://the-master-matched-be.herokuapp.com/profit-tracker/delete-payment-method/" + this.state.id, {
             method: "DELETE"
         })
 
@@ -69,7 +69,7 @@ class PaymentMethods extends Component {
 
     fetchUsers = async() => {
         try {
-            const rawUsers = await fetch("http://localhost:3002/profit-tracker/get-users")            
+            const rawUsers = await fetch("https://the-master-matched-be.herokuapp.com/profit-tracker/get-users")            
             if(rawUsers.ok){
                 const users = await rawUsers.json()
                 this.setState({ users: users })

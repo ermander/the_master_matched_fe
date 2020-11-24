@@ -15,7 +15,7 @@ class UsersModal extends Component {
     // Fetching the users
     fetchUsers = async () => {
         try {
-            const response = await fetch("http://localhost:3002/profit-tracker/get-users")
+            const response = await fetch("https://the-master-matched-be.herokuapp.com/profit-tracker/get-users")
             if(response.ok){
                 const users = await response.json()
                 this.setState({users: users})
@@ -52,7 +52,7 @@ class UsersModal extends Component {
                 userBancaId: this.state.user2 !== "" ? this.state.user2[parseInt(this.state.users)]._id : this.state.users[0]._id
             }
 
-            const response = await fetch("http://localhost:3002/profit-tracker/save-match", {
+            const response = await fetch("https://the-master-matched-be.herokuapp.com/profit-tracker/save-match", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

@@ -26,7 +26,7 @@ class Ricarica_Spesa extends Component {
             }
     
             // Saving the new balance
-            const newBalance = await fetch("http://localhost:3002/profit-tracker/ricarica-spesa", {
+            const newBalance = await fetch("https://the-master-matched-be.herokuapp.com/profit-tracker/ricarica-spesa", {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json"
@@ -36,7 +36,7 @@ class Ricarica_Spesa extends Component {
     
             // Saving the new transaction
             if(newBalance.ok){
-                const newTransaction = await fetch("http://localhost:3002/profit-tracker/save-transaction", {
+                const newTransaction = await fetch("https://the-master-matched-be.herokuapp.com/profit-tracker/save-transaction", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"

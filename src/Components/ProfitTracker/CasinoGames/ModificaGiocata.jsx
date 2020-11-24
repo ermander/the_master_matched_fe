@@ -12,7 +12,7 @@ class ModificaGiocata extends Component {
 
             }   
             
-            const response = await fetch("http://localhost:3002/profit-tracker/modify-casino-bet/" + id, {
+            const response = await fetch("https://the-master-matched-be.herokuapp.com/profit-tracker/modify-casino-bet/" + id, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

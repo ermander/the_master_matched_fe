@@ -35,7 +35,7 @@ class CasinoDetails extends Component {
     }
 
     fetchBookmakers = async () => {
-        const response = await fetch("http://localhost:3002/profit-tracker/bookmakers")
+        const response = await fetch("https://the-master-matched-be.herokuapp.com/profit-tracker/bookmakers")
         if(response.ok){
             const bookmakers = await response.json()
             this.setState({
@@ -46,7 +46,7 @@ class CasinoDetails extends Component {
 
     fetchCasinoBets = async () => {
         try {
-            const response = await fetch("http://localhost:3002/profit-tracker/casino")
+            const response = await fetch("https://the-master-matched-be.herokuapp.com/profit-tracker/casino")
             if(response.ok){
                 const casinoBets = await response.json()
                 let balance = 0
@@ -68,7 +68,7 @@ class CasinoDetails extends Component {
 
     deleteCasinoBet = async(id) => {
         try {
-            const response = await fetch("http://localhost:3002/profit-tracker/delete-casino-bet/" + id, {
+            const response = await fetch("https://the-master-matched-be.herokuapp.com/profit-tracker/delete-casino-bet/" + id, {
                 method: "DELETE"
             })
             if(response.ok){

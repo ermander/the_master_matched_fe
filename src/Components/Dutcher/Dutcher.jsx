@@ -14,7 +14,7 @@ import NavBar from "../Navbar/Navbar"
 import OpenDutcherMatchModalButton from "./OpenDutcherMatchModalButton";
 
 // API
-const url = "https://jobista.altervista.org/api_dutcher.php?length=5000&cookies=cookie: "
+const url = "https://the-master-matched-be.herokuapp.com/odds-data/dutcher"
 
 class Dutcher extends Component {
     state={
@@ -49,10 +49,10 @@ class Dutcher extends Component {
     // Fetching all available odds
     fetchOdds = async() => {
         try {
-            const rawOdds = await fetch(url + "__cfduid=d70bde2ca62202a33009749886a3a802a1605651291; _gid=GA1.2.555543434.1605651298; cookieconsent_status=dismiss; flarum_remember=QB5QZIOiV86zQCV8JqjMSPyfFmtdLSS1Pun1KpJf; wordpress_logged_in_fa686efef513bdb6e3e44099da671de0=ermander%7C1605972666%7CFUB2oYQIrhsrHXIbz2GTS8uUAsSYGIOe0TGQugYW1jL%7C1ca3dabb89308ff393db76e0ddd049f277eaab0c5c412e5df35ed123da03bbef; _ga_M6CJV63K6Z=GS1.1.1605799797.10.1.1605800576.59; _ga_SD5RC6H9GW=GS1.1.1605799797.10.1.1605800576.59; _ga=GA1.2.424916475.1605651298")
+            const rawOdds = await fetch(url)
             if(rawOdds.ok){
                 const odds = await rawOdds.json()
-                const slicedOdds = odds.data
+                const slicedOdds = odds[0].data
                 console.log(slicedOdds)
 
                 for(let i = 0; i < slicedOdds.length; i++){
@@ -132,7 +132,6 @@ class Dutcher extends Component {
     }
 
     reloadOdds = () => {
-        console.log("ciao")
         const odds = this.state.odds
         this.setState({ filteredOdds: odds })
     }

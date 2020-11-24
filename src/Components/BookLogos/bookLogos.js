@@ -25,7 +25,7 @@ export const bookLogos = {
     "marathonbet": "https://upload.wikimedia.org/wikipedia/commons/a/ac/Marathonbet_Logo_New.png",
     "merkur win": "https://res.cloudinary.com/dnadfuxk0/image/upload/v1600693156/Solo%20Capstone/MerkurWin_tnpt8u.png",
     "newgioco": "https://res.cloudinary.com/dnadfuxk0/image/upload/v1600693156/Solo%20Capstone/NweGioco_tyxa9a.png",
-    "pinterBet": "https://res.cloudinary.com/dnadfuxk0/image/upload/v1600693156/Solo%20Capstone/PinterBet_gxchdh.png",
+    "pinterbet": "https://res.cloudinary.com/dnadfuxk0/image/upload/v1600693156/Solo%20Capstone/PinterBet_gxchdh.png",
     "planetWin365": "https://res.cloudinary.com/dnadfuxk0/image/upload/v1600693156/Solo%20Capstone/PlanetWin365_egmsdn.png",
     "plexbet": "https://res.cloudinary.com/dnadfuxk0/image/upload/v1600693156/Solo%20Capstone/Plexbet_pdjsvt.png",
     "scommettendo": "https://res.cloudinary.com/dnadfuxk0/image/upload/v1600693156/Solo%20Capstone/Scommettendo_faor2n.png",

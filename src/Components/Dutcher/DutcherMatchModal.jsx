@@ -37,7 +37,7 @@ class DutcherMatchModal extends Component {
 
     postNewMatch = async () => {
         try {
-            const postNewMatch = await fetch("http://localhost:3002/profit-tracker/in-progress", {
+            const postNewMatch = await fetch("https://the-master-matched-be.herokuapp.com/profit-tracker/in-progress", {
             method: "POST",
             headers: {
                 "Content-Type": 'application/json'

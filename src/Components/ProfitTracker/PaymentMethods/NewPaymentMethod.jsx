@@ -22,7 +22,7 @@ class NewPaymentMethod extends Component {
                 balance: this.state.balance !== "" ? parseInt(this.state.balance) : 0
             }
 
-            const NewPaymentMethod = await fetch("http://localhost:3002/profit-tracker/new-payment-method", {
+            const NewPaymentMethod = await fetch("https://the-master-matched-be.herokuapp.com/profit-tracker/new-payment-method", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

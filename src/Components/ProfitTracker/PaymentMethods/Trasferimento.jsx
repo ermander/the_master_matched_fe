@@ -21,7 +21,7 @@ class Trasferimento extends Component {
                 receiver: this.state.receiver !== "" ? this.props.paymentMethods[parseInt(this.state.receiver)]._id : this.props.paymentMethods[0]._id
             }
     
-            const saveNewBalance = await fetch("http://localhost:3002/profit-tracker/trasferment", {
+            const saveNewBalance = await fetch("https://the-master-matched-be.herokuapp.com/profit-tracker/trasferment", {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json"
@@ -30,7 +30,7 @@ class Trasferimento extends Component {
             })
     
             if(saveNewBalance.ok){
-                const saveNewTransaction = await fetch("http://localhost:3002/profit-tracker/save-transaction", {
+                const saveNewTransaction = await fetch("https://the-master-matched-be.herokuapp.com/profit-tracker/save-transaction", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"

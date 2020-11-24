@@ -21,7 +21,7 @@ class ModifyUser extends Component {
         console.log(user)
 
         try {
-            const modifyUser = await fetch("http://localhost:3002/profit-tracker/modify-user", {
+            const modifyUser = await fetch("https://the-master-matched-be.herokuapp.com/profit-tracker/modify-user", {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json"

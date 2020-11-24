@@ -18,7 +18,7 @@ import PrimaryBookmaker from "./PrimaryBookmaker"
 import "./oddsmatcher.css";
 
 // API
-const url = "https://jobista.altervista.org/api.php?cookies=cookie: ";
+const url = "https://the-master-matched-be.herokuapp.com/odds-data/oddsmatcher";
 
 class OddsMatcher extends Component {
   state = {
@@ -68,14 +68,11 @@ class OddsMatcher extends Component {
   fetchOdds = async () => {
     try {
       this.setState({ isLoading: true });
-      const rawOdds = await fetch(
-        url +
-          "__cfduid=d70bde2ca62202a33009749886a3a802a1605651291; _gid=GA1.2.555543434.1605651298; cookieconsent_status=dismiss; flarum_remember=QB5QZIOiV86zQCV8JqjMSPyfFmtdLSS1Pun1KpJf; wordpress_logged_in_fa686efef513bdb6e3e44099da671de0=ermander%7C1605972666%7CFUB2oYQIrhsrHXIbz2GTS8uUAsSYGIOe0TGQugYW1jL%7C1ca3dabb89308ff393db76e0ddd049f277eaab0c5c412e5df35ed123da03bbef; _gat_gtag_UA_134094661_1=1; _ga_M6CJV63K6Z=GS1.1.1605799797.10.1.1605799875.53; _ga_SD5RC6H9GW=GS1.1.1605799797.10.1.1605799875.53; _ga=GA1.2.424916475.1605651298"
-      );
+      const rawOdds = await fetch(url);
       console.log(rawOdds)
       if (rawOdds.ok) {
         const odds = await rawOdds.json();
-        const slicedOdds = await odds.slice(0, 3500);
+        const slicedOdds = await odds[0].data.slice(0, 3500);        
         const bookLogoss = bookLogos;
         // Calculating odds rating
         for (let i = 0; i < slicedOdds.length; i++) {
@@ -117,8 +114,7 @@ class OddsMatcher extends Component {
           return b.rating - a.rating;
         });
         this.setState({ odds: slicedOdds, filteredOdds: slicedOdds, isLoading: false });
-        
-      }
+      }        
     } catch (error) {
       console.log("fetchOdds function error: ", error);
     }

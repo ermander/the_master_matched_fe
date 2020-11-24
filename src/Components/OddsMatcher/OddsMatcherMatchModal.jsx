@@ -387,32 +387,33 @@ class OddsMatcherMatchModal extends Component {
                                 <Col xs={2}>{
                                     this.state.puntata !== ""
                                     ?
-                                    "+" + ((this.props.odd.quota * this.state.puntata)-this.state.puntata).toFixed(2)
+                                    "+" + ((this.props.odd.quota * this.state.puntata)-this.state.puntata).toFixed(2) + "€"
                                     :
-                                    "+0.00"
+                                    "+0.00€"
                                     }
                                 </Col>
                                 <Col xs={2}>{
                                     this.state.risk === ""
                                     ?
-                                    "+0.00"
+                                    "+0.00€"
                                     :
-                                    -parseFloat(this.state.risk)
+                                    -parseFloat(this.state.risk) + "€"
                                     }
                                 </Col>
                                 <Col xs={1}>=</Col>
                                 <Col xs={2}>{
                                     this.state.puntata === ""
                                     ?
-                                    "+0.00"
+                                    "+0.00€"
                                     :
                                     (
                                         (((parseFloat(this.props.odd.quota) * parseFloat(this.state.puntata)) - parseFloat(this.state.risk)) - this.state.puntata).toFixed(2) > 0
                                         ?
                                         "+" + 
-                                        (((parseFloat(this.props.odd.quota) * parseFloat(this.state.puntata)) - parseFloat(this.state.risk)) - this.state.puntata).toFixed(2)
+                                        (((parseFloat(this.props.odd.quota) * parseFloat(this.state.puntata)) - parseFloat(this.state.risk)) - this.state.puntata).toFixed(2) + "€"
                                         :
-                                        (((parseFloat(this.props.odd.quota) * parseFloat(this.state.puntata)) - parseFloat(this.state.risk)) - this.state.puntata).toFixed(2)
+                                        "-" + 
+                                        (((parseFloat(this.props.odd.quota) * parseFloat(this.state.puntata)) - parseFloat(this.state.risk)) - this.state.puntata).toFixed(2) + "€"
 
                                     )
                                     
@@ -423,33 +424,34 @@ class OddsMatcherMatchModal extends Component {
                                 <Col xs={2}>{
                                         this.state.puntata === ""
                                         ?
-                                        "+0.00"
+                                        "+0.00€"
                                         :
-                                        -parseFloat(this.state.puntata).toFixed(2)
+                                        -parseFloat(this.state.puntata).toFixed(2) + "€"
                                     }                   
                                 </Col>
                                 <Col xs={2}>{
                                     this.state.puntata !== ""
                                     ?
-                                    "+" + this.state.bancata
+                                    "+" + this.state.bancata + "€"
                                     :
-                                    "+0.00"
+                                    "+0.00€"
                                 }</Col>
                                 <Col xs={1}>=</Col>
                                 <Col xs={2}>{
                                     this.state.puntata === ""
                                     ?
                                     (
-                                        "+0.00"
+                                        "+0.00€"
                                     )
                                     :
                                     (
                                         (this.state.bancata - (this.state.bancata - (this.state.bancata * 0.95)) - this.state.puntata).toFixed(2) > 0
                                         ?
                                         "+" + 
-                                        (this.state.bancata - (this.state.bancata - (this.state.bancata * 0.95)) - this.state.puntata).toFixed(2)
+                                        (this.state.bancata - (this.state.bancata - (this.state.bancata * 0.95)) - this.state.puntata).toFixed(2) + "€"
                                         : 
-                                        (this.state.bancata - (this.state.bancata - (this.state.bancata * 0.95)) - this.state.puntata).toFixed(2)
+                                        "-" +
+                                        (this.state.bancata - (this.state.bancata - (this.state.bancata * 0.95)) - this.state.puntata).toFixed(2) + "€"
                                     )
                                     }
                                 </Col>

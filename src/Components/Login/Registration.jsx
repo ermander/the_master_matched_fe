@@ -20,7 +20,7 @@ class Registration extends Component {
                 nickname: this.state.username
             }
 
-            const response = await fetch("http://localhost:3002/register", {
+            const response = await fetch("https://the-master-matched-be.herokuapp.com/register", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

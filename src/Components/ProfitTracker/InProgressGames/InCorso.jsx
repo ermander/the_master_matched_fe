@@ -26,7 +26,7 @@ class InCorso extends Component {
     }
 
     fetchInProgressMatches = async() => {
-        const url = "http://localhost:3002/profit-tracker/in-progress"
+        const url = "https://the-master-matched-be.herokuapp.com/profit-tracker/in-progress"
         const response = await fetch(url)
         const parsedResponse = await response.json()
         this.setState({
@@ -42,7 +42,7 @@ class InCorso extends Component {
     deleteMatch = async (id) => {
         try {
             console.log(id)
-            const deleteMatch = await fetch("http://localhost:3002/profit-tracker/delete-match/" + id, {
+            const deleteMatch = await fetch("https://the-master-matched-be.herokuapp.com/profit-tracker/delete-match/" + id, {
                 method: "DELETE"
             })
 
@@ -60,10 +60,10 @@ class InCorso extends Component {
 
     cloneMatch = async (id) => {
         try {
-            const response = await fetch("http://localhost:3002/profit-tracker/in-progress/" + id)
+            const response = await fetch("https://the-master-matched-be.herokuapp.com/profit-tracker/in-progress/" + id)
             const parsedResponse = await response.json()
             delete parsedResponse._id
-            const cloneMatch = await fetch("http://localhost:3002/profit-tracker/save-match",{
+            const cloneMatch = await fetch("https://the-master-matched-be.herokuapp.com/profit-tracker/save-match",{
                 method: "POST",
                     headers: {
                         "Content-Type": 'application/json'
@@ -83,7 +83,7 @@ class InCorso extends Component {
 
     archiveMatch = async (id) => {
         try {
-            const response = await fetch("http://localhost:3002/profit-tracker/modify-match/" + id, {
+            const response = await fetch("https://the-master-matched-be.herokuapp.com/profit-tracker/modify-match/" + id, {
                 method: "PUT",
                 headers: {
                     "Content-Type": 'application/json'
