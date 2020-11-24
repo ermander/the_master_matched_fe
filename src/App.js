@@ -7,23 +7,32 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 // Components
 import Login from "./Components/Login/Login";
+
 import OddsMatcher from "./Components/OddsMatcher/OddsMatcher";
 import Dutcher from "./Components/Dutcher/Dutcher";
+
 import BestOdds from "./Components/BestOdds/BestOdds";
 import Trimatcher from "./Components/Trimatcher/Trimatcher";
+
 import InCorso from "./Components/ProfitTracker/InProgressGames/InCorso";
 import Archiviate from "./Components/ProfitTracker/ArchievedGames/Archiviate";
 import PuntaPunta from "./Components/Calcolatori/PuntaPunta";
+
 import PuntaBanca from "./Components/Calcolatori/PuntaBanca";
 import MultiTool from "./Components/Calcolatori/MultiTool";
+
 import Casino from "./Components/Calcolatori/Casino";
 import Converter from "./Components/Calcolatori/Converter";
+
 import BetDetails from "./Components/ProfitTracker/InProgressGames/BetDetails";
 import CasinoDetails from "./Components/ProfitTracker/CasinoGames/CasinoDetails";
+
 import Utenti from "./Components/ProfitTracker/Users/Utenti";
 import PaymentMethods from "./Components/ProfitTracker/PaymentMethods/PaymentMethods";
+
 import Bookmakers from "./Components/ProfitTracker/Bookmakers/Bookmakers";
 import ArchivedBetDetails from "./Components/ProfitTracker/ArchievedGames/ArchivedBetDetails";
+
 import Transactions from "./Components/ProfitTracker/Transactions/Transactions";
 import Registration from "./Components/Login/Registration"
 
