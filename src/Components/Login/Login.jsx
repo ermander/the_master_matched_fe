@@ -31,7 +31,7 @@ class Login extends Component {
           //localStorage.setItem("accessToken", json.token)
           //localStorage.setItem("refreshToken", json.refreshToken)
           history.push("/oddsmatcher");
-          window.location.href = "https://the-master-matched-be.herokuapp.com/oddsmatcher"
+          window.location.href = "https://the-master-matched-fe.herokuapp.com/oddsmatcher"
         }
       }
 
