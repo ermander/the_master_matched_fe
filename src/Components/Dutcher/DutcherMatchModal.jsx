@@ -105,7 +105,7 @@ class DutcherMatchModal extends Component {
                 inCorso={true}
             />
 
-            <Modal show={this.props.show} onHide={this.props.noShow} style={{backgroundColor: "transparent"}}>
+            <Modal show={this.props.show} onHide={this.props.noShow} style={{backgroundColor: "transparent"}} className="some-class">
                 <Modal.Body className="p-0" style={{maxHeight: "85vh"}}>
                     {/* SELEZIONE MODALITà NORMALE, BONUS O RIMBORSO*/}
                     <Row className="no-gutters" style={{backgroundColor: "#37474f"}}>
