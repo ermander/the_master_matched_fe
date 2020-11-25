@@ -57,7 +57,7 @@ class Trasferimento extends Component {
     render() {
         return (
             <>
-            <Modal show={this.props.show} onHide={this.props.noShow}>
+            <Modal show={this.props.show} onHide={this.props.noShow} style={{maxWidth: "70vw", marginLeft: "15vw", marginRight: "15vw"}}>
                 <Modal.Header closeButton>
                     <Modal.Title>
                     New Transfer

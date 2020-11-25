@@ -128,7 +128,7 @@ class Utenti extends Component {
                                         New User
                                     </Button>
 
-                                    <Modal show={this.state.show} onHide={this.handleClose} className="new-user-modal">
+                                    <Modal show={this.state.show} onHide={this.handleClose} className="new-user-modal" style={{maxWidth: "70vw", marginLeft: "15vw", marginRight: "15vw"}}>
                                         <Modal.Header closeButton>
                                             <Modal.Title>New User</Modal.Title>
                                         </Modal.Header>
