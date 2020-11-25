@@ -27,7 +27,7 @@ export const bookLogos = {
     "merkur win": "https://res.cloudinary.com/dnadfuxk0/image/upload/v1600693156/Solo%20Capstone/MerkurWin_tnpt8u.png",
     "newgioco": "https://res.cloudinary.com/dnadfuxk0/image/upload/v1600693156/Solo%20Capstone/NweGioco_tyxa9a.png",
     "pinterbet": "https://res.cloudinary.com/dnadfuxk0/image/upload/v1600693156/Solo%20Capstone/PinterBet_gxchdh.png",
-    "planetWin365": "https://res.cloudinary.com/dnadfuxk0/image/upload/v1600693156/Solo%20Capstone/PlanetWin365_egmsdn.png",
+    "planetwin365": "https://res.cloudinary.com/dnadfuxk0/image/upload/v1600693156/Solo%20Capstone/PlanetWin365_egmsdn.png",
     "plexbet": "https://res.cloudinary.com/dnadfuxk0/image/upload/v1600693156/Solo%20Capstone/Plexbet_pdjsvt.png",
     "scommettendo": "https://res.cloudinary.com/dnadfuxk0/image/upload/v1600693156/Solo%20Capstone/Scommettendo_faor2n.png",
     "sisal": "https://res.cloudinary.com/dnadfuxk0/image/upload/v1600693156/Solo%20Capstone/Sisal_j8nlfc.png",
