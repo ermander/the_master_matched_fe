@@ -1,5 +1,7 @@
-.some-class{
+.some-class2{
     max-width: 70vw!important;
+    margin-left: 15vw;
+    margin-right: 15vw;
 }
 
 .mt-3 .mx-1 .row{
