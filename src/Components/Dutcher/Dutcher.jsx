@@ -43,8 +43,7 @@ class Dutcher extends Component {
           },
         isLoading: true,
         show: false,
-        odd: {},
-        saveOdds = []
+        odd: {}
     }
 
     // Fetching all available odds
