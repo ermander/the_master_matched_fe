@@ -43,13 +43,14 @@ class Dutcher extends Component {
           },
         isLoading: true,
         show: false,
-        odd: {}
+        odd: {},
+        saveOdds: []
     }
 
     // Fetching all available odds
     fetchOdds = async() => {
         try {
-            const rawOdds = await fetch(url + "__cfduid=d70bde2ca62202a33009749886a3a802a1605651291; _gid=GA1.2.555543434.1605651298; cookieconsent_status=dismiss; flarum_remember=QB5QZIOiV86zQCV8JqjMSPyfFmtdLSS1Pun1KpJf; wordpress_logged_in_fa686efef513bdb6e3e44099da671de0=ermander%7C1605972666%7CFUB2oYQIrhsrHXIbz2GTS8uUAsSYGIOe0TGQugYW1jL%7C1ca3dabb89308ff393db76e0ddd049f277eaab0c5c412e5df35ed123da03bbef; _ga_M6CJV63K6Z=GS1.1.1605799797.10.1.1605800576.59; _ga_SD5RC6H9GW=GS1.1.1605799797.10.1.1605800576.59; _ga=GA1.2.424916475.1605651298")
+            const rawOdds = await fetch(url + "__cfduid=d6c50e652d9c4aa933380f2a6279f96531606184278; _gid=GA1.2.912235944.1606184282; cookieconsent_status=dismiss; flarum_remember=OHHx37KdXrp5cRS7skimkbPbmHV0oSwd6b7rcrkp; wordpress_logged_in_fa686efef513bdb6e3e44099da671de0=ermander%7C1606485347%7CivHJUrrk6I4NLYLR98bxeu6K6VNNVYvioIdtqKBIdRl%7C2687eabebf047b2e91a4c702b4e1a9a4a51af36644f88b83f945b53a379b7939; _ga=GA1.1.1339232762.1606184282; _ga_M6CJV63K6Z=GS1.1.1606312541.5.1.1606314488.60; _ga_SD5RC6H9GW=GS1.1.1606312541.5.1.1606314488.60")
             if(rawOdds.ok){
                 const odds = await rawOdds.json()
                 const slicedOdds = odds.data
