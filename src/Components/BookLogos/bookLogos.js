@@ -17,7 +17,7 @@ export const bookLogos = {
     "chancebet": "https://res.cloudinary.com/dnadfuxk0/image/upload/v1600693155/Solo%20Capstone/Chencebet_n8ah64.png",
     "domusbet": "https://res.cloudinary.com/dnadfuxk0/image/upload/v1600693155/Solo%20Capstone/DomusBet_jqkzfp.jpg",
     "eurobet": "https://feelinglucky.it/wp-content/uploads/eurobet-logo.png",
-    "evento gioco": "https://res.cloudinary.com/dnadfuxk0/image/upload/v1606313174/Evento-Gioco_joqmib.jpg"
+    "evento gioco": "https://res.cloudinary.com/dnadfuxk0/image/upload/v1606313174/Evento-Gioco_joqmib.jpg",
     "efbet": "https://res.cloudinary.com/dnadfuxk0/image/upload/v1601574457/Solo%20Capstone/Bookmaker%20Logos/efbet_eqllrh.png",
     "elashbet": "https://res.cloudinary.com/dnadfuxk0/image/upload/v1600693155/Solo%20Capstone/Flashbet_ynbnst.png",
     "gioco digitale": "https://res.cloudinary.com/dnadfuxk0/image/upload/v1600693155/Solo%20Capstone/gioco_digitale_ds96er.png",
