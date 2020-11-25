@@ -50,7 +50,6 @@ class OddsMatcher extends Component {
     updateOdds: false,
     showBookmakersFilterModal: false,
     openMatchModal: false,
-    saveOdds = []
   };
 
   handleShow = () => {
@@ -69,7 +68,7 @@ class OddsMatcher extends Component {
   fetchOdds = async () => {
     try {
       this.setState({ isLoading: true });
-      const rawOdds = await fetch(url2 + "__cfduid=d6c50e652d9c4aa933380f2a6279f96531606184278; _gid=GA1.2.912235944.1606184282; cookieconsent_status=dismiss; flarum_remember=OHHx37KdXrp5cRS7skimkbPbmHV0oSwd6b7rcrkp; wordpress_logged_in_fa686efef513bdb6e3e44099da671de0=ermander%7C1606485347%7CivHJUrrk6I4NLYLR98bxeu6K6VNNVYvioIdtqKBIdRl%7C2687eabebf047b2e91a4c702b4e1a9a4a51af36644f88b83f945b53a379b7939; _gat_gtag_UA_134094661_1=1; _ga_M6CJV63K6Z=GS1.1.1606312541.5.1.1606313525.45; _ga_SD5RC6H9GW=GS1.1.1606312541.5.1.1606313525.45; _ga=GA1.2.1339232762.1606184282");
+      const rawOdds = await fetch(url);
       console.log(rawOdds)
       if (rawOdds.ok) {
         const odds = await rawOdds.json();
@@ -187,27 +186,8 @@ class OddsMatcher extends Component {
     this.setState({ filteredOdds: odds })
   }
 
-  saveBets = async () => {
-    const rawOdds = await fetch(url2 + "__cfduid=d6c50e652d9c4aa933380f2a6279f96531606184278; _gid=GA1.2.912235944.1606184282; cookieconsent_status=dismiss; flarum_remember=OHHx37KdXrp5cRS7skimkbPbmHV0oSwd6b7rcrkp; wordpress_logged_in_fa686efef513bdb6e3e44099da671de0=ermander%7C1606485347%7CivHJUrrk6I4NLYLR98bxeu6K6VNNVYvioIdtqKBIdRl%7C2687eabebf047b2e91a4c702b4e1a9a4a51af36644f88b83f945b53a379b7939; _gat_gtag_UA_134094661_1=1; _ga_M6CJV63K6Z=GS1.1.1606312541.5.1.1606313525.45; _ga_SD5RC6H9GW=GS1.1.1606312541.5.1.1606313525.45; _ga=GA1.2.1339232762.1606184282");
-    if(rawOdds.ok){
-      const odds = await rawOdds.json()
-      const data = {
-        data: odds
-      }
-      const saveOdds = await fetch("http://localhost:3002/odds-data/write-file",{
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-      })
-    }
-  }
-
-
   componentDidMount = () => {
     this.fetchOdds();
-    this.saveBets()
   };
 
   render() {
