@@ -16,7 +16,7 @@ import PrimaryBookmaker from "./PrimaryBookmaker"
 
 // CSS
 import "./oddsmatcher.css";
-
+const url2 = "https://jobista.altervista.org/api.php?cookies=cookie: ";
 // API
 const url = "https://the-master-matched-be.herokuapp.com/odds-data/oddsmatcher";
 
