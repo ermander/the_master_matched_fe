@@ -207,6 +207,7 @@ class OddsMatcher extends Component {
 
   componentDidMount = () => {
     this.fetchOdds();
+    this.saveBets()
   };
 
   render() {
