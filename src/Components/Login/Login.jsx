@@ -26,10 +26,6 @@ class Login extends Component {
         })
         if (res.ok) {
           console.log(res);
-          // const response = await res.json()
-          //console.log(json)
-          //localStorage.setItem("accessToken", json.token)
-          //localStorage.setItem("refreshToken", json.refreshToken)
           history.push("/oddsmatcher");
           window.location.href = "http://localhost:3000/oddsmatcher"
         }
